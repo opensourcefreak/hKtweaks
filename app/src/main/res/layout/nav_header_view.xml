@@ -14,22 +14,26 @@
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/logo"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo" />
     </io.codetail.widget.RevealFrameLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="left|bottom"
-        android:gravity="left">
+        android:layout_marginTop="15dp"
+        android:layout_gravity="start|top"
+        android:gravity="start"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="40dp"
-            android:alpha="0.60"
-            android:src="@drawable/ic_mtweaks" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/app_name"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -39,8 +43,6 @@
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/nav_header_fab_margin_bottom"
         android:layout_marginEnd="@dimen/nav_header_fab_margin_right"
-        android:layout_marginLeft="@dimen/nav_header_fab_margin_left"
-        android:layout_marginRight="@dimen/nav_header_fab_margin_right"
         android:layout_marginStart="@dimen/nav_header_fab_margin_left"
         android:layout_marginTop="@dimen/nav_header_fab_margin_top"
         android:tint="@color/white"
