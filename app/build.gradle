@@ -15,11 +15,11 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId 'com.moro.mtweaks'
+        applicationId 'com.hades.hKtweaks'
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 2100
-        versionName "2.10.0"
+        versionCode 100
+        versionName "1.0.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,7 +40,7 @@ android {
     }
     android.applicationVariants.all { final variant ->
         variant.outputs.all {
-            outputFileName = "MTweaks_v${variant.versionName}.apk"
+            outputFileName = "hKtweaks_v${variant.versionName}.apk"
         }
     }
 }

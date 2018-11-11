@@ -1,16 +1,21 @@
-# MTweaks
+# hKtweaks
 
-It is a Mod of Grarak's [KernelAdiutor](https://github.com/Grarak/KernelAdiutor) for compatibilize to Samsung Exynos.
+It is a fork of MoroGoku's [MTweaks](https://github.com/morogoku/MTweaks-KernelAdiutorMOD) for proper adaptation to exynos 7880 devices.
+Original MTweaks app is a Mod of Grarak's [KernelAdiutor](https://github.com/Grarak/KernelAdiutor) for compatibilize to Samsung Exynos.
 Thanks to Willi Ye for this great application.
 
 
-## Donation
+## Donation link for Morogoku (Original creator of MTweaks)
 [![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png)](https://paypal.me/morogoku)
+
+## Donation link of myself
+[![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png)](https://paypal.me/corsicanu)
+
 
 ## Credits
 * Willi Ye, author of [KernelAdiutor](https://github.com/Grarak/KernelAdiutor)
 
-I used following libraries:
+Following libraries were used:
 
 * Google: [v4 Support Library](https://developer.android.com/topic/libraries/support-library/features.html#v4)
 * Google: [v7 appcompat library](https://developer.android.com/topic/libraries/support-library/features.html#v7)
@@ -47,17 +52,18 @@ _(Many sys interface paths has been taken from his [UKM-Project](https://github.
 
     Copyright (C) 2015-2016 Willi Ye <williye97@gmail.com>
 	Copyright (C) 2017 morogoku <morogoku@hotmail.com>
+	Copyright (C) 2018 corsicanu <corsicanu22@gmail.com>
 	
     
-    MTweaks is free software: you can redistribute it and/or modify
+    hKtweaks is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
     
-    MTweaks is distributed in the hope that it will be useful,
+    hKtweaks is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
     
     You should have received a copy of the GNU General Public License
-    along with MTweaks.  If not, see <http://www.gnu.org/licenses/>.
+    along with hKtweaks.  If not, see <http://www.gnu.org/licenses/>.

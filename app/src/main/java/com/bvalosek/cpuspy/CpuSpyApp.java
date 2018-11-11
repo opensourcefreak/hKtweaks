@@ -11,8 +11,8 @@ package com.bvalosek.cpuspy;
 import android.content.Context;
 import android.util.SparseArray;
 
-import com.moro.mtweaks.utils.AppSettings;
-import com.moro.mtweaks.utils.Utils;
+import com.hades.hKtweaks.utils.AppSettings;
+import com.hades.hKtweaks.utils.Utils;
 
 /**
  * main application class
