@@ -10,7 +10,7 @@
     <string name="open">Open %s</string>
     <string name="disable">Disable</string>
     <string name="changelog">hKtweaks v%s</string>
-    <string name="changelog_message">\n* Initial release for hadesKernel-universal7880\n\n\n</string>
+    <string name="changelog_message">\nWarning: You will need to uninstall previous version of hKtweaks first, then install the update. \nFor preserving the settings use backup\/restore function of the app. \n\n* Merge upstream of MTweaks\n* Bug fixes and improvements\n\nRead more on https\:\/\/github.com\/morogoku\/MTweaks-KernelAdiutorMOD\n\n\n</string>
     <string name="close">Close</string>
 
     <!-- Security -->
