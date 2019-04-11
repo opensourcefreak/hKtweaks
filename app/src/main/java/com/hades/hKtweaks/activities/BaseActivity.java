@@ -34,8 +34,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.crashlytics.android.Crashlytics;
-import com.hades.hKtweaks.BuildConfig;
 import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.utils.AppSettings;
 import com.hades.hKtweaks.utils.Themes;
@@ -44,8 +42,6 @@ import com.hades.hKtweaks.utils.ViewUtils;
 
 import java.util.Locale;
 
-import io.fabric.sdk.android.Fabric;
-
 /**
  * Created by willi on 14.04.16.
  */
@@ -53,10 +49,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        // Don't initialize analytics with debug build
-        if (!BuildConfig.DEBUG) {
-            Fabric.with(this, new Crashlytics());
-        }
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         Utils.DARK_THEME = Themes.isDarkTheme(this);

@@ -34,6 +34,7 @@ import com.hades.hKtweaks.utils.ViewUtils;
 import com.hades.hKtweaks.utils.kernel.cpu.CPUBoost;
 import com.hades.hKtweaks.utils.kernel.cpu.CPUFreq;
 import com.hades.hKtweaks.utils.kernel.cpu.Misc;
+import com.hades.hKtweaks.utils.kernel.gpu.GPUFreq;
 import com.hades.hKtweaks.views.dialog.Dialog;
 import com.hades.hKtweaks.views.recyclerview.CardView;
 import com.hades.hKtweaks.views.recyclerview.DescriptionView;
@@ -100,30 +101,23 @@ public class CPUFragment extends RecyclerViewFragment {
     protected void addItems(List<RecyclerViewItem> items) {
         mInput.clear();
 
-        Log.crashlyticsI("freqInit");
         freqInit(items);
         if (mCPUBoost.supported()) {
-            Log.crashlyticsI("cpuBoostInit");
             cpuBoostInit(items);
         }
         if (Misc.hasMcPowerSaving()) {
-            Log.crashlyticsI("mcPowerSavingInit");
             mcPowerSavingInit(items);
         }
         if (Misc.hasPowerSavingWq()) {
-            Log.crashlyticsI("powerSavingWqInit");
             powerSavingWqInit(items);
         }
         if (Misc.hasCFSScheduler()) {
-            Log.crashlyticsI("cfsSchedulerInit");
             cfsSchedulerInit(items);
         }
         if (Misc.hasCpuQuiet()) {
-            Log.crashlyticsI("cpuQuietInit");
             cpuQuietInit(items);
         }
         if (Misc.hasCpuTouchBoost()) {
-            Log.crashlyticsI("cpuTouchBoostInit");
             cpuTouchBoostInit(items);
         }
     }
@@ -176,6 +170,22 @@ public class CPUFragment extends RecyclerViewFragment {
                 -> mCPUFreq.setMinFreq(mCPUFreq.getFreqs().get(position), bigCores.get(0),
                 bigCores.get(bigCores.size() - 1), getActivity()));
         bigFrequenciesCard.addItem(mCPUMinBig);
+
+        if(mCPUFreq.hasBigAllCoresMaxFreq()) {
+            SwitchView bigAll = new SwitchView();
+            bigAll.setTitle(getString(R.string.big_cores_max_title));
+            bigAll.setSummary(getString(R.string.big_cores_max_summary));
+            bigAll.setChecked(mCPUFreq.isBigAllCoresMaxFreq());
+            bigAll.addOnSwitchListener((switchView, isChecked) -> {
+                if (!isChecked) {
+                    mCPUFreq.setMaxFreq(2288000, bigCores.get(0),
+                            bigCores.get(bigCores.size() - 1), getActivity());
+                }
+                mCPUFreq.enableBigAllCoresMaxFreq(isChecked, getActivity());
+            });
+            bigFrequenciesCard.addItem(bigAll);
+        }
+
 
         if (mCPUFreq.hasMaxScreenOffFreq()) {
             mCPUMaxScreenOffBig = new SelectView();

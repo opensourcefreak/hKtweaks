@@ -10,7 +10,7 @@
   <string name="open">Abrir %s</string>
   <string name="used">usado</string>
   <string name="free">libre</string>
-  <string name="changelog_message">\n* Optimizadas Opciones GPU\n* Actualizado a SDK 28\n* Actualizado idioma Francés\n* Nuevo control de voltage Mif, Int, Disp, Cam\n\n\n</string>
+  <string name="changelog_message">\n* Control MoroSound v2 por Grouxho\n* CPU: Permitir 4 BIG cores a max Freq.\n* Corregido init.d\n\n\n</string>
   <string name="close">Cerrar</string>
   <!-- Security -->
   <string name="password">Contraseña</string>
@@ -111,6 +111,7 @@
   <string name="uptime">Tiempo de actividad</string>
   <string name="error_frequencies">Falla al cargar las frecuencias</string>
   <string name="unused_frequencies">Frecuencias no utilizadas</string>
+  <string name="gpu_utilization">Utilización de GPU</string>
   <!-- Device -->
   <string name="processor">Procesador</string>
   <string name="vendor">Proveedor</string>
@@ -151,8 +152,8 @@
   <string name="manual">Manual</string>
   <string name="mc_power_saving">Ahorro de Energía Multinúcleo</string>
   <string name="mc_power_saving_summary">Intenta agrupar tareas en el menor número de núcleos posible.</string>
-  <string name="disabled">Desabilitado</string>
-  <string name="enabled">Activo</string>
+  <string name="disabled">Desactivado</string>
+  <string name="enabled">Activado</string>
   <string name="aggressive">Agresivo</string>
   <string name="power_saving_wq">Planificar colas de trabajo en CPUs activos para ahorrar energía.</string>
   <string name="cfs_scheduler_policy">Política del Regulador CFS</string>
@@ -183,6 +184,8 @@
   <string name="hotplug_boost_summary">Hotplug Boost impulsa la CPU cuando los núcleos se activan.</string>
   <string name="touch_boost">Touch boost</string>
   <string name="touch_boost_summary">Esto aumentará la velocidad mínima de la CPU si toca la pantalla o pulsa un botón.</string>
+  <string name="big_cores_max_title">Permitir 4 Cores a máxima freq.</string>
+  <string name="big_cores_max_summary">Permite a los 4 BIG Cores ir a la máxima freqcuencia, aumenta el rendimiento, pero consumira mas bateria</string>
   <!-- CPU Voltage -->
   <string name="global_offset">Ajuste Global</string>
   <string name="override_vmin">Sobrescribir voltaje mínimo</string>
@@ -532,12 +535,12 @@
   <string name="dt2w_charging">DoubleTap2Wake mientras se está cargando</string>
   <string name="dt2w_s2w">DobleToqueParaDespertar + DeslizarParaDespertar</string>
   <string name="dt2w_s2w_charging">DoubleTap2Wake + Sweep2Wake mientras se está cargando</string>
-  <string name="s2s_summary">Bloquea tu dispositivo deslizando en la pantalla.</string>
+  <string name="s2s_summary">Bloquea tu dispositivo deslizando por el borde inferior de la pantalla.</string>
   <string name="s2s_disabled">Desactivado</string>
-  <string name="s2s_right">Deslizar hacía la derecha</string>
-  <string name="s2s_left">Deslizar hacía la izquierda</string>
-  <string name="s2s_any">Deslizar hacía la derecha o izquierda</string>
-  <string name="slide_up">Deslizar hacia arriba</string>
+  <string name="s2s_right">Deslizar a la derecha</string>
+  <string name="s2s_left">Deslizar a la izquierda</string>
+  <string name="s2s_any">Deslizar a la derecha o izquierda</string>
+  <string name="slide_up">Deslizar a arriba</string>
   <string name="slide_down">Deslizar hacia abajo</string>
   <string name="slide_left">Deslizar a la izquierda</string>
   <string name="slide_right">Deslizar a la derecha</string>
@@ -559,6 +562,11 @@
   <string name="height">Altura</string>
   <string name="vibration">Vibración</string>
   <string name="vibration_strength">Intensidad de vibración</string>
+  <string name="up">Arriba</string>
+  <string name="down">Abajo</string>
+  <string name="left">Izquierda</string>
+  <string name="right">Derecha</string>
+  <string name="gesVib_title">Vibración de Gesto</string>
   <!-- Sound -->
   <string name="sound_control">Control de sonido</string>
   <string name="headset_highperf_mode">Modo de Alto Rendimiento del Auricular</string>
@@ -574,6 +582,27 @@
   <string name="lock_mic_gain_summary">Evitar modificaciones en ganancias de micrófono</string>
   <string name="microphone_gain">Ganancia del Micrófono</string>
   <string name="volume_gain">Ganancia de Volumen</string>
+  <string name="moro_sound_control">MoRo Sound Control</string>
+  <string name="moro_sound_summary">Puede ajustar la ganancia de auriculares y altavoz.\nHAGALO CON PRECAUCION!, un volumen excesivo puede dañar sus oidos o el altavoz.</string>
+  <string name="earpiece_gain">Ganancia Auricular</string>
+  <string name="earpiece_gain_summary">Necesita el mod DualSpeaker</string>
+  <string name="arizona_sound_sw">Control Principal</string>
+  <string name="arizona_volume_title">Volumen</string>
+  <string name="arizona_eq_title">Ecualizador</string>
+  <string name="arizona_eq_sw">Ecualizador</string>
+  <!-- Grx Sound Control -->
+  <string name="headphones_volume">Auriculares externos</string>
+  <string name="left_headphone">Izquierdo</string>
+  <string name="right_headphone">Derecho</string>
+  <string name="eq_profile">Perfil Activo / Gestión Perfiles</string>
+  <string name="eq_profile_custom">Personalizado</string>
+  <string name="eq_profile_delete">Borrar Perfil</string>
+  <string name="eq_profile_save">Salvar Perfil de Ecu.</string>
+  <string name="eq_profile_name">Nombre de Perfil</string>
+  <string name="eq_profile_invalid_name">Nombre perfil no válido</string>
+  <string name="eq_profile_saved">Perfil guardado</string>
+  <string name="eq_profile_deleted">borrado</string>
+  <string name="eq_profile_delete_confirm">Seguro que quieres borrar este perfil de ecualizador?</string>
   <!-- Battery -->
   <string name="store_mode">Store Mode</string>
   <string name="store_mode_summary">Establezca los límites MAX y MIN para la carga de bateía.</string>
@@ -775,7 +804,6 @@
   <string name="wkl_alert_title">ADVERTENCIA</string>
   <string name="wkl_alert_message">Los Wakelocks normalmente están ahí por una razón. Los programadores de controladores y aplicaciones seguramente tenían sus razones para incluir wakelocks en el código en ciertas áreas. Esto significa que, al bloquear algunos de ellos, puede presentarse problemas, y puede desencadenar extraños efectos secundarios y, en el peor de los casos, hacer que el sistema sea completamente inutilizable.\n\nBloquear wakelocks es responsabilidad exclusiva de usted.</string>
   <string name="wkl_alert_checkbox">MOSTRAR LA PROXIMA VEZ</string>
-
   <!-- Virtual Memory -->
   <string name="vm_tunables">VM Ajustables</string>
   <string name="vm_tun_switch_title">Lista de VM ajustables</string>
@@ -784,8 +812,10 @@
   <string name="vm_tun_tit_common">Ajustes más comunes</string>
   <string name="vm_tunnables">VM Ajustables</string>
   <string name="zram">Z-RAM</string>
+  <string name="zramsw_summary">Ative o desactive ZRAM.\n</string>
   <string name="disksize">Tamaño del disco</string>
   <string name="disksize_summary">Intenta aumentar el rendimiento evitando la paginación de almacenamiento físico, en su lugar usa un dispositivo de compresión virtual en la RAM. La paginación toma un lugar en la RAM hasta que sea necesario de usar el intercambio de espacio en el almacenamiento físico.</string>
+  <string name="disksize_summary2">Desactive primero ZRAM para poder ajustar el tamaño.</string>
   <string name="zswap">ZSWAP</string>
   <string name="zswap_summary">ZSwap es un caché ligeramente comprimido para páginas de intercambio. Toma páginas que están en proceso de ser intercambiadas hacia fuera e intenta comprimirlas en un espacio de la memoria asignado dinámicamente basado en RAM. Zswap intercambia básicamente ciclos de CPU por un espacio de intercambio de E/S reducido potencialmente.</string>
   <string name="memory_pool">Piscina de Memoria</string>
@@ -798,6 +828,14 @@
   <string name="read">Lectura</string>
   <string name="write">Escritura</string>
   <!-- Misc -->
+  <string name="secure_kernel_tit">Seguridad</string>
+  <string name="secure_kernel_on">Kernel Seguro</string>
+  <string name="secure_kernel_off">Kernel Inseguro</string>
+  <string name="adb_secure_on">ADB Seguro</string>
+  <string name="adb_secure_off">ADB Inseguro</string>
+  <string name="debug_on">Debuggable</string>
+  <string name="debug_off">No Debuggable</string>
+  <string name="restart_usb_toast">Reiniciando USB …</string>
   <string name="selinux">Estado SELinux</string>
   <string name="selinux_no_kernel_toast">Estado SELinux: Kernel no soportado</string>
   <string name="selinux_summary">Seleccione el estado de SELinux, Permissive/Enforcing.\n(Requiere kernel que lo soporte.)</string>

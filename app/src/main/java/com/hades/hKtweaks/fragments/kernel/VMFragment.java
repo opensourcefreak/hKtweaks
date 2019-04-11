@@ -31,6 +31,7 @@ import com.hades.hKtweaks.utils.kernel.vm.VM;
 import com.hades.hKtweaks.utils.kernel.vm.ZRAM;
 import com.hades.hKtweaks.utils.kernel.vm.ZSwap;
 import com.hades.hKtweaks.views.recyclerview.CardView;
+import com.hades.hKtweaks.views.recyclerview.DescriptionView;
 import com.hades.hKtweaks.views.recyclerview.GenericSelectView2;
 import com.hades.hKtweaks.views.recyclerview.ProgressBarView;
 import com.hades.hKtweaks.views.recyclerview.RecyclerViewItem;
@@ -159,20 +160,41 @@ public class VMFragment extends RecyclerViewFragment {
     }
 
     private void zramInit(List<RecyclerViewItem> items) {
+        boolean isZramEnabled = ZRAM.isEnabled();
+
+        SeekBarView zram = new SeekBarView();
+
+
         CardView zramCard = new CardView(getActivity());
         zramCard.setTitle(getString(R.string.zram));
 
-        SeekBarView zram = new SeekBarView();
+        DescriptionView zramDesc = new DescriptionView();
+        zramDesc.setTitle(getString(R.string.disksize_summary));
+        zramCard.addItem(zramDesc);
+
+        SwitchView zramSw = new SwitchView();
+        zramSw.setTitle(getString(R.string.zram));
+        zramSw.setSummary(getString(R.string.zramsw_summary));
+        zramSw.setChecked(isZramEnabled);
+        zramSw.addOnSwitchListener((switchView, isChecked) -> {
+            ZRAM.enable(isChecked, getActivity());
+            zram.setEnabled(!isChecked);
+        });
+
+        zramCard.addItem(zramSw);
+
+
+        zram.setEnabled(!isZramEnabled);
         zram.setTitle(getString(R.string.disksize));
-        zram.setSummary(getString(R.string.disksize_summary));
+        zram.setSummary(getString(R.string.disksize_summary2));
         zram.setUnit(getString(R.string.mb));
-        zram.setMax(2048);
-        zram.setOffset(10);
-        zram.setProgress(ZRAM.getDisksize() / 10);
+        zram.setMax(2560);
+        zram.setOffset(32);
+        zram.setProgress(ZRAM.getDisksize() / 32);
         zram.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
             @Override
             public void onStop(SeekBarView seekBarView, int position, String value) {
-                ZRAM.setDisksize(position * 10, getActivity());
+                ZRAM.setDisksize(position * 32, getActivity());
             }
 
             @Override
@@ -278,7 +300,7 @@ public class VMFragment extends RecyclerViewFragment {
             }
         }, 250);
     }
-/*
+
     protected void refresh() {
         super.refresh();
 
@@ -293,5 +315,5 @@ public class VMFragment extends RecyclerViewFragment {
             mem.setItems(total, progress);
         }
     }
-*/
+
 }

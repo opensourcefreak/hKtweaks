@@ -75,6 +75,7 @@
     <string name="px">px</string>
     <string name="percent">%</string>
     <string name="gb">GB</string>
+    <string name="db">dB</string>
 
     <!-- Special signs -->
     <string name="minus" translatable="false">-</string>
@@ -141,6 +142,7 @@
     <string name="uptime">Uptime</string>
     <string name="error_frequencies">Failed to load frequencies</string>
     <string name="unused_frequencies">Unused Frequencies</string>
+    <string name="gpu_utilization">GPU Utilization</string>
 
     <!-- Device -->
     <string name="processor">Processor</string>
@@ -224,6 +226,8 @@
     <string name="hotplug_boost_summary">Hotplug Boost is similar to input boost but it occurs when CPUs go online.</string>
     <string name="touch_boost">Touch Boost</string>
     <string name="touch_boost_summary">This will boost your minimum CPU speed if you touch the screen or press a button.</string>
+    <string name="big_cores_max_title">Allow 4 Cores to máx freq.</string>
+    <string name="big_cores_max_summary">Allows the 4 BIG Cores to go to the maximum frequency, increases the performance, but will consume more battery</string>
 
     <!-- CPU Voltage -->
     <string name="global_offset">Global Offset</string>
@@ -596,7 +600,7 @@
     <string name="dt2w_charging">DoubleTap2Wake while charging</string>
     <string name="dt2w_s2w">DoubleTap2Wake + Sweep2Wake</string>
     <string name="dt2w_s2w_charging">DoubleTap2Wake + Sweep2Wake while charging</string>
-    <string name="s2s_summary">Lock you device by swiping on the screen.</string>
+    <string name="s2s_summary">Lock your device by swiping by the bottom edge of the screen.</string>
     <string name="s2s_disabled">Disabled</string>
     <string name="s2s_right">Sweep Right</string>
     <string name="s2s_left">Sweep Left</string>
@@ -629,6 +633,11 @@
     <string name="key_power_mode_summary">Wake controls will only be active when you put your device into sleep with the power key.</string>
     <string name="charging_mode">Charging Mode</string>
     <string name="charging_mode_summary">Wake controls will only be active when device is charging.</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="gesVib_title">Gesture Vibration</string>
 
     <!-- Sound -->
     <string name="sound_control">Sound Control</string>
@@ -645,6 +654,57 @@
     <string name="lock_mic_gain_summary">Prevent modifications to microphone gains</string>
     <string name="microphone_gain">Microphone Gain</string>
     <string name="volume_gain">Volume Gain</string>
+    <string name="moro_sound_control">MoRo Sound Control</string>
+    <string name="moro_sound_summary">You can adjust the headphone and speaker gain.\nDO IT WITH CAUTION!, excessive volume could damage your ears or the speaker.</string>
+    <string name="earpiece_gain">Earpiece Gain</string>
+    <string name="earpiece_gain_summary">You need the DualSpeaker mod</string>
+    <string name="arizona_title">Arizona Control Sound</string>
+    <string name="arizona_sound_sw">Main Control</string>
+    <string name="arizona_sound_sw_summary_on">Enable or Disable the sound control\nEnabled</string>
+    <string name="arizona_sound_sw_summary_off">Enable or Disable the sound control\nDisabled</string>
+    <string name="arizona_volume_title">Volume</string>
+    <string name="arizona_hp_l">Left Headphone Gain</string>
+    <string name="arizona_hp_r">Right Headphone Gain</string>
+    <string name="arizona_eq_title">Equalizer</string>
+    <string name="arizona_eq_sw">Equalizer Control</string>
+    <string name="arizona_eql1">Band 1 Gain</string>
+    <string name="arizona_eql1_summary">Cutoff-frequency: 25 Hz</string>
+    <string name="arizona_eql2">Band 2 Gain</string>
+    <string name="arizona_eql2_summary">Center-frequency: 200 Hz, bandwidth: 100 Hz</string>
+    <string name="arizona_eql3">Band 3 Gain</string>
+    <string name="arizona_eql3_summary">Center-frequency: 500 Hz, bandwidth: 250 Hz</string>
+    <string name="arizona_eql4">Band 4 Gain</string>
+    <string name="arizona_eql4_summary">Center-frequency: 1000 Hz, bandwidth: 500 Hz</string>
+    <string name="arizona_eql5">Band 5 Gain</string>
+    <string name="arizona_eql5_summary">Center-frequency: 2000 Hz, bandwidth: 1000 Hz</string>
+    <string name="arizona_eql6">Band 6 Gain</string>
+    <string name="arizona_eql6_summary">Center-frequency: 4000 Hz, bandwidth: 2000 Hz</string>
+    <string name="arizona_eql7">Band 7 Gain</string>
+    <string name="arizona_eql7_summary">Center-frequency: 8000 Hz, bandwidth: 4000 Hz</string>
+    <string name="arizona_eql8">Band 8 Gain</string>
+    <string name="arizona_eql8_summary">Cutoff-frequency: 16000 Hz</string>
+    <string name="arizona_eqprofile_tit">EQ Profiles</string>
+    <string name="arizona_eqprofile_desc">Select an equalizer profile</string>
+    <string name="arizona_eq_prof1">Extreme Bass</string>
+    <string name="arizona_eq_prof2">Bass-Treble Balance</string>
+    <string name="arizona_eq_prof3">Treble Gain</string>
+    <string name="arizona_eq_prof4">Eargasm</string>
+    <string name="arizona_mono_tit">Mono Mixer</string>
+    <string name="arizona_mono_desc">Mixes together left and right channels</string>
+
+    <!-- Grx Sound Control -->
+    <string name="headphones_volume">HeadPhones</string>
+    <string name="left_headphone">Left</string>
+    <string name="right_headphone">Right</string>
+    <string name="eq_profile">Active Profile / Manage Profiles</string>
+    <string name="eq_profile_custom">Custom</string>
+    <string name="eq_profile_delete">Delete Profile</string>
+    <string name="eq_profile_save">Save Eq Profile</string>
+    <string name="eq_profile_name">Profile Name</string>
+    <string name="eq_profile_invalid_name">Invalid profile name</string>
+    <string name="eq_profile_saved">Profile saved</string>
+    <string name="eq_profile_deleted">deleted</string>
+    <string name="eq_profile_delete_confirm">Are you sure you want to delete this equalizer profile?</string>
 
     <!-- Battery -->
     <string name="store_mode">Store Mode</string>
@@ -877,8 +937,10 @@
     <string name="vm_tun_tit_common">Common settings</string>
     <string name="vm_tunnables">VM Tunnables</string>
     <string name="zram">Z-RAM</string>
+    <string name="zramsw_summary">Enable or disable ZRAM</string>
     <string name="disksize">Disksize</string>
     <string name="disksize_summary">Attempts to increase performance by avoiding paging on physical storage, instead using a compressed virtual device in RAM. Paging takes place in RAM until it is necessary to use the swap space on physical storage.</string>
+    <string name="disksize_summary2">First disable ZRAM to be able to adjust the size.</string>
     <string name="zswap">ZSWAP</string>
     <string name="zswap_summary">ZSwap is a lightweight compressed cache for swap pages. It takes pages that are in the process of being swapped out and attempts to compress them into a dynamically allocated RAM-based memory pool. Zswap basically trades CPU cycles for potentially reduced swap I/O.</string>
     <string name="memory_pool">Memory pool</string>
@@ -893,6 +955,14 @@
     <string name="write">Write</string>
 
     <!-- Misc -->
+    <string name="secure_kernel_tit">Security</string>
+    <string name="secure_kernel_on">Secure Kernel</string>
+    <string name="secure_kernel_off">Insecure Kernel</string>
+    <string name="adb_secure_on">Secure ADB</string>
+    <string name="adb_secure_off">Insecure ADB</string>
+    <string name="debug_on">Debuggable</string>
+    <string name="debug_off">Not Debuggable</string>
+    <string name="restart_usb_toast">Restarting USB…</string>
     <string name="selinux">SELinux State</string>
     <string name="selinux_no_kernel_toast">SELinux state: Kernel not supported</string>
     <string name="selinux_summary">Select the SELinux state, Permissive/Enforcing.\n(Required a kernel with support.)</string>

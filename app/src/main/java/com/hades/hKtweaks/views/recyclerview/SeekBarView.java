@@ -115,8 +115,7 @@ public class SeekBarView extends RecyclerViewItem {
                         mOnSeekBarListener.onStop(
                                 SeekBarView.this, mProgress, mItems.get(mProgress));
                     }
-                } catch (Exception e) {
-                    Log.crashlyticsE(e.getMessage());
+                } catch (Exception ignored) {
                 }
             }
         });
@@ -221,6 +220,11 @@ public class SeekBarView extends RecyclerViewItem {
                 } catch (Exception ignored) {
                     mValue.setText(mValue.getResources().getString(R.string.not_in_range));
                 }
+            }
+            if(mEnabled){
+                mSeekBar.setAlpha(1f);
+            } else {
+                mSeekBar.setAlpha(0.4f);
             }
         }
     }

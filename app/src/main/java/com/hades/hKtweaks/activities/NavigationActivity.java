@@ -365,10 +365,9 @@ public class NavigationActivity extends BaseActivity
             int id = navigationFragment.mId;
 
             Drawable drawable = ContextCompat.getDrawable(this,
-                    Utils.DONATED
-                            && AppSettings.isSectionIcons(this)
-                            && navigationFragment.mDrawable != 0 ? navigationFragment.mDrawable :
-                            R.drawable.ic_blank);
+                        AppSettings.isSectionIcons(this)
+                        && navigationFragment.mDrawable != 0 ? navigationFragment.mDrawable :
+                        R.drawable.ic_blank);
 
             if (fragmentClass == null) {
                 lastSubMenu = menu.addSubMenu(id);
@@ -512,7 +511,6 @@ public class NavigationActivity extends BaseActivity
 
         mDrawer.postDelayed(()
                         -> {
-                    Log.crashlyticsI("open " + fragment.getClass().getSimpleName());
                     getSupportFragmentManager().beginTransaction().replace(
                             R.id.content_frame, fragment, res + "_key").commitAllowingStateLoss();
                 },

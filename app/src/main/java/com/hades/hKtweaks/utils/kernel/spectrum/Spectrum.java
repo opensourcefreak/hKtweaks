@@ -2,7 +2,6 @@ package com.hades.hKtweaks.utils.kernel.spectrum;
 
 import android.os.AsyncTask;
 
-import com.hades.hKtweaks.utils.Utils;
 import com.hades.hKtweaks.utils.root.RootUtils;
 
 /**
@@ -10,9 +9,6 @@ import com.hades.hKtweaks.utils.root.RootUtils;
  */
 
 public class Spectrum {
-
-    private static final String SPECTRUM = "/init.spectrum.sh";
-
 
     public static String getProfile(){
         return RootUtils.runCommand("getprop persist.spectrum.profile");
@@ -40,6 +36,6 @@ public class Spectrum {
     }
 
     public static boolean supported() {
-        return Utils.existFile(SPECTRUM);
+        return RootUtils.getProp("spectrum.support").equals("1");
     }
 }
