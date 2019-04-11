@@ -1,10 +1,10 @@
-package com.moro.mtweaks.utils.kernel.sound;
+package com.hades.hKtweaks.utils.kernel.sound;
 
 import android.content.Context;
 
-import com.moro.mtweaks.fragments.ApplyOnBootFragment;
-import com.moro.mtweaks.utils.Utils;
-import com.moro.mtweaks.utils.root.Control;
+import com.hades.hKtweaks.fragments.ApplyOnBootFragment;
+import com.hades.hKtweaks.utils.Utils;
+import com.hades.hKtweaks.utils.root.Control;
 
 import java.util.ArrayList;
 import java.util.Arrays;
