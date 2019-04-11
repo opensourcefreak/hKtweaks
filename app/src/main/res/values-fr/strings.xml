@@ -10,8 +10,6 @@
     <string name="no_busybox">Aucun accès à \"busybox\"</string>
     <string name="open">Ouvrir %s</string>
     <string name="disable">Désactivé</string>
-    <string name="changelog">MTweaks YoBlue v%s</string>
-    <string name="changelog_message">\n* Correction du Wakelock Boeffla, gain de fluidité, merci @Grouxho\n\n\n</string>
     <string name="close">Fermer</string>
     <!-- Security -->
     <string name="password">Mot de passe</string>
