@@ -64,6 +64,7 @@ public class GPUFreqExynos {
     private static final String TUNABLE_HIGHSPEED_78x0_LOAD = "/sys/devices/11400000.mali/highspeed_load";
     private static final String TUNABLE_HIGHSPEED_78x0_DELAY = "/sys/devices/11400000.mali/highspeed_delay";
     private static final String POWER_POLICY_78x0 = "/sys/devices/11400000.mali/power_policy";
+    private static final String UTILIZATION_78x0 = "/sys/devices/11400000.mali/utilization";
 
     private static final String MAX_S7_FREQ = "/sys/devices/14ac0000.mali/max_clock";
     private static final String MIN_S7_FREQ = "/sys/devices/14ac0000.mali/min_clock";
@@ -189,6 +190,7 @@ public class GPUFreqExynos {
         mPowerPolicies.put(POWER_POLICY_S9, 1);
         mPowerPolicies.put(POWER_POLICY_S10, 1);
 
+        mUtilization.put(UTILIZATION_78x0, 1);
         mUtilization.put(UTILIZATION_S7, 1);
         mUtilization.put(UTILIZATION_S8, 1);
         mUtilization.put(UTILIZATION_S9, 1);
