@@ -1,14 +1,9 @@
 {
-  "latestVersion": "1.1.0",
-  "latestVersionCode": "110",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.0/hKtweaks_v1.1.0.apk",
+  "latestVersion": "1.1.1",
+  "latestVersionCode": "111",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.1/hKtweaks_v1.1.1.apk",
   "releaseNotes": [
     "Changelog:",
-    "Warning: You will need to uninstall previous version of hKtweaks first, then install the update.",
-    "For preserving the settings use backup/restore function of the app.",
-    "",
-    "- Merge upstream of MTweaks",
-    "- Bug fixes and improvements",
-    "Read more on https://github.com/morogoku/MTweaks-KernelAdiutorMOD"
+    "- Fix GPU usage on exynos 78x0 crashing the app on GPU Settings"
   ]
 }
