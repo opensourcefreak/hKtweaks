@@ -28,6 +28,7 @@
         <item name="android:textDirection">locale</item>
         <item name="dim_dialog_background">@color/dim_foreground_disabled_material_light</item>
         <item name="rcBackgroundColor">@color/rcBackground_dark</item>
+        <item name="android:navigationBarColor">@color/black</item>
     </style>
 
     <style name="AppThemeParent" parent="AppTheme" />
