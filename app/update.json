@@ -1,9 +1,11 @@
 {
-  "latestVersion": "1.1.1",
-  "latestVersionCode": "111",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.1/hKtweaks_v1.1.1.apk",
+  "latestVersion": "1.1.2",
+  "latestVersionCode": "112",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.2/hKtweaks_v1.1.2.apk",
   "releaseNotes": [
     "Changelog:",
-    "- Fix GPU usage on exynos 78x0 crashing the app on GPU Settings"
+    "- Add support for exynos 7884/7885 family",
+    "- Switch default theme to blue",
+    "- Update blue theme colors to be visible enough"
   ]
 }
