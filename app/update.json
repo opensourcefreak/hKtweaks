@@ -1,11 +1,10 @@
 {
-  "latestVersion": "1.1.2",
-  "latestVersionCode": "112",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.2/hKtweaks_v1.1.2.apk",
+  "latestVersion": "1.1.3",
+  "latestVersionCode": "113",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.3/hKtweaks_v1.1.3.apk",
   "releaseNotes": [
     "Changelog:",
-    "- Add support for exynos 7884/7885 family",
-    "- Switch default theme to blue",
-    "- Update blue theme colors to be visible enough"
+    "- Fix thermal nodes for 7885",
+    "- Make dark navbar on dark theme"
   ]
 }
