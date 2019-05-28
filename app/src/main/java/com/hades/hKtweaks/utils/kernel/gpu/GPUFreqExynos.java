@@ -55,16 +55,16 @@ public class GPUFreqExynos {
     private static final String MIN_S7_FREQ_STOCK = "/sys/devices/platform/gpusysfs/gpu_min_clock";
     private static final String AVAILABLE_S7_FREQS_STOCK = "/sys/devices/platform/gpusysfs/gpu_freq_table";
 
-    private static final String MAX_7885_FREQ = "/sys/devices/11500000.mali/max_clock";
-    private static final String MIN_7885_FREQ = "/sys/devices/11500000.mali/min_clock";
-    private static final String CUR_7885_FREQ = "/sys/devices/11500000.mali/clock";
-    private static final String AVAILABLE_7885_FREQS = "/sys/devices/11500000.mali/volt_table";
-    private static final String AVAILABLE_7885_GOVERNORS = "/sys/devices/11500000.mali/dvfs_governor";
-    private static final String TUNABLE_HIGHSPEED_7885_CLOCK = "/sys/devices/11500000.mali/highspeed_clock";
-    private static final String TUNABLE_HIGHSPEED_7885_LOAD = "/sys/devices/11500000.mali/highspeed_load";
-    private static final String TUNABLE_HIGHSPEED_7885_DELAY = "/sys/devices/11500000.mali/highspeed_delay";
-    private static final String POWER_POLICY_7885 = "/sys/devices/11500000.mali/power_policy";
-    private static final String UTILIZATION_7885 = "/sys/devices/11500000.mali/utilization";
+    private static final String MAX_7885_FREQ = "/sys/devices/platform/11500000.mali/max_clock";
+    private static final String MIN_7885_FREQ = "/sys/devices/platform/11500000.mali/min_clock";
+    private static final String CUR_7885_FREQ = "/sys/devices/platform/11500000.mali/clock";
+    private static final String AVAILABLE_7885_FREQS = "/sys/devices/platform/11500000.mali/volt_table";
+    private static final String AVAILABLE_7885_GOVERNORS = "/sys/devices/platform/11500000.mali/dvfs_governor";
+    private static final String TUNABLE_HIGHSPEED_7885_CLOCK = "/sys/devices/platform/11500000.mali/highspeed_clock";
+    private static final String TUNABLE_HIGHSPEED_7885_LOAD = "/sys/devices/platform/11500000.mali/highspeed_load";
+    private static final String TUNABLE_HIGHSPEED_7885_DELAY = "/sys/devices/platform/11500000.mali/highspeed_delay";
+    private static final String POWER_POLICY_7885 = "/sys/devices/platform/11500000.mali/power_policy";
+    private static final String UTILIZATION_7885 = "/sys/devices/platform/11500000.mali/utilization";
 
     private static final String MAX_78x0_FREQ = "/sys/devices/11400000.mali/max_clock";
     private static final String MIN_78x0_FREQ = "/sys/devices/11400000.mali/min_clock";

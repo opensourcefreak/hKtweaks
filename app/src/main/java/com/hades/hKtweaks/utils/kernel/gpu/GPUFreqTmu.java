@@ -42,12 +42,12 @@ public class GPUFreqTmu {
         return sIOInstance;
     }
 
-    private static final String TMU_7885 = "/sys/devices/11500000.mali/tmu";
-    private static final String THROTTLING1_7885 = "/sys/devices/11500000.mali/throttling1";
-    private static final String THROTTLING2_7885 = "/sys/devices/11500000.mali/throttling2";
-    private static final String THROTTLING3_7885 = "/sys/devices/11500000.mali/throttling3";
-    private static final String THROTTLING4_7885 = "/sys/devices/11500000.mali/throttling4";
-    private static final String TRIPPING_7885 = "/sys/devices/11500000.mali/tripping";
+    private static final String TMU_7885 = "/sys/devices/platform/11500000.mali/tmu";
+    private static final String THROTTLING1_7885 = "/sys/devices/platform/11500000.mali/throttling1";
+    private static final String THROTTLING2_7885 = "/sys/devices/platform/11500000.mali/throttling2";
+    private static final String THROTTLING3_7885 = "/sys/devices/platform/11500000.mali/throttling3";
+    private static final String THROTTLING4_7885 = "/sys/devices/platform/11500000.mali/throttling4";
+    private static final String TRIPPING_7885 = "/sys/devices/platform/11500000.mali/tripping";
 
     private static final String TMU_78x0 = "/sys/devices/11400000.mali/tmu";
     private static final String THROTTLING1_78x0 = "/sys/devices/11400000.mali/throttling1";
