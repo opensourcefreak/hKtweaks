@@ -10,7 +10,7 @@
     <string name="open">Open %s</string>
     <string name="disable">Disable</string>
     <string name="changelog">hKtweaks v%s</string>
-    <string name="changelog_message">\n* Add support for exynos 7884/7885 family\n* Switch default theme to blue\n* Update blue theme colors to be visible enough\n</string>
+    <string name="changelog_message">\n* Fix thermal nodes for 7885\n* Make dark navbar on dark theme\n*</string>
     <string name="close">Close</string>
 
     <!-- Security -->
