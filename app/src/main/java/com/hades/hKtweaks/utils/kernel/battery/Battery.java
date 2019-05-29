@@ -52,7 +52,7 @@ public class Battery {
     private static final String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
     private static final String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
 
-    private static final String CHARGE_S7 = "/sys/devices/battery";
+    public static final String CHARGE_S7 = "/sys/devices/battery";
     private static final String S7_UNSTABLE_CHARGE = CHARGE_S7 + "/unstable_power_detection";
     private static final String S7_HV_INPUT = CHARGE_S7 + "/hv_input";
     private static final String S7_HV_CHARGE = CHARGE_S7 + "/hv_charge";
