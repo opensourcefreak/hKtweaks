@@ -52,25 +52,25 @@ public class Battery {
     private static final String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
     private static final String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
 
-    public static final String CHARGE_S7 = "/sys/devices/battery";
-    private static final String S7_UNSTABLE_CHARGE = CHARGE_S7 + "/unstable_power_detection";
-    private static final String S7_HV_INPUT = CHARGE_S7 + "/hv_input";
-    private static final String S7_HV_CHARGE = CHARGE_S7 + "/hv_charge";
-    private static final String S7_AC_INPUT = CHARGE_S7 + "/ac_input";
-    private static final String S7_AC_CHARGE = CHARGE_S7 + "/ac_charge";
-    private static final String S7_AC_INPUT_SCREEN = CHARGE_S7 + "/so_limit_input";
-    private static final String S7_AC_CHARGE_SCREEN = CHARGE_S7 + "/so_limit_charge";
-    private static final String S7_USB_INPUT = CHARGE_S7 + "/sdp_input";
-    private static final String S7_USB_CHARGE = CHARGE_S7 + "/sdp_charge";
-    private static final String S7_WC_INPUT = CHARGE_S7 + "/wc_input";
-    private static final String S7_WC_CHARGE = CHARGE_S7 + "/wc_charge";
-    private static final String S7_CAR_INPUT = CHARGE_S7 + "/car_input";
-    private static final String S7_CAR_CHARGE = CHARGE_S7 + "/car_charge";
-    private static final String S7_CHARGE_SOURCE = CHARGE_S7 + "/power_supply/battery/batt_charging_source";
-    private static final String S7_FG_FULLCAPNOM = CHARGE_S7 + "/power_supply/battery/fg_fullcapnom";
-    private static final String S7_STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
-    private static final String S7_STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
-    private static final String S7_STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
+    public static final String BATTERY_NODE = "/sys/devices/battery";
+    private static final String UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
+    private static final String HV_INPUT = BATTERY_NODE + "/hv_input";
+    private static final String HV_CHARGE = BATTERY_NODE + "/hv_charge";
+    private static final String AC_INPUT = BATTERY_NODE + "/ac_input";
+    private static final String AC_CHARGE = BATTERY_NODE + "/ac_charge";
+    private static final String AC_INPUT_SCREEN = BATTERY_NODE + "/so_limit_input";
+    private static final String AC_CHARGE_SCREEN = BATTERY_NODE + "/so_limit_charge";
+    private static final String USB_INPUT = BATTERY_NODE + "/sdp_input";
+    private static final String USB_CHARGE = BATTERY_NODE + "/sdp_charge";
+    private static final String WC_INPUT = BATTERY_NODE + "/wc_input";
+    private static final String WC_CHARGE = BATTERY_NODE + "/wc_charge";
+    private static final String CAR_INPUT = BATTERY_NODE + "/car_input";
+    private static final String CAR_CHARGE = BATTERY_NODE + "/car_charge";
+    private static final String CHARGE_SOURCE = BATTERY_NODE + "/power_supply/battery/batt_charging_source";
+    private static final String FG_FULLCAPNOM = BATTERY_NODE + "/power_supply/battery/fg_fullcapnom";
+    private static final String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
+    private static final String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
+    private static final String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
 
     private int mCapacity;
 
@@ -90,104 +90,104 @@ public class Battery {
     }
 
     public String getHealthValue() {
-        float cap = Utils.strToInt(Utils.readFile(S7_FG_FULLCAPNOM));
+        float cap = Utils.strToInt(Utils.readFile(FG_FULLCAPNOM));
         float value = ((cap * 2) / getCapacity()) * 100;
         return String.format("%.2f", value);
     }
 
-    public void saveS7StockValues(Context context) {
-        if (hasS7HvInput()) {
-            AppSettings.saveString("bat_s7_hv_input", getS7HvInput(), context);
+    public void saveStockValues(Context context) {
+        if (hasHvInput()) {
+            AppSettings.saveString("bat_hv_input", getHvInput(), context);
         } else {
-            AppSettings.remove("bat_s7_hv_input", context);
+            AppSettings.remove("bat_hv_input", context);
         }
-        if (hasS7HvCharge()) {
-            AppSettings.saveString("bat_s7_hv_charge", getS7HvCharge(), context);
+        if (hasHvCharge()) {
+            AppSettings.saveString("bat_hv_charge", getHvCharge(), context);
         } else {
-            AppSettings.remove("bat_s7_hv_charge", context);
+            AppSettings.remove("bat_hv_charge", context);
         }
-        if (hasS7AcInput()) {
-            AppSettings.saveString("bat_s7_ac_input", getS7AcInput(), context);
+        if (hasAcInput()) {
+            AppSettings.saveString("bat_ac_input", getAcInput(), context);
         } else {
-            AppSettings.remove("bat_s7_ac_input", context);
+            AppSettings.remove("bat_ac_input", context);
         }
-        if (hasS7AcCharge()) {
-            AppSettings.saveString("bat_s7_ac_charge", getS7AcCharge(), context);
+        if (hasAcCharge()) {
+            AppSettings.saveString("bat_ac_charge", getAcCharge(), context);
         } else {
-            AppSettings.remove("bat_s7_ac_charge", context);
+            AppSettings.remove("bat_ac_charge", context);
         }
-        if (hasS7AcInputScreen()) {
-            AppSettings.saveString("bat_s7_ac_input_screen", getS7AcInputScreen(), context);
+        if (hasAcInputScreen()) {
+            AppSettings.saveString("bat_ac_input_screen", getAcInputScreen(), context);
         } else {
-            AppSettings.remove("bat_s7_ac_input_screen", context);
+            AppSettings.remove("bat_ac_input_screen", context);
         }
-        if (hasS7AcChargeScreen()) {
-            AppSettings.saveString("bat_s7_ac_charge_screen", getS7AcChargeScreen(), context);
+        if (hasAcChargeScreen()) {
+            AppSettings.saveString("bat_ac_charge_screen", getAcChargeScreen(), context);
         } else {
-            AppSettings.remove("bat_s7_ac_charge_screen", context);
+            AppSettings.remove("bat_ac_charge_screen", context);
         }
-        if (hasS7UsbInput()) {
-            AppSettings.saveString("bat_s7_usb_input", getS7UsbInput(), context);
+        if (hasUsbInput()) {
+            AppSettings.saveString("bat_usb_input", getUsbInput(), context);
         } else {
-            AppSettings.remove("bat_s7_usb_input", context);
+            AppSettings.remove("bat_usb_input", context);
         }
-        if (hasS7UsbCharge()) {
-            AppSettings.saveString("bat_s7_usb_charge", getS7UsbCharge(), context);
+        if (hasUsbCharge()) {
+            AppSettings.saveString("bat_usb_charge", getUsbCharge(), context);
         } else {
-            AppSettings.remove("bat_s7_usb_charge", context);
+            AppSettings.remove("bat_usb_charge", context);
         }
-        if (hasS7WcInput()) {
-            AppSettings.saveString("bat_s7_wc_input", getS7WcInput(), context);
+        if (hasWcInput()) {
+            AppSettings.saveString("bat_wc_input", getWcInput(), context);
         } else {
-            AppSettings.remove("bat_s7_wc_input", context);
+            AppSettings.remove("bat_wc_input", context);
         }
-        if (hasS7WcCharge()) {
-            AppSettings.saveString("bat_s7_wc_charge", getS7WcCharge(), context);
+        if (hasWcCharge()) {
+            AppSettings.saveString("bat_wc_charge", getWcCharge(), context);
         } else {
-            AppSettings.remove("bat_s7_wc_charge", context);
+            AppSettings.remove("bat_wc_charge", context);
         }
-        if (hasS7CarInput()) {
-            AppSettings.saveString("bat_s7_car_input", getS7CarInput(), context);
+        if (hasCarInput()) {
+            AppSettings.saveString("bat_car_input", getCarInput(), context);
         } else {
-            AppSettings.remove("bat_s7_car_input", context);
+            AppSettings.remove("bat_car_input", context);
         }
-        if (hasS7CarCharge()) {
-            AppSettings.saveString("bat_s7_car_charge", getS7CarCharge(), context);
+        if (hasCarCharge()) {
+            AppSettings.saveString("bat_car_charge", getCarCharge(), context);
         } else {
-            AppSettings.remove("bat_s7_car_charge", context);
+            AppSettings.remove("bat_car_charge", context);
         }
 
-        AppSettings.saveBoolean("s7_battery_saved", true, context);
+        AppSettings.saveBoolean("battery_saved", true, context);
     }
 
 
-    public boolean hasS7StoreMode(){
-        return (Utils.existFile(S7_STORE_MODE) && Utils.existFile(S7_STORE_MODE_MAX)
-                && Utils.existFile(S7_STORE_MODE_MIN));
+    public boolean hasStoreMode(){
+        return (Utils.existFile(STORE_MODE) && Utils.existFile(STORE_MODE_MAX)
+                && Utils.existFile(STORE_MODE_MIN));
     }
 
-    public boolean isS7StoreModeEnabled(){
-        return Utils.readFile(S7_STORE_MODE).equals("1");
+    public boolean isStoreModeEnabled(){
+        return Utils.readFile(STORE_MODE).equals("1");
     }
 
-    public void enableS7StoreMode(boolean enable, Context context){
-        run(Control.write(enable ? "1" : "0", S7_STORE_MODE), S7_STORE_MODE, context);
+    public void enableStoreMode(boolean enable, Context context){
+        run(Control.write(enable ? "1" : "0", STORE_MODE), STORE_MODE, context);
     }
 
-    public String getS7StoreModeMax(){
-        return Utils.readFile(S7_STORE_MODE_MAX);
+    public String getStoreModeMax(){
+        return Utils.readFile(STORE_MODE_MAX);
     }
 
-    public void setS7StoreModeMax(int value, Context context){
-        run(Control.write(String.valueOf(value), S7_STORE_MODE_MAX), S7_STORE_MODE_MAX, context);
+    public void setStoreModeMax(int value, Context context){
+        run(Control.write(String.valueOf(value), STORE_MODE_MAX), STORE_MODE_MAX, context);
     }
 
-    public String getS7StoreModeMin(){
-        return Utils.readFile(S7_STORE_MODE_MIN);
+    public String getStoreModeMin(){
+        return Utils.readFile(STORE_MODE_MIN);
     }
 
-    public void setS7StoreModeMin(int value, Context context){
-        run(Control.write(String.valueOf(value), S7_STORE_MODE_MIN), S7_STORE_MODE_MIN, context);
+    public void setStoreModeMin(int value, Context context){
+        run(Control.write(String.valueOf(value), STORE_MODE_MIN), STORE_MODE_MIN, context);
     }
 
     public void setChargingCurrent(int value, Context context) {
@@ -255,158 +255,158 @@ public class Battery {
         Control.runSetting(command, ApplyOnBootFragment.BATTERY, id, context);
     }
 
-/* Init S7 Battery */
+    /* Init Battery */
 
-    public boolean hasS7HvInput() {
-        return Utils.existFile(S7_HV_INPUT);
+    public boolean hasHvInput() {
+        return Utils.existFile(HV_INPUT);
     }
 
-    public void setS7HvInput(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_HV_INPUT), S7_HV_INPUT, context);
+    public void setHvInput(int value, Context context) {
+        run(Control.write(String.valueOf(value), HV_INPUT), HV_INPUT, context);
     }
 
-    public String getS7HvInput() {
-        return Utils.readFile(S7_HV_INPUT);
+    public String getHvInput() {
+        return Utils.readFile(HV_INPUT);
     }
 
-    public boolean hasS7HvCharge() {
-        return Utils.existFile(S7_HV_CHARGE);
+    public boolean hasHvCharge() {
+        return Utils.existFile(HV_CHARGE);
     }
 
-    public void setS7HvCharge(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_HV_CHARGE), S7_HV_CHARGE, context);
+    public void setHvCharge(int value, Context context) {
+        run(Control.write(String.valueOf(value), HV_CHARGE), HV_CHARGE, context);
     }
 
-    public String getS7HvCharge() {
-        return Utils.readFile(S7_HV_CHARGE);
+    public String getHvCharge() {
+        return Utils.readFile(HV_CHARGE);
     }
 
-    public boolean hasS7AcInput() {
-        return Utils.existFile(S7_AC_INPUT);
+    public boolean hasAcInput() {
+        return Utils.existFile(AC_INPUT);
     }
 
-    public void setS7AcInput(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_AC_INPUT), S7_AC_INPUT, context);
+    public void setAcInput(int value, Context context) {
+        run(Control.write(String.valueOf(value), AC_INPUT), AC_INPUT, context);
     }
 
-    public String getS7AcInput() {
-        return Utils.readFile(S7_AC_INPUT);
+    public String getAcInput() {
+        return Utils.readFile(AC_INPUT);
     }
 
-    public boolean hasS7AcCharge() {
-        return Utils.existFile(S7_AC_CHARGE);
+    public boolean hasAcCharge() {
+        return Utils.existFile(AC_CHARGE);
     }
 
-    public void setS7AcCharge(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_AC_CHARGE), S7_AC_CHARGE, context);
+    public void setAcCharge(int value, Context context) {
+        run(Control.write(String.valueOf(value), AC_CHARGE), AC_CHARGE, context);
     }
 
-    public String getS7AcCharge() {
-        return Utils.readFile(S7_AC_CHARGE);
+    public String getAcCharge() {
+        return Utils.readFile(AC_CHARGE);
     }
 
-    public boolean hasS7AcInputScreen() {
-        return Utils.existFile(S7_AC_INPUT_SCREEN);
+    public boolean hasAcInputScreen() {
+        return Utils.existFile(AC_INPUT_SCREEN);
     }
 
-    public void setS7AcInputScreen(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_AC_INPUT_SCREEN), S7_AC_INPUT_SCREEN, context);
+    public void setAcInputScreen(int value, Context context) {
+        run(Control.write(String.valueOf(value), AC_INPUT_SCREEN), AC_INPUT_SCREEN, context);
     }
 
-    public String getS7AcInputScreen() {
-        return Utils.readFile(S7_AC_INPUT_SCREEN);
+    public String getAcInputScreen() {
+        return Utils.readFile(AC_INPUT_SCREEN);
     }
 
-    public boolean hasS7AcChargeScreen() {
-        return Utils.existFile(S7_AC_CHARGE_SCREEN);
+    public boolean hasAcChargeScreen() {
+        return Utils.existFile(AC_CHARGE_SCREEN);
     }
 
-    public void setS7AcChargeScreen(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_AC_CHARGE_SCREEN), S7_AC_CHARGE_SCREEN, context);
+    public void setAcChargeScreen(int value, Context context) {
+        run(Control.write(String.valueOf(value), AC_CHARGE_SCREEN), AC_CHARGE_SCREEN, context);
     }
 
-    public String getS7AcChargeScreen() {
-        return Utils.readFile(S7_AC_CHARGE_SCREEN);
+    public String getAcChargeScreen() {
+        return Utils.readFile(AC_CHARGE_SCREEN);
     }
 
-    public boolean hasS7UsbInput() {
-        return Utils.existFile(S7_USB_INPUT);
+    public boolean hasUsbInput() {
+        return Utils.existFile(USB_INPUT);
     }
 
-    public void setS7UsbInput(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_USB_INPUT), S7_USB_INPUT, context);
+    public void setUsbInput(int value, Context context) {
+        run(Control.write(String.valueOf(value), USB_INPUT), USB_INPUT, context);
     }
 
-    public String getS7UsbInput() {
-        return Utils.readFile(S7_USB_INPUT);
+    public String getUsbInput() {
+        return Utils.readFile(USB_INPUT);
     }
 
-    public boolean hasS7UsbCharge() {
-        return Utils.existFile(S7_USB_CHARGE);
+    public boolean hasUsbCharge() {
+        return Utils.existFile(USB_CHARGE);
     }
 
-    public void setS7UsbCharge(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_USB_CHARGE), S7_USB_CHARGE, context);
+    public void setUsbCharge(int value, Context context) {
+        run(Control.write(String.valueOf(value), USB_CHARGE), USB_CHARGE, context);
     }
 
-    public String getS7UsbCharge() {
-        return Utils.readFile(S7_USB_CHARGE);
+    public String getUsbCharge() {
+        return Utils.readFile(USB_CHARGE);
     }
 
-    public boolean hasS7WcInput() {
-        return Utils.existFile(S7_WC_INPUT);
+    public boolean hasWcInput() {
+        return Utils.existFile(WC_INPUT);
     }
 
-    public void setS7WcInput(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_WC_INPUT), S7_WC_INPUT, context);
+    public void setWcInput(int value, Context context) {
+        run(Control.write(String.valueOf(value), WC_INPUT), WC_INPUT, context);
     }
 
-    public String getS7WcInput() {
-        return Utils.readFile(S7_WC_INPUT);
+    public String getWcInput() {
+        return Utils.readFile(WC_INPUT);
     }
 
-    public boolean hasS7WcCharge() {
-        return Utils.existFile(S7_WC_CHARGE);
+    public boolean hasWcCharge() {
+        return Utils.existFile(WC_CHARGE);
     }
 
-    public void setS7WcCharge(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_WC_CHARGE), S7_WC_CHARGE, context);
+    public void setWcCharge(int value, Context context) {
+        run(Control.write(String.valueOf(value), WC_CHARGE), WC_CHARGE, context);
     }
 
-    public String getS7WcCharge() {
-        return Utils.readFile(S7_WC_CHARGE);
+    public String getWcCharge() {
+        return Utils.readFile(WC_CHARGE);
     }
 
-    public boolean hasS7CarCharge() {
-        return Utils.existFile(S7_CAR_CHARGE);
+    public boolean hasCarCharge() {
+        return Utils.existFile(CAR_CHARGE);
     }
 
-    public void setS7CarCharge(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_CAR_CHARGE), S7_CAR_CHARGE, context);
+    public void setCarCharge(int value, Context context) {
+        run(Control.write(String.valueOf(value), CAR_CHARGE), CAR_CHARGE, context);
     }
 
-    public String getS7CarCharge() {
-        return Utils.readFile(S7_CAR_CHARGE);
+    public String getCarCharge() {
+        return Utils.readFile(CAR_CHARGE);
     }
 
-    public boolean hasS7CarInput() {
-        return Utils.existFile(S7_CAR_INPUT);
+    public boolean hasCarInput() {
+        return Utils.existFile(CAR_INPUT);
     }
 
-    public void setS7CarInput(int value, Context context) {
-        run(Control.write(String.valueOf(value), S7_CAR_INPUT), S7_CAR_INPUT, context);
+    public void setCarInput(int value, Context context) {
+        run(Control.write(String.valueOf(value), CAR_INPUT), CAR_INPUT, context);
     }
 
-    public String getS7CarInput() {
-        return Utils.readFile(S7_CAR_INPUT);
+    public String getCarInput() {
+        return Utils.readFile(CAR_INPUT);
     }
 
-    public boolean hasS7ChargeSource() {
-        return Utils.existFile(S7_CHARGE_SOURCE);
+    public boolean hasChargeSource() {
+        return Utils.existFile(CHARGE_SOURCE);
     }
 
-    public static String getS7ChargeSource(Context context) {
-        String value = Utils.readFile(S7_CHARGE_SOURCE);
+    public static String getChargeSource(Context context) {
+        String value = Utils.readFile(CHARGE_SOURCE);
         switch (value){
             case "0" :
                 return context.getResources().getString(R.string.cs_unknown);
@@ -496,19 +496,19 @@ public class Battery {
         return "Unknown source";
     }
 
-    public boolean hasChargeS7() {
-        return Utils.existFile(CHARGE_S7);
+    public boolean hasCharge() {
+        return Utils.existFile(BATTERY_NODE);
     }
 
     public boolean hasUnstableCharge() {
-        return Utils.existFile(S7_UNSTABLE_CHARGE);
+        return Utils.existFile(UNSTABLE_CHARGE);
     }
 
     public boolean isUnstableChargeEnabled() {
-        return Utils.readFile(S7_UNSTABLE_CHARGE).equals("1");
+        return Utils.readFile(UNSTABLE_CHARGE).equals("1");
     }
 
     public void enableUnstableCharge(boolean enable, Context context) {
-        run(Control.write(enable ? "1" : "0", S7_UNSTABLE_CHARGE), S7_UNSTABLE_CHARGE, context);
+        run(Control.write(enable ? "1" : "0", UNSTABLE_CHARGE), UNSTABLE_CHARGE, context);
     }
 }

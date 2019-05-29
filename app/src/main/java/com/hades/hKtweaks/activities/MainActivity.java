@@ -40,7 +40,6 @@ import com.hades.hKtweaks.fragments.kernel.GPUFragment;
 import com.hades.hKtweaks.services.profile.Tile;
 import com.hades.hKtweaks.utils.AppSettings;
 import com.hades.hKtweaks.utils.Device;
-import com.hades.hKtweaks.utils.Log;
 import com.hades.hKtweaks.utils.Utils;
 import com.hades.hKtweaks.utils.kernel.battery.Battery;
 import com.hades.hKtweaks.utils.kernel.bus.VoltageCam;
@@ -225,7 +224,7 @@ public class MainActivity extends BaseActivity {
                 }
 
                 // Reset battery_saved to recopy battery stock values
-                AppSettings.saveBoolean("s7_battery_saved", false, mRefActivity.get());
+                AppSettings.saveBoolean("battery_saved", false, mRefActivity.get());
             }
 
             // Check if hKtweaks version is changed
@@ -240,8 +239,8 @@ public class MainActivity extends BaseActivity {
             }
 
             // save battery stock values
-            if (!AppSettings.getBoolean("s7_battery_saved", false, mRefActivity.get())){
-                Battery.getInstance(mRefActivity.get()).saveS7StockValues(mRefActivity.get());
+            if (!AppSettings.getBoolean("battery_saved", false, mRefActivity.get())){
+                Battery.getInstance(mRefActivity.get()).saveStockValues(mRefActivity.get());
             }
 
             // Save backup of Cluster0 stock voltages

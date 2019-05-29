@@ -83,7 +83,7 @@ public class BatteryFragment extends RecyclerViewFragment {
 
     @Override
     protected void addItems(List<RecyclerViewItem> items) {
-        if (mBattery.hasChargeS7()) {
+        if (mBattery.hasCharge()) {
             //chartypeInit(items);
             charsourceInit(items);
             statusInit(items);
@@ -93,7 +93,7 @@ public class BatteryFragment extends RecyclerViewFragment {
             tempInit(items);
             levelInit(items);
             healthInit(items);
-            chargeS7Init(items);
+            chargeInit(items);
         } else {
             levelInit(items);
             voltageInit(items);
@@ -118,7 +118,7 @@ public class BatteryFragment extends RecyclerViewFragment {
                 mBattery.getCapacity() + getString(R.string.mah)));
     }
 
-    private void chargeS7Init(List<RecyclerViewItem> items) {
+    private void chargeInit(List<RecyclerViewItem> items) {
 
         CardView unsCharge = new CardView(getActivity());
         unsCharge.setTitle(getString(R.string.unstable_charge_card));
@@ -144,13 +144,13 @@ public class BatteryFragment extends RecyclerViewFragment {
         storeCard.setTitle(getString(R.string.store_mode));
         storeCard.setFullSpan(true);
 
-        if (mBattery.hasS7StoreMode()){
+        if (mBattery.hasStoreMode()){
             SwitchView sMode = new SwitchView();
             sMode.setTitle(getString(R.string.store_mode));
             sMode.setSummary(getString(R.string.store_mode_summary));
-            sMode.setChecked(mBattery.isS7StoreModeEnabled());
+            sMode.setChecked(mBattery.isStoreModeEnabled());
             sMode.addOnSwitchListener((switchView, isChecked)
-                    -> mBattery.enableS7StoreMode(isChecked, getActivity()));
+                    -> mBattery.enableStoreMode(isChecked, getActivity()));
 
             storeCard.addItem(sMode);
 
@@ -161,11 +161,11 @@ public class BatteryFragment extends RecyclerViewFragment {
             smMax.setMax(100);
             smMax.setMin(1);
             smMax.setUnit(getString(R.string.percent));
-            smMax.setProgress(Utils.strToInt(mBattery.getS7StoreModeMax()) -1 );
+            smMax.setProgress(Utils.strToInt(mBattery.getStoreModeMax()) -1 );
             smMax.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7StoreModeMax(position +1, getActivity());
+                    mBattery.setStoreModeMax(position +1, getActivity());
                 }
 
                 @Override
@@ -182,11 +182,11 @@ public class BatteryFragment extends RecyclerViewFragment {
             smMin.setMax(100);
             smMin.setMin(1);
             smMin.setUnit(getString(R.string.percent));
-            smMin.setProgress(Utils.strToInt(mBattery.getS7StoreModeMin()) -1 );
+            smMin.setProgress(Utils.strToInt(mBattery.getStoreModeMin()) -1 );
             smMin.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7StoreModeMin(position +1, getActivity());
+                    mBattery.setStoreModeMin(position +1, getActivity());
                 }
 
                 @Override
@@ -206,19 +206,19 @@ public class BatteryFragment extends RecyclerViewFragment {
         hvPower.setTitle(getString(R.string.hv_power_supply));
         hvPower.setFullSpan(true);
 
-        if (mBattery.hasS7HvInput()) {
+        if (mBattery.hasHvInput()) {
             SeekBarView hv_input = new SeekBarView();
             hv_input.setTitle(getString(R.string.hv_input));
-            hv_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_hv_input", "", getActivity()) + getString(R.string.ma));
+            hv_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_hv_input", "", getActivity()) + getString(R.string.ma));
             hv_input.setMax(3000);
             hv_input.setMin(400);
             hv_input.setUnit(getString(R.string.ma));
             hv_input.setOffset(25);
-            hv_input.setProgress(Utils.strToInt(mBattery.getS7HvInput()) / 25 - 16);
+            hv_input.setProgress(Utils.strToInt(mBattery.getHvInput()) / 25 - 16);
             hv_input.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7HvInput((position + 16) * 25, getActivity());
+                    mBattery.setHvInput((position + 16) * 25, getActivity());
                 }
 
                 @Override
@@ -229,19 +229,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             hvPower.addItem(hv_input);
         }
 
-        if (mBattery.hasS7HvCharge()) {
+        if (mBattery.hasHvCharge()) {
             SeekBarView hv_charge = new SeekBarView();
             hv_charge.setTitle(getString(R.string.hv_charge));
-            hv_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_hv_charge", "", getActivity()) + getString(R.string.ma));
+            hv_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_hv_charge", "", getActivity()) + getString(R.string.ma));
             hv_charge.setMax(3150);
             hv_charge.setMin(1000);
             hv_charge.setUnit(getString(R.string.ma));
             hv_charge.setOffset(25);
-            hv_charge.setProgress(Utils.strToInt(mBattery.getS7HvCharge()) / 25 - 40);
+            hv_charge.setProgress(Utils.strToInt(mBattery.getHvCharge()) / 25 - 40);
             hv_charge.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7HvCharge((position + 40) * 25, getActivity());
+                    mBattery.setHvCharge((position + 40) * 25, getActivity());
                 }
 
                 @Override
@@ -261,19 +261,19 @@ public class BatteryFragment extends RecyclerViewFragment {
         acMains.setTitle(getString(R.string.ac_mains));
         acMains.setFullSpan(true);
 
-        if (mBattery.hasS7AcInput()) {
+        if (mBattery.hasAcInput()) {
             SeekBarView ac_input = new SeekBarView();
             ac_input.setTitle(getString(R.string.ac_input));
-            ac_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_ac_input", "", getActivity()) + getString(R.string.ma));
+            ac_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_ac_input", "", getActivity()) + getString(R.string.ma));
             ac_input.setMax(3150);
             ac_input.setMin(400);
             ac_input.setUnit(getString(R.string.ma));
             ac_input.setOffset(25);
-            ac_input.setProgress(Utils.strToInt(mBattery.getS7AcInput()) / 25 - 16);
+            ac_input.setProgress(Utils.strToInt(mBattery.getAcInput()) / 25 - 16);
             ac_input.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7AcInput((position + 16) * 25, getActivity());
+                    mBattery.setAcInput((position + 16) * 25, getActivity());
                 }
 
                 @Override
@@ -284,19 +284,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             acMains.addItem(ac_input);
         }
 
-        if (mBattery.hasS7AcCharge()) {
+        if (mBattery.hasAcCharge()) {
             SeekBarView ac_charge = new SeekBarView();
             ac_charge.setTitle(getString(R.string.ac_charge));
-            ac_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_ac_charge", "", getActivity()) + getString(R.string.ma));
+            ac_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_ac_charge", "", getActivity()) + getString(R.string.ma));
             ac_charge.setMax(3150);
             ac_charge.setMin(400);
             ac_charge.setUnit(getString(R.string.ma));
             ac_charge.setOffset(25);
-            ac_charge.setProgress(Utils.strToInt(mBattery.getS7AcCharge()) / 25 - 16);
+            ac_charge.setProgress(Utils.strToInt(mBattery.getAcCharge()) / 25 - 16);
             ac_charge.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7AcCharge((position + 16) * 25, getActivity());
+                    mBattery.setAcCharge((position + 16) * 25, getActivity());
                 }
 
                 @Override
@@ -307,19 +307,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             acMains.addItem(ac_charge);
         }
 
-        if (mBattery.hasS7AcInputScreen()) {
+        if (mBattery.hasAcInputScreen()) {
             SeekBarView ac_input_screen = new SeekBarView();
             ac_input_screen.setTitle(getString(R.string.ac_input_screen));
-            ac_input_screen.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_ac_input_screen", "", getActivity()) + getString(R.string.ma));
+            ac_input_screen.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_ac_input_screen", "", getActivity()) + getString(R.string.ma));
             ac_input_screen.setMax(3150);
             ac_input_screen.setMin(400);
             ac_input_screen.setUnit(getString(R.string.ma));
             ac_input_screen.setOffset(25);
-            ac_input_screen.setProgress(Utils.strToInt(mBattery.getS7AcInputScreen()) / 25 - 16);
+            ac_input_screen.setProgress(Utils.strToInt(mBattery.getAcInputScreen()) / 25 - 16);
             ac_input_screen.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7AcInputScreen((position + 16) * 25, getActivity());
+                    mBattery.setAcInputScreen((position + 16) * 25, getActivity());
                 }
 
                 @Override
@@ -330,19 +330,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             acMains.addItem(ac_input_screen);
         }
 
-        if (mBattery.hasS7AcChargeScreen()) {
+        if (mBattery.hasAcChargeScreen()) {
             SeekBarView ac_charge_screen = new SeekBarView();
             ac_charge_screen.setTitle(getString(R.string.ac_charge_screen));
-            ac_charge_screen.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_ac_charge_screen", "", getActivity()) + getString(R.string.ma));
+            ac_charge_screen.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_ac_charge_screen", "", getActivity()) + getString(R.string.ma));
             ac_charge_screen.setMax(3150);
             ac_charge_screen.setMin(400);
             ac_charge_screen.setUnit(getString(R.string.ma));
             ac_charge_screen.setOffset(25);
-            ac_charge_screen.setProgress(Utils.strToInt(mBattery.getS7AcChargeScreen()) / 25 - 16);
+            ac_charge_screen.setProgress(Utils.strToInt(mBattery.getAcChargeScreen()) / 25 - 16);
             ac_charge_screen.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7AcChargeScreen((position + 16) * 25, getActivity());
+                    mBattery.setAcChargeScreen((position + 16) * 25, getActivity());
                 }
 
                 @Override
@@ -362,19 +362,19 @@ public class BatteryFragment extends RecyclerViewFragment {
         usbCard.setTitle(getString(R.string.usb_port));
         usbCard.setFullSpan(true);
 
-        if(mBattery.hasS7UsbInput()) {
+        if(mBattery.hasUsbInput()) {
             SeekBarView usb_input = new SeekBarView();
             usb_input.setTitle(getString(R.string.usb_input));
-            usb_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_usb_input", "", getActivity()) + getString(R.string.ma));
+            usb_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_usb_input", "", getActivity()) + getString(R.string.ma));
             usb_input.setMax(1200);
             usb_input.setMin(100);
             usb_input.setUnit(getString(R.string.ma));
             usb_input.setOffset(25);
-            usb_input.setProgress(Utils.strToInt(mBattery.getS7UsbInput()) / 25 - 4);
+            usb_input.setProgress(Utils.strToInt(mBattery.getUsbInput()) / 25 - 4);
             usb_input.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7UsbInput((position + 4) * 25, getActivity());
+                    mBattery.setUsbInput((position + 4) * 25, getActivity());
                 }
 
                 @Override
@@ -385,19 +385,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             usbCard.addItem(usb_input);
         }
 
-        if(mBattery.hasS7UsbCharge()) {
+        if(mBattery.hasUsbCharge()) {
             SeekBarView usb_charge = new SeekBarView();
             usb_charge.setTitle(getString(R.string.usb_charge));
-            usb_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_usb_charge", "", getActivity()) + getString(R.string.ma));
+            usb_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_usb_charge", "", getActivity()) + getString(R.string.ma));
             usb_charge.setMax(1200);
             usb_charge.setMin(100);
             usb_charge.setUnit(getString(R.string.ma));
             usb_charge.setOffset(25);
-            usb_charge.setProgress(Utils.strToInt(mBattery.getS7UsbCharge()) / 25 - 4);
+            usb_charge.setProgress(Utils.strToInt(mBattery.getUsbCharge()) / 25 - 4);
             usb_charge.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7UsbCharge((position + 4) * 25, getActivity());
+                    mBattery.setUsbCharge((position + 4) * 25, getActivity());
                 }
 
                 @Override
@@ -417,19 +417,19 @@ public class BatteryFragment extends RecyclerViewFragment {
         carCard.setTitle(getString(R.string.car_dock));
         carCard.setFullSpan(true);
 
-        if(mBattery.hasS7CarInput()) {
+        if(mBattery.hasCarInput()) {
             SeekBarView car_input = new SeekBarView();
             car_input.setTitle(getString(R.string.car_input));
-            car_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_car_input", "", getActivity()) + getString(R.string.ma));
+            car_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_car_input", "", getActivity()) + getString(R.string.ma));
             car_input.setMax(2300);
             car_input.setMin(800);
             car_input.setUnit(getString(R.string.ma));
             car_input.setOffset(25);
-            car_input.setProgress(Utils.strToInt(mBattery.getS7CarInput()) / 25 - 32);
+            car_input.setProgress(Utils.strToInt(mBattery.getCarInput()) / 25 - 32);
             car_input.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7CarInput((position + 32) * 25, getActivity());
+                    mBattery.setCarInput((position + 32) * 25, getActivity());
                 }
 
                 @Override
@@ -440,19 +440,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             carCard.addItem(car_input);
         }
 
-        if(mBattery.hasS7CarCharge()) {
+        if(mBattery.hasCarCharge()) {
             SeekBarView car_charge = new SeekBarView();
             car_charge.setTitle(getString(R.string.car_charge));
-            car_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_car_charge", "", getActivity()) + getString(R.string.ma));
+            car_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_car_charge", "", getActivity()) + getString(R.string.ma));
             car_charge.setMax(2300);
             car_charge.setMin(800);
             car_charge.setUnit(getString(R.string.ma));
             car_charge.setOffset(25);
-            car_charge.setProgress(Utils.strToInt(mBattery.getS7CarCharge()) / 25 - 32);
+            car_charge.setProgress(Utils.strToInt(mBattery.getCarCharge()) / 25 - 32);
             car_charge.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7CarCharge((position + 32) * 25, getActivity());
+                    mBattery.setCarCharge((position + 32) * 25, getActivity());
                 }
 
                 @Override
@@ -472,19 +472,19 @@ public class BatteryFragment extends RecyclerViewFragment {
         wcCard.setTitle(getString(R.string.wireless_power));
         wcCard.setFullSpan(true);
 
-        if(mBattery.hasS7WcInput()) {
+        if(mBattery.hasWcInput()) {
             SeekBarView wc_input = new SeekBarView();
             wc_input.setTitle(getString(R.string.wc_input));
-            wc_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_wc_input", "", getActivity()) + getString(R.string.ma));
+            wc_input.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_wc_input", "", getActivity()) + getString(R.string.ma));
             wc_input.setMax(1500);
             wc_input.setMin(800);
             wc_input.setUnit(getString(R.string.ma));
             wc_input.setOffset(25);
-            wc_input.setProgress(Utils.strToInt(mBattery.getS7WcInput()) / 25 - 32);
+            wc_input.setProgress(Utils.strToInt(mBattery.getWcInput()) / 25 - 32);
             wc_input.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7WcInput((position + 32) * 25, getActivity());
+                    mBattery.setWcInput((position + 32) * 25, getActivity());
                 }
 
                 @Override
@@ -495,19 +495,19 @@ public class BatteryFragment extends RecyclerViewFragment {
             wcCard.addItem(wc_input);
         }
 
-        if(mBattery.hasS7WcCharge()) {
+        if(mBattery.hasWcCharge()) {
             SeekBarView wc_charge = new SeekBarView();
             wc_charge.setTitle(getString(R.string.wc_charge));
-            wc_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_s7_wc_charge", "", getActivity()) + getString(R.string.ma));
+            wc_charge.setSummary(getString(R.string.def) + ": " + AppSettings.getString("bat_wc_charge", "", getActivity()) + getString(R.string.ma));
             wc_charge.setMax(2300);
             wc_charge.setMin(800);
             wc_charge.setUnit(getString(R.string.ma));
             wc_charge.setOffset(25);
-            wc_charge.setProgress(Utils.strToInt(mBattery.getS7WcCharge()) / 25 - 32);
+            wc_charge.setProgress(Utils.strToInt(mBattery.getWcCharge()) / 25 - 32);
             wc_charge.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    mBattery.setS7WcCharge((position + 32) * 25, getActivity());
+                    mBattery.setWcCharge((position + 32) * 25, getActivity());
                 }
 
                 @Override
@@ -673,13 +673,13 @@ public class BatteryFragment extends RecyclerViewFragment {
         public void onReceive(Context context, Intent intent) {
             mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             mBatteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
-            mBatteryCurrent = Utils.strToInt(Utils.readFile(Battery.CHARGE_S7 + "/power_supply/battery/current_now"));
-            mBatteryCurrentAvg = Utils.strToInt(Utils.readFile(Battery.CHARGE_S7 + "/power_supply/battery/current_avg"));
+            mBatteryCurrent = Utils.strToInt(Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/current_now"));
+            mBatteryCurrentAvg = Utils.strToInt(Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/current_avg"));
             //sBatteryCharType = Utils.readFile("/sys/devices/battery/power_supply/battery/charge_type");
-            mBatteryCharSource = mBattery.getS7ChargeSource(context);
+            mBatteryCharSource = mBattery.getChargeSource(context);
             mBatteryTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10D;
-            mBatteryStatus = Utils.readFile(Battery.CHARGE_S7 + "/power_supply/battery/status");
-            mBatteryHealth = Utils.readFile(Battery.CHARGE_S7 + "/power_supply/battery/health");
+            mBatteryStatus = Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/status");
+            mBatteryHealth = Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/health");
             mBatteryHealthValue = mBattery.getHealthValue();
         }
     };
