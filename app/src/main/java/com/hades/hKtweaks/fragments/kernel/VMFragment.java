@@ -36,10 +36,12 @@ import com.hades.hKtweaks.views.recyclerview.GenericSelectView2;
 import com.hades.hKtweaks.views.recyclerview.ProgressBarView;
 import com.hades.hKtweaks.views.recyclerview.RecyclerViewItem;
 import com.hades.hKtweaks.views.recyclerview.SeekBarView;
+import com.hades.hKtweaks.views.recyclerview.SelectView;
 import com.hades.hKtweaks.views.recyclerview.SwitchView;
 import com.hades.hKtweaks.views.recyclerview.TitleView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -163,6 +165,7 @@ public class VMFragment extends RecyclerViewFragment {
         boolean isZramEnabled = ZRAM.isEnabled();
 
         SeekBarView zram = new SeekBarView();
+        SelectView zramalg = new SelectView();
 
 
         CardView zramCard = new CardView(getActivity());
@@ -179,10 +182,19 @@ public class VMFragment extends RecyclerViewFragment {
         zramSw.addOnSwitchListener((switchView, isChecked) -> {
             ZRAM.enable(isChecked, getActivity());
             zram.setEnabled(!isChecked);
+            zramalg.setEnabled(!isChecked);
         });
 
         zramCard.addItem(zramSw);
 
+        zramalg.setEnabled(!isZramEnabled);
+        zramalg.setTitle(getString(R.string.zram_comp_algorithm));
+        zramalg.setSummary(getString(R.string.zram_comp_algorithm_summary));
+        zramalg.setItems(Arrays.asList(getResources().getStringArray(R.array.zram_alg)));
+        zramalg.setItem(ZRAM.getCompAlgorithm());
+        zramalg.setOnItemSelected((selectView, position, item)
+                -> ZRAM.setCompAlgorithm(item, getActivity()));
+        zramCard.addItem(zramalg);
 
         zram.setEnabled(!isZramEnabled);
         zram.setTitle(getString(R.string.disksize));

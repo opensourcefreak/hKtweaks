@@ -34,7 +34,7 @@ public class ZRAM {
     private static final String BLOCK = "/dev/block/zram0";
     private static final String DISKSIZE = "/sys/block/zram0/disksize";
     private static final String RESET = "/sys/block/zram0/reset";
-
+    private static final String ALGORITHM = "/sys/block/zram0/comp_algorithm";
     public static void setDisksize(final long value, final Context context) {
         long size = value * 1024 * 1024;
 
@@ -46,6 +46,23 @@ public class ZRAM {
         long value = Utils.strToLong(Utils.readFile(DISKSIZE)) / 1024 / 1024;
 
         return (int) value;
+    }
+
+    public static String getCompAlgorithm() {
+        String value = Utils.readFile(ALGORITHM);
+        switch (value){
+            case "[lzo] lz4 deflate" :
+                return "lzo";
+            case "lzo [lz4] deflate" :
+                return "lz4";
+            case "lzo lz4 [deflate]" :
+                return "deflate";
+        }
+        return null;
+    }
+    public static void setCompAlgorithm(String value, Context context) {
+        run(Control.write("1", RESET), RESET, context);
+        run(Control.write(String.valueOf(value), ALGORITHM), ALGORITHM, context);
     }
 
     public static void enable(boolean enable, Context context) {
