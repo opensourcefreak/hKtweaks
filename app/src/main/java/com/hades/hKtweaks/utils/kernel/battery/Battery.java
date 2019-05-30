@@ -30,6 +30,8 @@ import com.hades.hKtweaks.utils.root.Control;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by willi on 26.06.16.
@@ -52,7 +54,17 @@ public class Battery {
     private static final String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
     private static final String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
 
-    public static final String BATTERY_NODE = "/sys/devices/battery";
+    public static String BATTERY_NODE;
+    private final List<String> nodeList = new ArrayList<>();
+    {
+    /**
+     * Add on this list needed values for battery sysfs nodes
+     */
+        nodeList.add("/sys/devices/battery");
+        nodeList.add("/sys/devices/battery.30");
+        nodeList.add("/sys/devices/battery.55");
+        nodeList.add("/sys/devices/platform/battery");
+    }
     private static final String UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
     private static final String HV_INPUT = BATTERY_NODE + "/hv_input";
     private static final String HV_CHARGE = BATTERY_NODE + "/hv_charge";
@@ -73,8 +85,13 @@ public class Battery {
     private static final String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
 
     private int mCapacity;
-
     private Battery(Context context) {
+        for (String file : nodeList) {
+            if (Utils.existFile(file)) {
+                BATTERY_NODE = file;
+                break;
+            }
+        }
         if (mCapacity == 0) {
             try {
                 Class<?> powerProfile = Class.forName("com.android.internal.os.PowerProfile");
