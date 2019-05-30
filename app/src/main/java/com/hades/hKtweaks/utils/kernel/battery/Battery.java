@@ -42,9 +42,34 @@ public class Battery {
 
     public static Battery getInstance(@NonNull Context context) {
         if (sInstance == null) {
+            setValues();
             sInstance = new Battery(context);
         }
         return sInstance;
+    }
+
+    private static void setValues() {
+        for (String file : new String[] {"/sys/devices/battery", "/sys/devices/battery.30", "/sys/devices/battery.55", "/sys/devices/platform/battery"}) {
+            if (Utils.existFile(file)) {
+                BATTERY_NODE = file;
+                UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
+                HV_INPUT = BATTERY_NODE + "/hv_input";
+                HV_CHARGE = BATTERY_NODE + "/hv_charge";
+                AC_INPUT = BATTERY_NODE + "/ac_input";
+                AC_CHARGE = BATTERY_NODE + "/ac_charge";
+                AC_INPUT_SCREEN = BATTERY_NODE + "/so_limit_input";
+                AC_CHARGE_SCREEN = BATTERY_NODE + "/so_limit_charge";
+                USB_INPUT = BATTERY_NODE + "/sdp_input";
+                USB_CHARGE = BATTERY_NODE + "/sdp_charge";
+                WC_INPUT = BATTERY_NODE + "/wc_input";
+                WC_CHARGE = BATTERY_NODE + "/wc_charge";
+                CAR_INPUT = BATTERY_NODE + "/car_input";
+                CAR_CHARGE = BATTERY_NODE + "/car_charge";
+                CHARGE_SOURCE = BATTERY_NODE + "/power_supply/battery/batt_charging_source";
+                FG_FULLCAPNOM = BATTERY_NODE + "/power_supply/battery/fg_fullcapnom";
+                break;
+            }
+        }
     }
 
     private static final String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
@@ -55,42 +80,30 @@ public class Battery {
     private static final String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
 
     public static String BATTERY_NODE;
-    private final List<String> nodeList = new ArrayList<>();
-    {
-    /**
-     * Add on this list needed values for battery sysfs nodes
-     */
-        nodeList.add("/sys/devices/battery");
-        nodeList.add("/sys/devices/battery.30");
-        nodeList.add("/sys/devices/battery.55");
-        nodeList.add("/sys/devices/platform/battery");
-    }
-    private static final String UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
-    private static final String HV_INPUT = BATTERY_NODE + "/hv_input";
-    private static final String HV_CHARGE = BATTERY_NODE + "/hv_charge";
-    private static final String AC_INPUT = BATTERY_NODE + "/ac_input";
-    private static final String AC_CHARGE = BATTERY_NODE + "/ac_charge";
-    private static final String AC_INPUT_SCREEN = BATTERY_NODE + "/so_limit_input";
-    private static final String AC_CHARGE_SCREEN = BATTERY_NODE + "/so_limit_charge";
-    private static final String USB_INPUT = BATTERY_NODE + "/sdp_input";
-    private static final String USB_CHARGE = BATTERY_NODE + "/sdp_charge";
-    private static final String WC_INPUT = BATTERY_NODE + "/wc_input";
-    private static final String WC_CHARGE = BATTERY_NODE + "/wc_charge";
-    private static final String CAR_INPUT = BATTERY_NODE + "/car_input";
-    private static final String CAR_CHARGE = BATTERY_NODE + "/car_charge";
-    private static final String CHARGE_SOURCE = BATTERY_NODE + "/power_supply/battery/batt_charging_source";
-    private static final String FG_FULLCAPNOM = BATTERY_NODE + "/power_supply/battery/fg_fullcapnom";
-    private static final String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
-    private static final String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
-    private static final String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
+
+    private static  String UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
+    private static  String HV_INPUT = BATTERY_NODE + "/hv_input";
+    private static  String HV_CHARGE = BATTERY_NODE + "/hv_charge";
+    private static  String AC_INPUT = BATTERY_NODE + "/ac_input";
+    private static  String AC_CHARGE = BATTERY_NODE + "/ac_charge";
+    private static  String AC_INPUT_SCREEN = BATTERY_NODE + "/so_limit_input";
+    private static  String AC_CHARGE_SCREEN = BATTERY_NODE + "/so_limit_charge";
+    private static  String USB_INPUT = BATTERY_NODE + "/sdp_input";
+    private static  String USB_CHARGE = BATTERY_NODE + "/sdp_charge";
+    private static  String WC_INPUT = BATTERY_NODE + "/wc_input";
+    private static  String WC_CHARGE = BATTERY_NODE + "/wc_charge";
+    private static  String CAR_INPUT = BATTERY_NODE + "/car_input";
+    private static  String CAR_CHARGE = BATTERY_NODE + "/car_charge";
+    private static  String CHARGE_SOURCE = BATTERY_NODE + "/power_supply/battery/batt_charging_source";
+    private static  String FG_FULLCAPNOM = BATTERY_NODE + "/power_supply/battery/fg_fullcapnom";
+    private static  String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
+    private static  String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
+    private static  String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
 
     private int mCapacity;
     private Battery(Context context) {
-        for (String file : nodeList) {
-            if (Utils.existFile(file)) {
-                BATTERY_NODE = file;
-                break;
-            }
+        if (BATTERY_NODE == null) {
+            setValues();
         }
         if (mCapacity == 0) {
             try {
