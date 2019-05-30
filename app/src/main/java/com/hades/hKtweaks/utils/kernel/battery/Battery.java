@@ -30,8 +30,6 @@ import com.hades.hKtweaks.utils.root.Control;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by willi on 26.06.16.
@@ -48,8 +46,31 @@ public class Battery {
         return sInstance;
     }
 
-    private static void setValues() {
-        for (String file : new String[] {"/sys/devices/battery", "/sys/devices/battery.30", "/sys/devices/battery.55", "/sys/devices/platform/battery"}) {
+    public static String BATTERY_NODE;
+    private static String UNSTABLE_CHARGE;
+    private static String HV_INPUT;
+    private static String HV_CHARGE;
+    private static String AC_INPUT;
+    private static String AC_CHARGE;
+    private static String AC_INPUT_SCREEN;
+    private static String AC_CHARGE_SCREEN;
+    private static String USB_INPUT;
+    private static String USB_CHARGE;
+    private static String WC_INPUT;
+    private static String WC_CHARGE;
+    private static String CAR_INPUT;
+    private static String CAR_CHARGE;
+    private static String CHARGE_SOURCE;
+    private static String FG_FULLCAPNOM;
+	
+    public static void setValues() {
+        for (String file : new String[] {
+                // Add on this list needed values for battery sysfs nodes
+                "/sys/devices/battery",
+                "/sys/devices/battery.30",
+                "/sys/devices/battery.55",
+                "/sys/devices/platform/battery"}
+                ) {
             if (Utils.existFile(file)) {
                 BATTERY_NODE = file;
                 UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
@@ -72,33 +93,14 @@ public class Battery {
         }
     }
 
-    private static final String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
-    private static final String BLX = "/sys/devices/virtual/misc/batterylifeextender/charging_limit";
-
-    private static final String CHARGE_RATE = "/sys/kernel/thundercharge_control";
-    private static final String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
-    private static final String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
-
-    public static String BATTERY_NODE;
-
-    private static  String UNSTABLE_CHARGE = BATTERY_NODE + "/unstable_power_detection";
-    private static  String HV_INPUT = BATTERY_NODE + "/hv_input";
-    private static  String HV_CHARGE = BATTERY_NODE + "/hv_charge";
-    private static  String AC_INPUT = BATTERY_NODE + "/ac_input";
-    private static  String AC_CHARGE = BATTERY_NODE + "/ac_charge";
-    private static  String AC_INPUT_SCREEN = BATTERY_NODE + "/so_limit_input";
-    private static  String AC_CHARGE_SCREEN = BATTERY_NODE + "/so_limit_charge";
-    private static  String USB_INPUT = BATTERY_NODE + "/sdp_input";
-    private static  String USB_CHARGE = BATTERY_NODE + "/sdp_charge";
-    private static  String WC_INPUT = BATTERY_NODE + "/wc_input";
-    private static  String WC_CHARGE = BATTERY_NODE + "/wc_charge";
-    private static  String CAR_INPUT = BATTERY_NODE + "/car_input";
-    private static  String CAR_CHARGE = BATTERY_NODE + "/car_charge";
-    private static  String CHARGE_SOURCE = BATTERY_NODE + "/power_supply/battery/batt_charging_source";
-    private static  String FG_FULLCAPNOM = BATTERY_NODE + "/power_supply/battery/fg_fullcapnom";
-    private static  String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
-    private static  String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
-    private static  String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
+    private static String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
+    private static String BLX = "/sys/devices/virtual/misc/batterylifeextender/charging_limit";
+    private static String CHARGE_RATE = "/sys/kernel/thundercharge_control";
+    private static String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
+    private static String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
+    private static String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
+    private static String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
+    private static String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
 
     private int mCapacity;
     private Battery(Context context) {

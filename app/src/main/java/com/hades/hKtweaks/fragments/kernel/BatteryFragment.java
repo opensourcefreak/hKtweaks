@@ -53,7 +53,6 @@ public class BatteryFragment extends RecyclerViewFragment {
     private StatsView mVoltage;
     private StatsView mCurrent;
     private StatsView mCurrentAvg;
-    //private StatsView mCharType;
     private StatsView mCharSource;
     private StatsView mTemp;
     private StatsView mStatus;
@@ -63,7 +62,6 @@ public class BatteryFragment extends RecyclerViewFragment {
     private int mBatteryVoltage;
     private int mBatteryCurrent;
     private int mBatteryCurrentAvg;
-    //private static String sBatteryCharType;
     private String mBatteryCharSource;
     private double mBatteryTemp;
     private String mBatteryStatus;
@@ -84,7 +82,6 @@ public class BatteryFragment extends RecyclerViewFragment {
     @Override
     protected void addItems(List<RecyclerViewItem> items) {
         if (mBattery.hasCharge()) {
-            //chartypeInit(items);
             charsourceInit(items);
             statusInit(items);
             currentavgInit(items);
@@ -572,15 +569,6 @@ public class BatteryFragment extends RecyclerViewFragment {
 
         items.add(mHealth);
     }
-/*
-    private void chartypeInit(List<RecyclerViewItem> items) {
-        mCharType = new StatsView();
-        mCharType.setTitle(getString(R.string.char_type));
-        mCharType.setFullSpan(true);
-
-        items.add(mCharType);
-    }
-*/
     private void charsourceInit(List<RecyclerViewItem> items) {
         mCharSource = new StatsView();
         mCharSource.setTitle(getString(R.string.char_source));
@@ -671,11 +659,13 @@ public class BatteryFragment extends RecyclerViewFragment {
     private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            if (Battery.BATTERY_NODE == null) {
+                mBattery.setValues();
+            }
             mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             mBatteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
             mBatteryCurrent = Utils.strToInt(Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/current_now"));
             mBatteryCurrentAvg = Utils.strToInt(Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/current_avg"));
-            //sBatteryCharType = Utils.readFile("/sys/devices/battery/power_supply/battery/charge_type");
             mBatteryCharSource = mBattery.getChargeSource(context);
             mBatteryTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10D;
             mBatteryStatus = Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/status");
@@ -699,9 +689,6 @@ public class BatteryFragment extends RecyclerViewFragment {
         if (mCurrent != null) {
             mCurrentAvg.setStat(mBatteryCurrentAvg + getString(R.string.ma));
         }
-        /*if (mCharType != null) {
-            mCharType.setStat(mBatteryCharType);
-        }*/
         if (mCharSource != null) {
             mCharSource.setStat(mBatteryCharSource);
         }
