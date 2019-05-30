@@ -409,7 +409,7 @@ public class GPUFragment extends RecyclerViewFragment {
                 if(list != null) {
                     int value = 0;
                     for (int i = 0; i < list.size(); i++) {
-                        freqs.add(String.valueOf(list.get(i)));
+                        freqs.add(String.valueOf(list.get(i) / 1000));
                         if (list.get(i) == mGPUFreqExynos.getHighspeedClock()) {
                             value = i;
                         }
@@ -424,6 +424,7 @@ public class GPUFragment extends RecyclerViewFragment {
                     seekbar.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                         @Override
                         public void onStop(SeekBarView seekBarView, int position, String value) {
+                            value = String.valueOf((Integer.parseInt(value) * 1000));
                             mGPUFreqExynos.setHighspeedClock(value, getActivity());
                         }
 
@@ -838,7 +839,7 @@ public class GPUFragment extends RecyclerViewFragment {
             float maxFreq = mGPUFreqExynos.getAvailableFreqsSort()
                     .get(mGPUFreqExynos.getAvailableFreqsSort().size() - 1);
             mCurFreq.setText(freq / mGPUFreqExynos.getCurFreqOffset() + getString(R.string.mhz));
-            float per = (float) freq / maxFreq * 100f;
+            float per = (float) freq / maxFreq * 1000 * 100f;
             mCurFreq.addPercentage(load >= 0 ? load : Math.round(per > 100 ? 100 : per < 0 ? 0 : per));
         }
 

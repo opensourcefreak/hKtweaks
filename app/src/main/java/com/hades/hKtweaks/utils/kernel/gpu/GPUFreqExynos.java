@@ -394,7 +394,7 @@ public class GPUFreqExynos {
     }
 
     public int getMinFreq() {
-        return Utils.strToInt(Utils.readFile(MIN_FREQ));
+        return Utils.strToInt(Utils.readFile(MIN_FREQ)) / 1000;
     }
 
     public boolean hasMinFreq() {
@@ -406,7 +406,7 @@ public class GPUFreqExynos {
     }
 
     public int getMaxFreq() {
-        return Utils.strToInt(Utils.readFile(MAX_FREQ));
+        return Utils.strToInt(Utils.readFile(MAX_FREQ)) / 1000;
     }
 
     public boolean hasMaxFreq() {
@@ -417,7 +417,7 @@ public class GPUFreqExynos {
         List<String> list = new ArrayList<>();
         if (getAvailableFreqs() != null) {
             for (int freq : getAvailableFreqs()) {
-                list.add((freq) + context.getString(R.string.mhz));
+                list.add((freq / 1000) + context.getString(R.string.mhz));
             }
         }
         return list;
@@ -449,7 +449,7 @@ public class GPUFreqExynos {
     }
 
     public int getCurFreq() {
-        return Utils.strToInt(Utils.readFile(CUR_FREQ));
+        return Utils.strToInt(Utils.readFile(CUR_FREQ)) / 1000;
     }
 
     public boolean hasCurFreq() {
