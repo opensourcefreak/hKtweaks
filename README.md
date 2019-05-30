@@ -1,15 +1,15 @@
 # hKtweaks
 
-It is a fork of MoroGoku's [MTweaks](https://github.com/morogoku/MTweaks-KernelAdiutorMOD) for proper adaptation to exynos 7880 devices.
+It is a fork of MoroGoku's [MTweaks](https://github.com/morogoku/MTweaks-KernelAdiutorMOD), properly adaptated to exynos7870/7880/7884/7885/7904 devices (maybe even more).
 Original MTweaks app is a Mod of Grarak's [KernelAdiutor](https://github.com/Grarak/KernelAdiutor) for compatibilize to Samsung Exynos.
 Thanks to Willi Ye for this great application.
 
 
-## Donation link for Morogoku (Original creator of MTweaks)
-[![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png)](https://paypal.me/morogoku)
-
 ## Donation link of myself
 [![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png)](https://paypal.me/corsicanu)
+
+## Donation link for Morogoku (Original creator of MTweaks)
+[![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png)](https://paypal.me/morogoku)
 
 
 ## Credits
@@ -52,7 +52,7 @@ _(Many sys interface paths has been taken from his [UKM-Project](https://github.
 
     Copyright (C) 2015-2016 Willi Ye <williye97@gmail.com>
 	Copyright (C) 2017 morogoku <morogoku@hotmail.com>
-	Copyright (C) 2018 corsicanu <corsicanu22@gmail.com>
+	Copyright (C) 2019 corsicanu <corsicanu22@gmail.com>
 	
     
     hKtweaks is free software: you can redistribute it and/or modify
