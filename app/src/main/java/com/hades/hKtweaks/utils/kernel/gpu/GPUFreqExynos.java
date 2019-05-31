@@ -337,6 +337,16 @@ public class GPUFreqExynos {
         }
     }
 
+    public boolean needRefactor;
+    private String hz;
+    public String refactor(String hz){
+        if (hz.length() > 4){
+            hz = String.valueOf(Utils.strToInt(hz) / 1000);
+            needRefactor= true;
+        }
+        return hz;
+    }
+
     public void setGovernor(String value, Context context) {
         switch (value){
             case "Default" :
@@ -394,7 +404,7 @@ public class GPUFreqExynos {
     }
 
     public int getMinFreq() {
-        return Utils.strToInt(Utils.readFile(MIN_FREQ)) / 1000;
+        return Utils.strToInt(refactor(Utils.readFile(MIN_FREQ)));
     }
 
     public boolean hasMinFreq() {
@@ -406,7 +416,7 @@ public class GPUFreqExynos {
     }
 
     public int getMaxFreq() {
-        return Utils.strToInt(Utils.readFile(MAX_FREQ)) / 1000;
+        return Utils.strToInt(refactor(Utils.readFile(MAX_FREQ)));
     }
 
     public boolean hasMaxFreq() {
@@ -417,7 +427,7 @@ public class GPUFreqExynos {
         List<String> list = new ArrayList<>();
         if (getAvailableFreqs() != null) {
             for (int freq : getAvailableFreqs()) {
-                list.add((freq / 1000) + context.getString(R.string.mhz));
+                list.add(Utils.strToInt(refactor(String.valueOf(freq))) + context.getString(R.string.mhz));
             }
         }
         return list;
@@ -449,7 +459,7 @@ public class GPUFreqExynos {
     }
 
     public int getCurFreq() {
-        return Utils.strToInt(Utils.readFile(CUR_FREQ)) / 1000;
+        return Utils.strToInt(refactor(Utils.readFile(CUR_FREQ)));
     }
 
     public boolean hasCurFreq() {
