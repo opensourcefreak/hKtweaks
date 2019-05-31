@@ -10,7 +10,7 @@
     <string name="open">Open %s</string>
     <string name="disable">Disable</string>
     <string name="changelog">hKtweaks v%s</string>
-    <string name="changelog_message">\n* Fix thermal nodes for 7885\n* Make dark navbar on dark theme\n*</string>
+    <string name="changelog_message">\n* updated battery detection method (should work now on more devices now)\n* updated battery section layout\n* updated about section\n* increased max size of zram to 4GB\n* removed extra unneeded operations when setting custom values for zram\n* added compression algorithm selection for zram\n* fixed gpu frequencies showing Hz instead of MHz\n</string>
     <string name="close">Close</string>
 
     <!-- Security -->
