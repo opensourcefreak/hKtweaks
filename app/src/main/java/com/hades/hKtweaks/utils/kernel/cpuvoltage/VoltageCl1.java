@@ -37,7 +37,26 @@ public class VoltageCl1 {
 
     public static final String BACKUP = "/data/.hKtweaks/cpuCl1_stock_voltage";
 
-    public static final String CL1_VOLTAGE = "/sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster1_volt_table";
+    public static String CL1_VOLTAGE;
+
+    public static void setValues() {
+        for (String file : new String[] {
+                // Add on this list needed values for voltage sysfs nodes
+                "/sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster1_volt_table",
+                "/sys/devices/system/cpu/cpufreq/mp-cpufreq/kfc_volt_table"}
+        ) {
+            if (Utils.existFile(file)) {
+                CL1_VOLTAGE = file;
+                break;
+            }
+        }
+    }
+
+    private VoltageCl1(){
+        if (CL1_VOLTAGE == null) {
+            setValues();
+        }
+    }
 
     private static final HashMap<String, Boolean> sVoltages = new HashMap<>();
     private static final HashMap<String, Integer> sOffset = new HashMap<>();
@@ -45,7 +64,6 @@ public class VoltageCl1 {
     private static final HashMap<String, String> sSplitNewline = new HashMap<>();
     private static final HashMap<String, String> sSplitLine = new HashMap<>();
     private static final HashMap<String, Boolean> sAppend = new HashMap<>();
-
     static {
         sVoltages.put(CL1_VOLTAGE, false);
 
