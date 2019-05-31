@@ -38,6 +38,7 @@ public class LMK {
     private static final String ADAPTIVE = "/sys/module/lowmemorykiller/parameters/enable_adaptive_lmk";
     private static final String SWAP_WAIT = "/sys/module/lowmemorykiller/parameters/swap_wait";
     private static final String SWAP_WAIT_PERCENT = "/sys/module/lowmemorykiller/parameters/swap_wait_percent";
+    public static String stock;
 
     public static void setSwapWaitPercent(int value, Context context) {
         run(Control.write(String.valueOf(value), SWAP_WAIT_PERCENT), SWAP_WAIT_PERCENT, context);
@@ -72,6 +73,7 @@ public class LMK {
     public static List<String> getMinFrees() {
         RootUtils.chmod(MINFREE, "666");
         String value = Utils.readFile(MINFREE);
+        stock = value;
         return Arrays.asList(value.split(","));
     }
 
