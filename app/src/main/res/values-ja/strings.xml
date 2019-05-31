@@ -781,7 +781,7 @@
   <string name="confirmation_notification">確認通知</string>
   <string name="apply_on_boot_confirmation_notification_summary">「起動時に適用」が通知をonで実行後、「起動時に適用」が起動時に成功したと通知されます。</string>
   <string name="script">スクリプト</string>
-  <string name="apply_on_boot_script_summary">シェルスクリプトを使用し設定を適用します。起動時に障害が発生した場合のみこれを有効化して下さい。本オプション有効化後も問題が解決しない場合は、Kernel Adiutorと競合する他のアプリケーションが無いことを確認して下さい。</string>
+  <string name="apply_on_boot_script_summary">シェルスクリプトを使用し設定を適用します。起動時に障害が発生した場合のみこれを有効化して下さい。本オプション有効化後も問題が解決しない場合は、hKtweaksと競合する他のアプリケーションが無いことを確認して下さい。</string>
   <string name="debugging">デバッグ</string>
   <string name="logcat">Logcat</string>
   <string name="logcat_summary">logcat を /sdcard/logcat.txt にコピー</string>
@@ -791,7 +791,7 @@
   <string name="driver_message_summary">ドライバメッセージ (dmesg) を /sdcard/dmesg.txtにコピーします。</string>
   <string name="security">セキュリティ</string>
   <string name="set_password">パスワードの設定</string>
-  <string name="set_password_summary">パスワードでKernel Adiutor を保護可能です。このアプリケーションを開く際、常に入力する必要が生じます。パスワードを失念した際、Kernel Adiutorのアプリケーションの設定でデータを消去して下さい。パスワードは誰とも共有されません。</string>
+  <string name="set_password_summary">パスワードでKernel Adiutor を保護可能です。このアプリケーションを開く際、常に入力する必要が生じます。パスワードを失念した際、hKtweaksのアプリケーションの設定でデータを消去して下さい。パスワードは誰とも共有されません。</string>
   <string name="delete_password">パスワードの削除</string>
   <string name="old_password">古いパスワード</string>
   <string name="new_password">新しいパスワード</string>

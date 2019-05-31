@@ -822,7 +822,7 @@
   <string name="confirmation_notification">Potvrdzujúce oznámenie</string>
   <string name="apply_on_boot_confirmation_notification_summary">Po vybraní \'Aplikovať pri spustení\' so zapnutými oznámeniami ukáže oznámenie s potvrdením, či bolo aplikovanie pri spustení úspešné.</string>
   <string name="script">Skript</string>
-  <string name="apply_on_boot_script_summary">Použiť shell skript pre aplikovanie nastavení. Toto povoľte iba pokiaľ máte problémy s aplikovaním pri spustení. Pokiaľ aj po povolení tohoto nastavenia problém pretrváva, uistite sa, že nebeží žiadna iná aplikácia nekompatibilná s Kernel Adiutorom.</string>
+  <string name="apply_on_boot_script_summary">Použiť shell skript pre aplikovanie nastavení. Toto povoľte iba pokiaľ máte problémy s aplikovaním pri spustení. Pokiaľ aj po povolení tohoto nastavenia problém pretrváva, uistite sa, že nebeží žiadna iná aplikácia nekompatibilná s hKtweaksom.</string>
   <string name="debugging">Ladenie</string>
   <string name="logcat">Logcat</string>
   <string name="logcat_summary">Kopírovať logcat do /sdcard/logcat.txt</string>

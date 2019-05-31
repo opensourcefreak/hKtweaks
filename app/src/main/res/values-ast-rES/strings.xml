@@ -615,7 +615,7 @@
   <string name="driver_message_summary">Copia\'l mensaxe del controlador (dmesg) a /sdcard/dmesg.txt</string>
   <string name="security">Seguranza</string>
   <string name="set_password">Afitar contraseña</string>
-  <string name="set_password_summary">Pues protexer Kernel Adiutor afitando una contraseña. Cada vegada qu\'abras esta aplicación, habrás introducila. Si la escaeces, namái llimpia los datos d\'esta aplicación nos axustes del to preséu. Nun t\'esmolezas, nun compartiré la to contraseña.</string>
+  <string name="set_password_summary">Pues protexer hKtweaks afitando una contraseña. Cada vegada qu\'abras esta aplicación, habrás introducila. Si la escaeces, namái llimpia los datos d\'esta aplicación nos axustes del to preséu. Nun t\'esmolezas, nun compartiré la to contraseña.</string>
   <string name="delete_password">Desaniciar contraseña</string>
   <string name="old_password">Contraseña vieya</string>
   <string name="new_password">Contraseña nueva</string>
@@ -628,8 +628,7 @@
   <string name="fingerprint_summary">Usa la buelga pa pasar la comprobación de seguranza. Esto funcionará si tienes buelgues rexistraes.</string>
   <string name="sections">Seiciones</string>
   <!-- About -->
-  <string name="about_me">Hola, soi Willi Ye tamién conocíu como Grarak, un estudiante de 19 años que vive en Viena. Desendolco p\'Android dende hai bien de tiempu. Amás de Kernel Adiutor tamién calteo LineageOS en dellos preseos y trabayo en Paranoid. Asina qu\'entiendi si nun alcuentro tiempu p\'anovar esta aplicación.</string>
-  <!-- Contributors -->
+    <!-- Contributors -->
   <string name="commits">%d unvios</string>
   <string name="no_internet">¡Comprueba la conexón d\'internet, por favor!</string>
   <!-- Help -->

@@ -1201,7 +1201,7 @@
     <string name="confirmation_notification">Confirmation Notification</string>
     <string name="apply_on_boot_confirmation_notification_summary">After apply on boot with visible notification, show a notification afterwards with the confirmation that apply on boot was successful.</string>
     <string name="script">Script</string>
-    <string name="apply_on_boot_script_summary">Use a shell script to apply settings. Please only enable this if you have troubles with apply on boot. If the problem still persists after enabling this option, please make sure no other app is conflicting with Kernel Adiutor.</string>
+    <string name="apply_on_boot_script_summary">Use a shell script to apply settings. Please only enable this if you have troubles with apply on boot. If the problem still persists after enabling this option, please make sure no other app is conflicting with hKtweaks.</string>
     <string name="debugging">Debugging</string>
     <string name="logcat">Logcat</string>
     <string name="logcat_summary">Copy logcat to /sdcard/logcat.txt</string>
@@ -1211,7 +1211,7 @@
     <string name="driver_message_summary">Copy driver message (dmesg) to /sdcard/dmesg.txt</string>
     <string name="security">Security</string>
     <string name="set_password">Set Password</string>
-    <string name="set_password_summary">You can protect Kernel Adiutor by setting up a password. Every time you open this application, you have to enter it. If you forget it, simply wipe the data of this application in settings of your device. Don\'t worry I won\'t share your password.</string>
+    <string name="set_password_summary">You can protect hKtweaks by setting up a password. Every time you open this application, you have to enter it. If you forget it, simply wipe the data of this application in settings of your device. Don\'t worry I won\'t share your password.</string>
     <string name="delete_password">Delete Password</string>
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
