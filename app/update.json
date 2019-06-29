@@ -1,11 +1,10 @@
 {
-  "latestVersion": "1.1.5",
-  "latestVersionCode": "115",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.5/hKtweaks_v1.1.5.apk",
+  "latestVersion": "1.1.6",
+  "latestVersionCode": "116",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.6/hKtweaks_v1.1.6.apk",
   "releaseNotes": [
     "Changelog:",
-    "- fixed GPU settings showing 0Mhz",
-    "- added phone stock lmk values instead of static S7 values",
-    "- cleaned up strings to show proper app name in various cases"
+    "- added GPU temp nodes for S9(+)/Note9",
+    "- fixed GPU usage freq graph not loading on some devices"
   ]
 }
