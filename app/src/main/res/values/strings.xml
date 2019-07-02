@@ -10,7 +10,7 @@
     <string name="open">Open %s</string>
     <string name="disable">Disable</string>
     <string name="changelog">hKtweaks v%s</string>
-    <string name="changelog_message">\n* added GPU temp nodes for S9(\+)\/Note9\n* fixed GPU usage freq graph not loading on some devices\n</string>
+    <string name="changelog_message">\n* fixed CPU settings for 7885(6\/2 cores)\n</string>
     <string name="close">Close</string>
 
     <!-- Security -->

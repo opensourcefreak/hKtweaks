@@ -1,10 +1,9 @@
 {
-  "latestVersion": "1.1.6",
-  "latestVersionCode": "116",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.6/hKtweaks_v1.1.6.apk",
+  "latestVersion": "1.1.7",
+  "latestVersionCode": "117",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.7/hKtweaks_v1.1.7.apk",
   "releaseNotes": [
     "Changelog:",
-    "- added GPU temp nodes for S9(+)/Note9",
-    "- fixed GPU usage freq graph not loading on some devices"
+    "- fixed CPU settings for 7885(6/2 cores)"
   ]
 }
