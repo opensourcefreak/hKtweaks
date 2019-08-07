@@ -68,6 +68,8 @@ public class Battery {
                 // Add on this list needed values for battery sysfs nodes
                 "/sys/devices/battery",
                 "/sys/devices/battery.30",
+                "/sys/devices/battery.53",
+                "/sys/devices/battery.54",
                 "/sys/devices/battery.55",
                 "/sys/devices/platform/battery"}
                 ) {
