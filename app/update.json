@@ -1,9 +1,11 @@
 {
-  "latestVersion": "1.1.7",
-  "latestVersionCode": "117",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.7/hKtweaks_v1.1.7.apk",
+  "latestVersion": "1.1.8",
+  "latestVersionCode": "118",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.8/hKtweaks_v1.1.8.apk",
   "releaseNotes": [
     "Changelog:",
-    "- fixed CPU settings for 7885(6/2 cores)"
+    "- added battery node for S6 and S6+ family",
+    "- added S10 temperature nodes",
+    "- added toggle for adaptive fast charge"
   ]
 }

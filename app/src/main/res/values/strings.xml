@@ -10,7 +10,7 @@
     <string name="open">Open %s</string>
     <string name="disable">Disable</string>
     <string name="changelog">hKtweaks v%s</string>
-    <string name="changelog_message">\n* fixed CPU settings for 7885(6\/2 cores)\n</string>
+    <string name="changelog_message">\n* added battery node for S6 and S6+ family\n* added S10 temperature nodes\n* added toggle for adaptive fast charge\n</string>
     <string name="close">Close</string>
 
     <!-- Security -->
