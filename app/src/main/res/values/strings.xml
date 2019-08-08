@@ -724,10 +724,12 @@
     <string name="health">Health</string>
     <string name="capacity">Capacity</string>
     <string name="usb_fast_charge">USB Fast Charge</string>
+    <string name="adaptive_fast_charge">Adaptive Fast Charge</string>
     <string name="unstable_charge_card">Unstable Charge</string>
     <string name="enable_unstable_charge">Enable Unstable Power Detection</string>
     <string name="enable_unstable_charge_summary">If disabled, the charger chip will ignore unstable currents. Use at risk of your charger or charging ports. Unstable power detection will reduce the input current until a stable voltage from the power source is achieved.</string>
     <string name="usb_fast_charge_summary">Device will charge faster when connected with USB. Replug your charger when changing this option.</string>
+    <string name="adaptive_fast_charge_summary">Device will charge faster when this option is enabled. Replug your charger when changing this option.</string>
     <string name="blx">Battery Life eXtender</string>
     <string name="blx_summary">Set a limit for the capacity to which the battery will be charged by passing a value between 0 and 100.</string>
     <string name="charge_rate">Charge Rate</string>
