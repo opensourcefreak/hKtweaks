@@ -17,6 +17,7 @@
  * along with Kernel Adiutor.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+ 
 package com.hades.hKtweaks.fragments.kernel;
 
 import com.hades.hKtweaks.R;
@@ -44,9 +45,7 @@ import com.hades.hKtweaks.views.recyclerview.RecyclerViewItem;
 import com.hades.hKtweaks.views.recyclerview.SeekBarView;
 import com.hades.hKtweaks.views.recyclerview.SelectView;
 import com.hades.hKtweaks.views.recyclerview.SwitchView;
-import com.hades.hKtweaks.views.recyclerview.TitleView;
 import com.hades.hKtweaks.utils.Utils;
-/* import com.hades.hKtweaks.utils.root.Control; */
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -126,7 +125,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
         if (AiOHotplug.supported()) {
             aioHotplugInit(items);
         }
-/*
+
         for (SwitchView view : mEnableViews) {
             view.addOnSwitchListener((switchView, isChecked) -> {
                 boolean enabled = false;
@@ -141,7 +140,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     }
                 }
             });
-        }*/
+        }
     }
 
     private void samsungPlugInit(List<RecyclerViewItem> items) {
@@ -157,8 +156,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
         samsungPlug.addItem(enable);
         mEnableViews.add(enable);
-/* older */
-
+/*
 		SeekBarView max = new SeekBarView();
         max.setTitle(getString(R.string.samsungPlug_max_cpu));
         max.setMax(8);
@@ -194,7 +192,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
         });
 
         samsungPlug.addItem(min);
-/* older */
+*/
         if (samsungPlug.size() > 0) {
             items.add(samsungPlug);
         }
@@ -202,32 +200,45 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
     }
 
     private void mpdecisionInit(List<RecyclerViewItem> items) {
-        SwitchView mpdecision = new SwitchView();
+        CardView mpdecision = new CardView(getActivity());
         mpdecision.setTitle(getString(R.string.mpdecision));
-        mpdecision.setSummary(getString(R.string.mpdecision_summary));
-        mpdecision.setChecked(MPDecision.isMpdecisionEnabled());
-        mpdecision.addOnSwitchListener((switchView, isChecked)
+
+        SwitchView enable = new SwitchView();
+        enable.setTitle(getString(R.string.mpdecision));
+        enable.setSummary(getString(R.string.mpdecision_summary));
+        enable.setChecked(MPDecision.isMpdecisionEnabled());
+        enable.addOnSwitchListener((switchView, isChecked)
                 -> MPDecision.enableMpdecision(isChecked, getActivity()));
 
-        items.add(mpdecision);
-        mEnableViews.add(mpdecision);
+        mpdecision.addItem(enable);
+        mEnableViews.add(enable);
+
+        if (mpdecision.size() > 0) {
+            items.add(mpdecision);
+        }
     }
 
     private void intelliPlugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> intelliplug = new ArrayList<>();
-
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.intelliplug));
+        CardView intelliplug = new CardView(getActivity());
+        intelliplug.setTitle(getString(R.string.intelliplug));
+        intelliplug.setExpand(false);
 
         if (mIntelliPlug.hasIntelliPlugEnable()) {
             SwitchView enable = new SwitchView();
             enable.setTitle(getString(R.string.intelliplug));
             enable.setSummary(getString(R.string.intelliplug_summary));
             enable.setChecked(mIntelliPlug.isIntelliPlugEnabled());
-            enable.addOnSwitchListener((switchView, isChecked)
-                    -> mIntelliPlug.enableIntelliPlug(isChecked, getActivity()));
+            enable.addOnSwitchListener((switchView, isChecked) -> {
+                if (isChecked) {
+                    mIntelliPlug.enableStateNotifier(true, getActivity());
+                    mIntelliPlug.enableIntelliPlug(true, getActivity());
+                } else {
+                    mIntelliPlug.enableIntelliPlug(false, getActivity());
+                    mIntelliPlug.enableStateNotifier(false, getActivity());
+                }
+            });
 
-            intelliplug.add(enable);
+            intelliplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -240,7 +251,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             profile.setOnItemSelected((selectView, position, item)
                     -> mIntelliPlug.setIntelliPlugProfile(position, getActivity()));
 
-            intelliplug.add(profile);
+            intelliplug.addItem(profile);
         }
 
         if (mIntelliPlug.hasIntelliPlugEco()) {
@@ -251,7 +262,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             eco.addOnSwitchListener((switchView, isChecked)
                     -> mIntelliPlug.enableIntelliPlugEco(isChecked, getActivity()));
 
-            intelliplug.add(eco);
+            intelliplug.addItem(eco);
         }
 
         if (mIntelliPlug.hasIntelliPlugTouchBoost()) {
@@ -262,7 +273,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             touchBoost.addOnSwitchListener((switchView, isChecked)
                     -> mIntelliPlug.enableIntelliPlugTouchBoost(isChecked, getActivity()));
 
-            intelliplug.add(touchBoost);
+            intelliplug.addItem(touchBoost);
         }
 
         if (mIntelliPlug.hasIntelliPlugHysteresis()) {
@@ -282,7 +293,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(hysteresis);
+            intelliplug.addItem(hysteresis);
         }
 
         if (mIntelliPlug.hasIntelliPlugThresold()) {
@@ -302,7 +313,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(threshold);
+            intelliplug.addItem(threshold);
         }
 
         if (mIntelliPlug.hasIntelliPlugScreenOffMax() && mCPUFreq.getFreqs() != null) {
@@ -318,7 +329,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             maxScreenOffFreq.setOnItemSelected((selectView, position, item)
                     -> mIntelliPlug.setIntelliPlugScreenOffMax(position, getActivity()));
 
-            intelliplug.add(maxScreenOffFreq);
+            intelliplug.addItem(maxScreenOffFreq);
         }
 
         if (mIntelliPlug.hasIntelliPlugDebug()) {
@@ -329,7 +340,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             debug.addOnSwitchListener((switchView, isChecked)
                     -> mIntelliPlug.enableIntelliPlugDebug(isChecked, getActivity()));
 
-            intelliplug.add(debug);
+            intelliplug.addItem(debug);
         }
 
         if (mIntelliPlug.hasIntelliPlugSuspend()) {
@@ -340,7 +351,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             suspend.addOnSwitchListener((switchView, isChecked)
                     -> mIntelliPlug.enableIntelliPlugSuspend(isChecked, getActivity()));
 
-            intelliplug.add(suspend);
+            intelliplug.addItem(suspend);
         }
 
         if (mIntelliPlug.hasIntelliPlugCpusBoosted()) {
@@ -361,7 +372,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(cpusBoosted);
+            intelliplug.addItem(cpusBoosted);
         }
 
         if (mIntelliPlug.hasIntelliPlugMinCpusOnline()) {
@@ -382,7 +393,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(minCpusOnline);
+            intelliplug.addItem(minCpusOnline);
         }
 
         if (mIntelliPlug.hasIntelliPlugMaxCpusOnline()) {
@@ -403,7 +414,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(maxCpusOnline);
+            intelliplug.addItem(maxCpusOnline);
         }
 
         if (mIntelliPlug.hasIntelliPlugMaxCpusOnlineSusp()) {
@@ -424,7 +435,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(maxCpusOnlineSusp);
+            intelliplug.addItem(maxCpusOnlineSusp);
         }
 
         if (mIntelliPlug.hasIntelliPlugSuspendDeferTime()) {
@@ -445,7 +456,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(suspendDeferTime);
+            intelliplug.addItem(suspendDeferTime);
         }
 
         if (mIntelliPlug.hasIntelliPlugDeferSampling()) {
@@ -465,7 +476,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(deferSampling);
+            intelliplug.addItem(deferSampling);
         }
 
         if (mIntelliPlug.hasIntelliPlugBoostLockDuration()) {
@@ -487,7 +498,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(boostLockDuration);
+            intelliplug.addItem(boostLockDuration);
         }
 
         if (mIntelliPlug.hasIntelliPlugDownLockDuration()) {
@@ -509,13 +520,13 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(downLockDuration);
+            intelliplug.addItem(downLockDuration);
         }
 
         if (mIntelliPlug.hasIntelliPlugFShift()) {
             SeekBarView fShift = new SeekBarView();
             fShift.setTitle(getString(R.string.fshift));
-            fShift.setMax(4);
+            fShift.setMax(8);
             fShift.setProgress(mIntelliPlug.getIntelliPlugFShift());
             fShift.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
@@ -528,30 +539,35 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            intelliplug.add(fShift);
+            intelliplug.addItem(fShift);
         }
 
         if (intelliplug.size() > 0) {
-            items.add(title);
-            items.addAll(intelliplug);
+            items.add(intelliplug);
         }
     }
 
     private void lazyPlugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> lazyplug = new ArrayList<>();
-
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.lazyplug));
+        CardView lazyplug = new CardView(getActivity());
+        lazyplug.setTitle(getString(R.string.lazyplug));
+        lazyplug.setExpand(false);
 
         if (LazyPlug.hasEnable()) {
             SwitchView enable = new SwitchView();
             enable.setTitle(getString(R.string.lazyplug));
             enable.setSummary(getString(R.string.lazyplug_summary));
             enable.setChecked(LazyPlug.isEnabled());
-            enable.addOnSwitchListener((switchView, isChecked)
-                    -> LazyPlug.enable(isChecked, getActivity()));
+            enable.addOnSwitchListener((switchView, isChecked) -> {
+                if (isChecked) {
+                    LazyPlug.enableStateNotifier(true, getActivity());
+                    LazyPlug.enable(true, getActivity());
+                } else {
+                    LazyPlug.enable(false, getActivity());
+                    LazyPlug.enableStateNotifier(false, getActivity());
+                }
+            });
 
-            lazyplug.add(enable);
+            lazyplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -564,7 +580,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             profile.setOnItemSelected((selectView, position, item)
                     -> LazyPlug.setProfile(position, getActivity()));
 
-            lazyplug.add(profile);
+            lazyplug.addItem(profile);
         }
 
         if (LazyPlug.hasTouchBoost()) {
@@ -575,7 +591,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             touchBoost.addOnSwitchListener((switchView, isChecked)
                     -> LazyPlug.enableTouchBoost(isChecked, getActivity()));
 
-            lazyplug.add(touchBoost);
+            lazyplug.addItem(touchBoost);
         }
 
         if (LazyPlug.hasHysteresis()) {
@@ -595,7 +611,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            lazyplug.add(hysteresis);
+            lazyplug.addItem(hysteresis);
         }
 
         if (LazyPlug.hasThreshold()) {
@@ -615,7 +631,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            lazyplug.add(threshold);
+            lazyplug.addItem(threshold);
         }
 
         if (LazyPlug.hasPossibleCores()) {
@@ -636,30 +652,35 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            lazyplug.add(possibleCores);
+            lazyplug.addItem(possibleCores);
         }
 
         if (lazyplug.size() > 0) {
-            items.add(title);
-            items.addAll(lazyplug);
+            items.add(lazyplug);
         }
     }
 
     private void bluPlugInit(List<RecyclerViewItem> items) {
-        final List<RecyclerViewItem> bluplug = new ArrayList<>();
-
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.blu_plug));
+        CardView bluplug = new CardView(getActivity());
+        bluplug.setTitle(getString(R.string.blu_plug));
+        bluplug.setExpand(false);
 
         if (BluPlug.hasBluPlugEnable()) {
             SwitchView enable = new SwitchView();
             enable.setTitle(getString(R.string.blu_plug));
             enable.setSummary(getString(R.string.blu_plug_summary));
             enable.setChecked(BluPlug.isBluPlugEnabled());
-            enable.addOnSwitchListener((switchView, isChecked)
-                    -> BluPlug.enableBluPlug(isChecked, getActivity()));
+             enable.addOnSwitchListener((switchView, isChecked) -> {
+                if (isChecked) {
+                    BluPlug.enableStateNotifier(true, getActivity());
+                    BluPlug.enableBluPlug(true, getActivity());
+                } else {
+                    BluPlug.enableBluPlug(false, getActivity());
+                    BluPlug.enableStateNotifier(false, getActivity());
+                }
+            });
 
-            bluplug.add(enable);
+            bluplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -671,7 +692,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             powersaverMode.addOnSwitchListener((switchView, isChecked)
                     -> BluPlug.enableBluPlugPowersaverMode(isChecked, getActivity()));
 
-            bluplug.add(powersaverMode);
+            bluplug.addItem(powersaverMode);
         }
 
         if (BluPlug.hasBluPlugMinOnline()) {
@@ -692,7 +713,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(minOnline);
+            bluplug.addItem(minOnline);
         }
 
         if (BluPlug.hasBluPlugMaxOnline()) {
@@ -713,7 +734,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(maxOnline);
+            bluplug.addItem(maxOnline);
         }
 
         if (BluPlug.hasBluPlugMaxCoresScreenOff()) {
@@ -734,7 +755,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(maxCoresScreenOff);
+            bluplug.addItem(maxCoresScreenOff);
         }
 
         if (BluPlug.hasBluPlugMaxFreqScreenOff() && mCPUFreq.getFreqs() != null) {
@@ -758,7 +779,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(maxFreqScreenOff);
+            bluplug.addItem(maxFreqScreenOff);
         }
 
         if (BluPlug.hasBluPlugUpThreshold()) {
@@ -779,7 +800,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(upThreshold);
+            bluplug.addItem(upThreshold);
         }
 		
         if (BluPlug.hasBluPlugPlugThreshold()) {
@@ -800,7 +821,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(PlugThreshold);
+            bluplug.addItem(PlugThreshold);
         }
 
         if (BluPlug.hasBluPlugUpTimerCnt()) {
@@ -825,7 +846,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(upTimerCnt);
+            bluplug.addItem(upTimerCnt);
         }
 
         if (BluPlug.hasBluPlugDownTimerCnt()) {
@@ -850,19 +871,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            bluplug.add(downTimerCnt);
+            bluplug.addItem(downTimerCnt);
         }
 
         if (bluplug.size() > 0) {
-            items.add(title);
-            items.addAll(bluplug);
+            items.add(bluplug);
         }
     }
 
     private void msmHotplugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> msmHotplug = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.msm_hotplug));
+        CardView msmHotplug = new CardView(getActivity());
+        msmHotplug.setTitle(getString(R.string.msm_hotplug));
+        msmHotplug.setExpand(false);
 
         if (mMSMHotplug.hasMsmHotplugEnable()) {
             SwitchView enable = new SwitchView();
@@ -872,7 +892,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.addOnSwitchListener((switchView, isChecked)
                     -> mMSMHotplug.enableMsmHotplug(isChecked, getActivity()));
 
-            msmHotplug.add(enable);
+            msmHotplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -884,7 +904,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             debugMask.addOnSwitchListener((switchView, isChecked)
                     -> mMSMHotplug.enableMsmHotplugDebugMask(isChecked, getActivity()));
 
-            msmHotplug.add(debugMask);
+            msmHotplug.addItem(debugMask);
         }
 
         if (mMSMHotplug.hasMsmHotplugMinCpusOnline()) {
@@ -905,7 +925,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(minCpusOnline);
+            msmHotplug.addItem(minCpusOnline);
         }
 
         if (mMSMHotplug.hasMsmHotplugMaxCpusOnline()) {
@@ -926,7 +946,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(maxCpusOnline);
+            msmHotplug.addItem(maxCpusOnline);
         }
 
         if (mMSMHotplug.hasMsmHotplugCpusBoosted()) {
@@ -947,7 +967,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(cpusBoosted);
+            msmHotplug.addItem(cpusBoosted);
         }
 
         if (mMSMHotplug.hasMsmHotplugMaxCpusOnlineSusp()) {
@@ -968,7 +988,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(maxCpusOnlineSusp);
+            msmHotplug.addItem(maxCpusOnlineSusp);
         }
 
         if (mMSMHotplug.hasMsmHotplugBoostLockDuration()) {
@@ -989,7 +1009,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(boostLockDuration);
+            msmHotplug.addItem(boostLockDuration);
         }
 
         if (mMSMHotplug.hasMsmHotplugDownLockDuration()) {
@@ -1010,7 +1030,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(downLockDuration);
+            msmHotplug.addItem(downLockDuration);
         }
 
         if (mMSMHotplug.hasMsmHotplugHistorySize()) {
@@ -1031,7 +1051,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(historySize);
+            msmHotplug.addItem(historySize);
         }
 
         if (mMSMHotplug.hasMsmHotplugUpdateRate()) {
@@ -1051,7 +1071,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(updateRate);
+            msmHotplug.addItem(updateRate);
         }
 
         if (mMSMHotplug.hasMsmHotplugFastLaneLoad()) {
@@ -1071,7 +1091,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(fastLaneLoad);
+            msmHotplug.addItem(fastLaneLoad);
         }
 
         if (mMSMHotplug.hasMsmHotplugFastLaneMinFreq() && mCPUFreq.getFreqs() != null) {
@@ -1084,7 +1104,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> mMSMHotplug.setMsmHotplugFastLaneMinFreq(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            msmHotplug.add(fastLaneMinFreq);
+            msmHotplug.addItem(fastLaneMinFreq);
         }
 
         if (mMSMHotplug.hasMsmHotplugOfflineLoad()) {
@@ -1103,7 +1123,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(offlineLoad);
+            msmHotplug.addItem(offlineLoad);
         }
 
         if (mMSMHotplug.hasMsmHotplugIoIsBusy()) {
@@ -1114,7 +1134,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             ioIsBusy.addOnSwitchListener((switchView, isChecked)
                     -> mMSMHotplug.enableMsmHotplugIoIsBusy(isChecked, getActivity()));
 
-            msmHotplug.add(ioIsBusy);
+            msmHotplug.addItem(ioIsBusy);
         }
 
         if (mMSMHotplug.hasMsmHotplugSuspendMaxCpus()) {
@@ -1135,7 +1155,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(suspendMaxCpus);
+            msmHotplug.addItem(suspendMaxCpus);
         }
 
         if (mMSMHotplug.hasMsmHotplugSuspendFreq() && mCPUFreq.getFreqs() != null) {
@@ -1147,7 +1167,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             suspendFreq.setOnItemSelected((selectView, position, item)
                     -> mMSMHotplug.setMsmHotplugSuspendFreq(mCPUFreq.getFreqs().get(position), getActivity()));
 
-            msmHotplug.add(suspendFreq);
+            msmHotplug.addItem(suspendFreq);
         }
 
         if (mMSMHotplug.hasMsmHotplugSuspendDeferTime()) {
@@ -1168,19 +1188,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            msmHotplug.add(suspendDeferTime);
+            msmHotplug.addItem(suspendDeferTime);
         }
 
         if (msmHotplug.size() > 0) {
-            items.add(title);
-            items.addAll(msmHotplug);
+            items.add(msmHotplug);
         }
     }
 
     private void makoHotplugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> makoHotplug = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.mako_hotplug));
+        CardView makoHotplug = new CardView(getActivity());
+        makoHotplug.setTitle(getString(R.string.mako_hotplug));
+        makoHotplug.setExpand(false);
 
         if (MakoHotplug.hasMakoHotplugEnable()) {
             SwitchView enable = new SwitchView();
@@ -1190,7 +1209,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.addOnSwitchListener((switchView, isChecked)
                     -> MakoHotplug.enableMakoHotplug(isChecked, getActivity()));
 
-            makoHotplug.add(enable);
+            makoHotplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -1212,7 +1231,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(coresOnTouch);
+            makoHotplug.addItem(coresOnTouch);
         }
 
         if (MakoHotplug.hasMakoHotplugCpuFreqUnplugLimit() && mCPUFreq.getFreqs() != null) {
@@ -1225,7 +1244,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> MakoHotplug.setMakoHotplugCpuFreqUnplugLimit(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            makoHotplug.add(cpufreqUnplugLimit);
+            makoHotplug.addItem(cpufreqUnplugLimit);
         }
 
         if (MakoHotplug.hasMakoHotplugFirstLevel()) {
@@ -1245,7 +1264,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(firstLevel);
+            makoHotplug.addItem(firstLevel);
         }
 
         if (MakoHotplug.hasMakoHotplugHighLoadCounter()) {
@@ -1263,7 +1282,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(highLoadCounter);
+            makoHotplug.addItem(highLoadCounter);
         }
 
         if (MakoHotplug.hasMakoHotplugLoadThreshold()) {
@@ -1283,7 +1302,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(loadThreshold);
+            makoHotplug.addItem(loadThreshold);
         }
 
         if (MakoHotplug.hasMakoHotplugMaxLoadCounter()) {
@@ -1301,7 +1320,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(maxLoadCounter);
+            makoHotplug.addItem(maxLoadCounter);
         }
 
         if (MakoHotplug.hasMakoHotplugMinTimeCpuOnline()) {
@@ -1319,7 +1338,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(minTimeCpuOnline);
+            makoHotplug.addItem(minTimeCpuOnline);
         }
 
         if (MakoHotplug.hasMakoHotplugMinCoresOnline()) {
@@ -1340,7 +1359,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(minCoresOnline);
+            makoHotplug.addItem(minCoresOnline);
         }
 
         if (MakoHotplug.hasMakoHotplugTimer()) {
@@ -1358,7 +1377,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            makoHotplug.add(timer);
+            makoHotplug.addItem(timer);
         }
 
         if (MakoHotplug.hasMakoHotplugSuspendFreq() && mCPUFreq.getFreqs() != null) {
@@ -1370,20 +1389,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             suspendFreq.setOnItemSelected((selectView, position, item)
                     -> MakoHotplug.setMakoHotplugSuspendFreq(mCPUFreq.getFreqs().get(position), getActivity()));
 
-            makoHotplug.add(suspendFreq);
+            makoHotplug.addItem(suspendFreq);
         }
 
         if (makoHotplug.size() > 0) {
-            items.add(title);
-            items.addAll(makoHotplug);
+            items.add(makoHotplug);
         }
     }
 
-// added CLUSTER HOTPLUG by @nalas XDA
     private void ClusterHotplugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> clusterHotplug = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.cluster_hotplug));
+        CardView clusterHotplug = new CardView(getActivity());
+        clusterHotplug.setTitle(getString(R.string.cluster_hotplug));
+        clusterHotplug.setExpand(false);
 
         if (ClusterHotplug.hasClusterHotplugEnable()) {
             SwitchView enable = new SwitchView();
@@ -1393,7 +1410,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.addOnSwitchListener((switchView, isChecked)
                     -> ClusterHotplug.enableClusterHotplug(isChecked, getActivity()));
 
-            clusterHotplug.add(enable);
+            clusterHotplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -1405,7 +1422,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             lowPowerMode.addOnSwitchListener((switchView, isChecked)
                     -> ClusterHotplug.enableClusterHotplugLowPowerMode(isChecked, getActivity()));
 
-            clusterHotplug.add(lowPowerMode);
+            clusterHotplug.addItem(lowPowerMode);
         }
 
         if (ClusterHotplug.hasClusterHotplugLoadThresholdDown()) {
@@ -1425,7 +1442,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            clusterHotplug.add(loadThresholdDown);
+            clusterHotplug.addItem(loadThresholdDown);
         }
 
         if (ClusterHotplug.hasClusterHotplugLoadThresholdUp()) {
@@ -1445,7 +1462,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            clusterHotplug.add(loadThresholdUp);
+            clusterHotplug.addItem(loadThresholdUp);
         }
 
         if (ClusterHotplug.hasClusterHotplugVoteThresholdDown()) {
@@ -1465,7 +1482,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            clusterHotplug.add(voteThresholdDown);
+            clusterHotplug.addItem(voteThresholdDown);
         }
 
         if (ClusterHotplug.hasClusterHotplugVoteThresholdUp()) {
@@ -1485,7 +1502,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            clusterHotplug.add(voteThresholdUp);
+            clusterHotplug.addItem(voteThresholdUp);
         }
 
         if (ClusterHotplug.hasClusterHotplugSamplingTime()) {
@@ -1505,21 +1522,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            clusterHotplug.add(SamplingTime);
+            clusterHotplug.addItem(SamplingTime);
         }
 
         if (clusterHotplug.size() > 0) {
-            items.add(title);
-            items.addAll(clusterHotplug);
+            items.add(clusterHotplug);
         }
-
     }
-// ------------------------------------------------------------------------------	
 
     private void mbHotplugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> mbHotplug = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(mMBHotplug.getMBName(getActivity()));
+        CardView mbHotplug = new CardView(getActivity());
+        mbHotplug.setTitle(mMBHotplug.getMBName(getActivity()));
+        mbHotplug.setExpand(false);
 
         if (mMBHotplug.hasMBGHotplugEnable()) {
             SwitchView enable = new SwitchView();
@@ -1529,7 +1543,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.addOnSwitchListener((switchView, isChecked)
                     -> mMBHotplug.enableMBHotplug(isChecked, getActivity()));
 
-            mbHotplug.add(enable);
+            mbHotplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -1541,7 +1555,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             scroffSingleCore.addOnSwitchListener((switchView, isChecked)
                     -> mMBHotplug.enableMBHotplugScroffSingleCore(isChecked, getActivity()));
 
-            mbHotplug.add(scroffSingleCore);
+            mbHotplug.addItem(scroffSingleCore);
         }
 
         if (mMBHotplug.hasMBHotplugMinCpus()) {
@@ -1562,7 +1576,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(minCpus);
+            mbHotplug.addItem(minCpus);
         }
 
         if (mMBHotplug.hasMBHotplugMaxCpus()) {
@@ -1583,7 +1597,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(maxCpus);
+            mbHotplug.addItem(maxCpus);
         }
 
         if (mMBHotplug.hasMBHotplugMaxCpusOnlineSusp()) {
@@ -1604,7 +1618,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(maxCpusOnlineSusp);
+            mbHotplug.addItem(maxCpusOnlineSusp);
         }
 
         if (mMBHotplug.hasMBHotplugIdleFreq() && mCPUFreq.getFreqs() != null) {
@@ -1617,7 +1631,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> mMBHotplug.setMBHotplugIdleFreq(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            mbHotplug.add(idleFreq);
+            mbHotplug.addItem(idleFreq);
         }
 
         if (mMBHotplug.hasMBHotplugBoostEnable()) {
@@ -1628,7 +1642,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             boost.addOnSwitchListener((switchView, isChecked)
                     -> mMBHotplug.enableMBHotplugBoost(isChecked, getActivity()));
 
-            mbHotplug.add(boost);
+            mbHotplug.addItem(boost);
         }
 
         if (mMBHotplug.hasMBHotplugBoostTime()) {
@@ -1650,7 +1664,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(boostTime);
+            mbHotplug.addItem(boostTime);
         }
 
         if (mMBHotplug.hasMBHotplugCpusBoosted()) {
@@ -1671,7 +1685,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(cpusBoosted);
+            mbHotplug.addItem(cpusBoosted);
         }
 
         if (mMBHotplug.hasMBHotplugBoostFreqs() && mCPUFreq.getFreqs() != null) {
@@ -1687,7 +1701,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                         -> mMBHotplug.setMBHotplugBoostFreqs(
                         pos, mCPUFreq.getFreqs().get(position), getActivity()));
 
-                mbHotplug.add(boostFreq);
+                mbHotplug.addItem(boostFreq);
             }
         }
 
@@ -1710,7 +1724,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(startDelay);
+            mbHotplug.addItem(startDelay);
         }
 
         if (mMBHotplug.hasMBHotplugDelay()) {
@@ -1731,7 +1745,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(delay);
+            mbHotplug.addItem(delay);
         }
 
         if (mMBHotplug.hasMBHotplugPause()) {
@@ -1753,19 +1767,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            mbHotplug.add(pause);
+            mbHotplug.addItem(pause);
         }
 
         if (mbHotplug.size() > 0) {
-            items.add(title);
-            items.addAll(mbHotplug);
+            items.add(mbHotplug);
         }
     }
 
     private void alucardHotplugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> alucardHotplug = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.alucard_hotplug));
+        CardView alucardHotplug = new CardView(getActivity());
+        alucardHotplug.setTitle(getString(R.string.alucard_hotplug));
+        alucardHotplug.setExpand(false);
 
         if (AlucardHotplug.hasAlucardHotplugEnable()) {
             SwitchView enable = new SwitchView();
@@ -1774,21 +1787,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.setChecked(AlucardHotplug.isAlucardHotplugEnable());
 			enable.addOnSwitchListener((switchView, isChecked)
 			           -> AlucardHotplug.enableAlucardHotplug(isChecked, getActivity()));
-		/*
-			enable.addOnSwitchListener((switchView, isChecked) -> {
-                if (isChecked) {
-                    SamsungPlug.enableSamsungPlug(true, getActivity());
-                    AlucardHotplug.enableStateNotifier(true, getActivity());
-                    AlucardHotplug.enableAlucardHotplug(true, getActivity()); // was true
-                } else {
-                    AlucardHotplug.enableAlucardHotplug(true, getActivity()); // was false
-                    AlucardHotplug.enableStateNotifier(false, getActivity());
-                    SamsungPlug.enableSamsungPlug(true, getActivity());
-                }
-                refreshHotPlugs();
-            });	*/
-				
-            alucardHotplug.add(enable);
+
+            alucardHotplug.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -1800,7 +1800,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             ioIsBusy.addOnSwitchListener((switchView, isChecked)
                     -> AlucardHotplug.enableAlucardHotplugHpIoIsBusy(isChecked, getActivity()));
 
-            alucardHotplug.add(ioIsBusy);
+            alucardHotplug.addItem(ioIsBusy);
         }
 
         if (AlucardHotplug.hasAlucardHotplugSamplingRate()) {
@@ -1820,7 +1820,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(samplingRate);
+            alucardHotplug.addItem(samplingRate);
         }
 
         if (AlucardHotplug.hasAlucardHotplugSuspend()) {
@@ -1831,7 +1831,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             suspend.addOnSwitchListener((switchView, isChecked)
                     -> AlucardHotplug.enableAlucardHotplugSuspend(isChecked, getActivity()));
 
-            alucardHotplug.add(suspend);
+            alucardHotplug.addItem(suspend);
         }
 
         if (AlucardHotplug.hasAlucardHotplugMinCpusOnline()) {
@@ -1852,7 +1852,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(minCpusOnline);
+            alucardHotplug.addItem(minCpusOnline);
         }
 
         if (AlucardHotplug.hasAlucardHotplugMaxCoresLimit()) {
@@ -1873,7 +1873,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(maxCoresLimit);
+            alucardHotplug.addItem(maxCoresLimit);
         }
 
         if (AlucardHotplug.hasAlucardHotplugMaxCoresLimitSleep()) {
@@ -1894,7 +1894,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(maxCoresLimitSleep);
+            alucardHotplug.addItem(maxCoresLimitSleep);
         }
 
         if (AlucardHotplug.hasAlucardHotplugCpuDownRate()) {
@@ -1914,7 +1914,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(cpuDownRate);
+            alucardHotplug.addItem(cpuDownRate);
         }
 
         if (AlucardHotplug.hasAlucardHotplugCpuUpRate()) {
@@ -1934,7 +1934,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(cpuUpRate);
+            alucardHotplug.addItem(cpuUpRate);
         }
 
 		// added by @nalas XDA | 2019-07-12 | support for all Alucard features
@@ -1949,7 +1949,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> AlucardHotplug.setAlucardHotplugFreq_1_1(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            alucardHotplug.add(freq_1_1);
+            alucardHotplug.addItem(freq_1_1);
         }
 
 		if (AlucardHotplug.hasAlucardHotplugFreq_2_0() && mCPUFreq.getFreqs() != null) {
@@ -1963,7 +1963,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> AlucardHotplug.setAlucardHotplugFreq_1_1(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            alucardHotplug.add(freq_2_0);
+            alucardHotplug.addItem(freq_2_0);
         }
 
 		if (AlucardHotplug.hasAlucardHotplugFreq_2_1() && mCPUFreq.getFreqs() != null) {
@@ -1977,7 +1977,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> AlucardHotplug.setAlucardHotplugFreq_1_1(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            alucardHotplug.add(freq_2_1);
+            alucardHotplug.addItem(freq_2_1);
         }
 
 		if (AlucardHotplug.hasAlucardHotplugFreq_3_0() && mCPUFreq.getFreqs() != null) {
@@ -1991,7 +1991,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> AlucardHotplug.setAlucardHotplugFreq_1_1(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            alucardHotplug.add(freq_3_0);
+            alucardHotplug.addItem(freq_3_0);
         }
 
 		if (AlucardHotplug.hasAlucardHotplugFreq_3_1() && mCPUFreq.getFreqs() != null) {
@@ -2005,7 +2005,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> AlucardHotplug.setAlucardHotplugFreq_1_1(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            alucardHotplug.add(freq_3_1);
+            alucardHotplug.addItem(freq_3_1);
         }
 
 		if (AlucardHotplug.hasAlucardHotplugFreq_4_0() && mCPUFreq.getFreqs() != null) {
@@ -2019,7 +2019,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                     -> AlucardHotplug.setAlucardHotplugFreq_1_1(
                     mCPUFreq.getFreqs().get(position), getActivity()));
 
-            alucardHotplug.add(freq_4_0);
+            alucardHotplug.addItem(freq_4_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugLoad_1_1()) {
@@ -2041,7 +2041,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(load_1_1);
+            alucardHotplug.addItem(load_1_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugLoad_2_0()) {
@@ -2063,7 +2063,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(load_2_0);
+            alucardHotplug.addItem(load_2_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugLoad_2_1()) {
@@ -2085,7 +2085,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(load_2_1);
+            alucardHotplug.addItem(load_2_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugLoad_3_0()) {
@@ -2107,7 +2107,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(load_3_0);
+            alucardHotplug.addItem(load_3_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugLoad_3_1()) {
@@ -2129,7 +2129,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(load_3_1);
+            alucardHotplug.addItem(load_3_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugLoad_4_0()) {
@@ -2151,7 +2151,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(load_4_0);
+            alucardHotplug.addItem(load_4_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRate_1_1()) {
@@ -2160,7 +2160,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             rate_1_1.setSummary(getString(R.string.rate_1_1));
             rate_1_1.setUnit("");
             rate_1_1.setMin(0);
-            rate_1_1.setMax(10);
+            rate_1_1.setMax(60);
             rate_1_1.setProgress(AlucardHotplug.getAlucardHotplugRate_1_1());
             rate_1_1.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
@@ -2173,7 +2173,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(rate_1_1);
+            alucardHotplug.addItem(rate_1_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRate_2_0()) {
@@ -2195,7 +2195,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(rate_2_0);
+            alucardHotplug.addItem(rate_2_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRate_2_1()) {
@@ -2217,7 +2217,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(rate_2_1);
+            alucardHotplug.addItem(rate_2_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRate_3_0()) {
@@ -2239,7 +2239,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(rate_3_0);
+            alucardHotplug.addItem(rate_3_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRate_3_1()) {
@@ -2261,7 +2261,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(rate_3_1);
+            alucardHotplug.addItem(rate_3_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRate_4_0()) {
@@ -2283,7 +2283,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            alucardHotplug.add(rate_4_0);
+            alucardHotplug.addItem(rate_4_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRQ_1_1()) {
@@ -2292,9 +2292,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             RQ_1_1.setSummary(getString(R.string.rq_1_1));
             RQ_1_1.setUnit("mS");
             RQ_1_1.setMin(0);
-			RQ_1_1.setOffset(50);
             RQ_1_1.setMax(2000);
-            RQ_1_1.setProgress(AlucardHotplug.getAlucardHotplugRQ_1_1() - 50);
+            RQ_1_1.setProgress(AlucardHotplug.getAlucardHotplugRQ_1_1());
             RQ_1_1.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onMove(SeekBarView seekBarView, int position, String value) {
@@ -2302,11 +2301,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    AlucardHotplug.setAlucardHotplugRate_1_1(position + 50, getActivity());
+                    AlucardHotplug.setAlucardHotplugRate_1_1(position, getActivity());
                 }
             });
 
-            alucardHotplug.add(RQ_1_1);
+            alucardHotplug.addItem(RQ_1_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRQ_2_0()) {
@@ -2315,9 +2314,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             RQ_2_0.setSummary(getString(R.string.rq_2_0));
             RQ_2_0.setUnit("mS");
             RQ_2_0.setMin(0);
-			RQ_2_0.setOffset(50);
             RQ_2_0.setMax(2000);
-            RQ_2_0.setProgress(AlucardHotplug.getAlucardHotplugRQ_2_0() - 50);
+            RQ_2_0.setProgress(AlucardHotplug.getAlucardHotplugRQ_2_0());
             RQ_2_0.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onMove(SeekBarView seekBarView, int position, String value) {
@@ -2325,11 +2323,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    AlucardHotplug.setAlucardHotplugRQ_2_0(position + 50, getActivity());
+                    AlucardHotplug.setAlucardHotplugRQ_2_0(position, getActivity());
                 }
             });
 
-            alucardHotplug.add(RQ_2_0);
+            alucardHotplug.addItem(RQ_2_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRQ_2_1()) {
@@ -2338,9 +2336,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             RQ_2_1.setSummary(getString(R.string.rq_2_1));
             RQ_2_1.setUnit("mS");
             RQ_2_1.setMin(0);
-			RQ_2_1.setOffset(50);
             RQ_2_1.setMax(2000);
-            RQ_2_1.setProgress(AlucardHotplug.getAlucardHotplugRQ_2_1() - 50);
+            RQ_2_1.setProgress(AlucardHotplug.getAlucardHotplugRQ_2_1());
             RQ_2_1.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onMove(SeekBarView seekBarView, int position, String value) {
@@ -2348,11 +2345,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    AlucardHotplug.setAlucardHotplugRQ_2_1(position + 50, getActivity());
+                    AlucardHotplug.setAlucardHotplugRQ_2_1(position, getActivity());
                 }
             });
 
-            alucardHotplug.add(RQ_2_1);
+            alucardHotplug.addItem(RQ_2_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRQ_3_0()) {
@@ -2361,9 +2358,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             RQ_3_0.setSummary(getString(R.string.rq_3_0));
             RQ_3_0.setUnit("mS");
             RQ_3_0.setMin(0);
-			RQ_3_0.setOffset(50);
             RQ_3_0.setMax(2000);
-            RQ_3_0.setProgress(AlucardHotplug.getAlucardHotplugRQ_3_0() - 50);
+            RQ_3_0.setProgress(AlucardHotplug.getAlucardHotplugRQ_3_0());
             RQ_3_0.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onMove(SeekBarView seekBarView, int position, String value) {
@@ -2371,11 +2367,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    AlucardHotplug.setAlucardHotplugRQ_3_0(position + 50, getActivity());
+                    AlucardHotplug.setAlucardHotplugRQ_3_0(position, getActivity());
                 }
             });
 
-            alucardHotplug.add(RQ_3_0);
+            alucardHotplug.addItem(RQ_3_0);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRQ_3_1()) {
@@ -2384,9 +2380,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             RQ_3_1.setSummary(getString(R.string.rq_3_1));
             RQ_3_1.setUnit("mS");
             RQ_3_1.setMin(0);
-			RQ_3_1.setOffset(50);
             RQ_3_1.setMax(2000);
-            RQ_3_1.setProgress(AlucardHotplug.getAlucardHotplugRQ_3_1() - 50);
+            RQ_3_1.setProgress(AlucardHotplug.getAlucardHotplugRQ_3_1());
             RQ_3_1.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onMove(SeekBarView seekBarView, int position, String value) {
@@ -2394,11 +2389,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    AlucardHotplug.setAlucardHotplugRQ_3_1(position + 50, getActivity());
+                    AlucardHotplug.setAlucardHotplugRQ_3_1(position, getActivity());
                 }
             });
 
-            alucardHotplug.add(RQ_3_1);
+            alucardHotplug.addItem(RQ_3_1);
         }
 
         if (AlucardHotplug.hasAlucardHotplugRQ_4_0()) {
@@ -2407,9 +2402,8 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             RQ_4_0.setSummary(getString(R.string.rq_4_0));
             RQ_4_0.setUnit("mS");
             RQ_4_0.setMin(0);
-			RQ_4_0.setOffset(50);
             RQ_4_0.setMax(2000);
-            RQ_4_0.setProgress(AlucardHotplug.getAlucardHotplugRQ_4_0() - 50);
+            RQ_4_0.setProgress(AlucardHotplug.getAlucardHotplugRQ_4_0());
             RQ_4_0.setOnSeekBarListener(new SeekBarView.OnSeekBarListener() {
                 @Override
                 public void onMove(SeekBarView seekBarView, int position, String value) {
@@ -2417,16 +2411,15 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
 
                 @Override
                 public void onStop(SeekBarView seekBarView, int position, String value) {
-                    AlucardHotplug.setAlucardHotplugRQ_4_0(position + 50, getActivity());
+                    AlucardHotplug.setAlucardHotplugRQ_4_0(position, getActivity());
                 }
             });
 
-            alucardHotplug.add(RQ_4_0);
+            alucardHotplug.addItem(RQ_4_0);
         }
 
         if (alucardHotplug.size() > 0) {
-            items.add(title);
-            items.addAll(alucardHotplug);
+            items.add(alucardHotplug);
         }
     }
 
@@ -2437,27 +2430,22 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
         }else {
             thunderPlug.setTitle(getString(R.string.thunderplug));
         }
+        thunderPlug.setExpand(false);
 
         if (ThunderPlug.hasThunderPlugEnable()) {
             SwitchView enable = new SwitchView();
             enable.setTitle(getString(R.string.thunderplug));
             enable.setSummary(getString(R.string.thunderplug_summary));
             enable.setChecked(ThunderPlug.isThunderPlugEnabled());
-			enable.addOnSwitchListener((switchView, isChecked)			
-						    -> ThunderPlug.enableThunderPlug(isChecked, getActivity()));
-			/*
             enable.addOnSwitchListener((switchView, isChecked) -> {
                 if (isChecked) {
-                    SamsungPlug.enableSamsungPlug(true, getActivity()); //was false
                     ThunderPlug.enableStateNotifier(true, getActivity());
                     ThunderPlug.enableThunderPlug(true, getActivity());
                 } else {
-                    ThunderPlug.enableThunderPlug(true, getActivity());
+                    ThunderPlug.enableThunderPlug(false, getActivity());
                     ThunderPlug.enableStateNotifier(false, getActivity());
-                    SamsungPlug.enableSamsungPlug(true, getActivity());
                 }
-                refreshHotPlugs();
-            }); */
+            });
 
             thunderPlug.addItem(enable);
             mEnableViews.add(enable);
@@ -2651,9 +2639,9 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
     }
 
     private void zenDecisionInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> zenDecision = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.zen_decision));
+        CardView zenDecision = new CardView(getActivity());
+        zenDecision.setTitle(getString(R.string.zen_decision));
+        zenDecision.setExpand(false);
 
         if (ZenDecision.hasZenDecisionEnable()) {
             SwitchView enable = new SwitchView();
@@ -2663,7 +2651,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.addOnSwitchListener((switchView, isChecked)
                     -> ZenDecision.enableZenDecision(isChecked, getActivity()));
 
-            zenDecision.add(enable);
+            zenDecision.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -2686,7 +2674,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            zenDecision.add(wakeWaitTime);
+            zenDecision.addItem(wakeWaitTime);
         }
 
         if (ZenDecision.hasZenDecisionBatThresholdIgnore()) {
@@ -2707,19 +2695,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            zenDecision.add(batThresholdIgnore);
+            zenDecision.addItem(batThresholdIgnore);
         }
 
         if (zenDecision.size() > 0) {
-            items.add(title);
-            items.addAll(zenDecision);
+            items.add(zenDecision);
         }
     }
 
     private void autoSmpInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> autoSmp = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.autosmp));
+        CardView autoSmp = new CardView(getActivity());
+        autoSmp.setTitle(getString(R.string.autosmp));
+        autoSmp.setExpand(false);
 
         if (AutoSmp.hasAutoSmpEnable()) {
             SwitchView enable = new SwitchView();
@@ -2729,7 +2716,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             enable.addOnSwitchListener((switchView, isChecked)
                     -> AutoSmp.enableAutoSmp(isChecked, getActivity()));
 
-            autoSmp.add(enable);
+            autoSmp.addItem(enable);
             mEnableViews.add(enable);
         }
 
@@ -2749,7 +2736,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cpuFreqDown);
+            autoSmp.addItem(cpuFreqDown);
         }
 
         if (AutoSmp.hasAutoSmpCpufreqUp()) {
@@ -2768,7 +2755,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cpuFreqUp);
+            autoSmp.addItem(cpuFreqUp);
         }
 
         if (AutoSmp.hasAutoSmpCpufreqDown_bc()) {
@@ -2787,7 +2774,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cpuFreqDown_bc);
+            autoSmp.addItem(cpuFreqDown_bc);
         }
 
         if (AutoSmp.hasAutoSmpCpufreqDown_lc()) {
@@ -2806,7 +2793,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cpuFreqDown_lc);
+            autoSmp.addItem(cpuFreqDown_lc);
         }
 
         if (AutoSmp.hasAutoSmpCpufreqUp_bc()) {
@@ -2825,7 +2812,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cpuFreqUp_bc);
+            autoSmp.addItem(cpuFreqUp_bc);
         }
 
         if (AutoSmp.hasAutoSmpCpufreqUp_lc()) {
@@ -2844,7 +2831,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cpuFreqUp_lc);
+            autoSmp.addItem(cpuFreqUp_lc);
         }
 
         if (AutoSmp.hasAutoSmpCycleDown()) {
@@ -2864,7 +2851,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cycleDown);
+            autoSmp.addItem(cycleDown);
         }
 
         if (AutoSmp.hasAutoSmpCycleUp()) {
@@ -2884,7 +2871,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(cycleUp);
+            autoSmp.addItem(cycleUp);
         }
 
         if (AutoSmp.hasAutoSmpDelay()) {
@@ -2905,7 +2892,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(delay);
+            autoSmp.addItem(delay);
         }
 
         if (AutoSmp.hasAutoSmpMaxCpus()) {
@@ -2926,7 +2913,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(maxCpus);
+            autoSmp.addItem(maxCpus);
         }
 
         if (AutoSmp.hasAutoSmpMinCpus()) {
@@ -2947,7 +2934,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(minCpus);
+            autoSmp.addItem(minCpus);
         }
 
         if (AutoSmp.hasAutoSmpMaxCpus_bc()) {
@@ -2968,7 +2955,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(maxCpus_bc);
+            autoSmp.addItem(maxCpus_bc);
         }
 
         if (AutoSmp.hasAutoSmpMaxCpus_lc()) {
@@ -2989,7 +2976,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(maxCpus_lc);
+            autoSmp.addItem(maxCpus_lc);
         }
 
         if (AutoSmp.hasAutoSmpMinCpus_bc()) {
@@ -3010,7 +2997,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(minCpus_bc);
+            autoSmp.addItem(minCpus_bc);
         }
 
         if (AutoSmp.hasAutoSmpMinCpus_lc()) {
@@ -3031,7 +3018,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            autoSmp.add(minCpus_lc);
+            autoSmp.addItem(minCpus_lc);
         }
 
         if (AutoSmp.hasAutoSmpScroffSingleCore()) {
@@ -3042,19 +3029,18 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             scroffSingleCore.addOnSwitchListener((switchView, isChecked)
                     -> AutoSmp.enableAutoSmpScroffSingleCoreActive(isChecked, getActivity()));
 
-            autoSmp.add(scroffSingleCore);
+            autoSmp.addItem(scroffSingleCore);
         }
 
         if (autoSmp.size() > 0) {
-            items.add(title);
-            items.addAll(autoSmp);
+            items.add(autoSmp);
         }
     }
 
     private void coreCtlInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> coreCtl = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(mCoreCtl.hasEnable() ? R.string.hcube : R.string.core_control));
+        CardView coreCtl = new CardView(getActivity());
+        coreCtl.setTitle(getString(mCoreCtl.hasEnable() ? R.string.hcube : R.string.core_control));
+        coreCtl.setExpand(false);
 
         if (mCoreCtl.hasMinCpus(mCPUFreq.getBigCpu())) {
             SeekBarView minCpus = new SeekBarView();
@@ -3073,7 +3059,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            coreCtl.add(minCpus);
+            coreCtl.addItem(minCpus);
         }
 
         if (mCoreCtl.hasBusyDownThreshold()) {
@@ -3092,7 +3078,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            coreCtl.add(busyDownThreshold);
+            coreCtl.addItem(busyDownThreshold);
         }
 
         if (mCoreCtl.hasBusyUpThreshold()) {
@@ -3111,7 +3097,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            coreCtl.add(busyUpThreshold);
+            coreCtl.addItem(busyUpThreshold);
         }
 
         if (mCoreCtl.hasOfflineDelayMs()) {
@@ -3133,7 +3119,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            coreCtl.add(offlineDelayMs);
+            coreCtl.addItem(offlineDelayMs);
         }
 
         if (mCoreCtl.hasOnlineDelayMs()) {
@@ -3155,11 +3141,10 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            coreCtl.add(onlineDelayMs);
+            coreCtl.addItem(onlineDelayMs);
         }
 
         if (coreCtl.size() > 0) {
-            items.add(title);
 
             if (mCoreCtl.hasEnable()) {
                 SwitchView enable = new SwitchView();
@@ -3178,14 +3163,14 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 items.add(description);
             }
 
-            items.addAll(coreCtl);
+            items.add(coreCtl);
         }
     }
 
     private void aioHotplugInit(List<RecyclerViewItem> items) {
-        List<RecyclerViewItem> aioHotplug = new ArrayList<>();
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.aio_hotplug));
+        CardView aioHotplug = new CardView(getActivity());
+        aioHotplug.setTitle(getString(R.string.aio_hotplug));
+        aioHotplug.setExpand(false);
 
         if (AiOHotplug.hasToggle()) {
             SwitchView toggle = new SwitchView();
@@ -3195,7 +3180,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
             toggle.addOnSwitchListener((switchView, isChecked)
                     -> AiOHotplug.enable(isChecked, getActivity()));
 
-            aioHotplug.add(toggle);
+            aioHotplug.addItem(toggle);
             mEnableViews.add(toggle);
         }
 
@@ -3217,7 +3202,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            aioHotplug.add(maxCpus);
+            aioHotplug.addItem(maxCpus);
         }
 
         if (mCPUFreq.isBigLITTLE() && AiOHotplug.hasBigCores()) {
@@ -3243,7 +3228,7 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            aioHotplug.add(bigMaxCpus);
+            aioHotplug.addItem(bigMaxCpus);
         }
 
         if (mCPUFreq.isBigLITTLE() && AiOHotplug.hasLITTLECores()) {
@@ -3269,22 +3254,11 @@ public class CPUHotplugFragment extends RecyclerViewFragment {
                 }
             });
 
-            aioHotplug.add(LITTLEMaxCpus);
+            aioHotplug.addItem(LITTLEMaxCpus);
         }
 
         if (aioHotplug.size() > 0) {
-            items.add(title);
-            items.addAll(aioHotplug);
+            items.add(aioHotplug);
         }
-    }
-
-    private void refreshHotPlugs() {
-        getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mEnableViews.get(0).setChecked(SamsungPlug.isSamsungPlugEnabled());
-                mEnableViews.get(1).setChecked(ThunderPlug.isThunderPlugEnabled());
-            }
-        }, 250);
     }
 }
