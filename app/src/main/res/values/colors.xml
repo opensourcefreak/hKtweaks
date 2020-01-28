@@ -14,5 +14,5 @@
     <color name="colorGaming">#ef5350</color>
 
     <color name="rcBackground_light">#dcdcdc</color>
-    <color name="rcBackground_dark">#616161</color>
+    <color name="rcBackground_dark">#000000</color>
 </resources>

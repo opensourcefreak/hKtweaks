@@ -82,6 +82,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     private static final String KEY_FORCE_ENGLISH = "forceenglish";
     //private static final String KEY_USER_INTERFACE = "user_interface";
     private static final String KEY_DARK_THEME = "darktheme";
+    private static final String KEY_DARK_THEME_MODE = "darkthememode";
     //private static final String KEY_MATERIAL_ICON = "materialicon";
     private static final String KEY_BANNER_RESIZER = "banner_resizer";
     private static final String KEY_HIDE_BANNER = "hide_banner";
@@ -153,6 +154,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         findPreference(KEY_UPDATE_NOTIFICATION).setOnPreferenceChangeListener(this);
         findPreference(KEY_CHECK_UPDATE).setOnPreferenceClickListener(this);
         findPreference(KEY_DARK_THEME).setOnPreferenceChangeListener(this);
+        findPreference(KEY_DARK_THEME_MODE).setOnPreferenceChangeListener(this);
         findPreference(KEY_BANNER_RESIZER).setOnPreferenceClickListener(this);
         findPreference(KEY_HIDE_BANNER).setOnPreferenceChangeListener(this);
         findPreference(KEY_PRIMARY_COLOR).setOnPreferenceClickListener(this);
@@ -202,11 +204,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object o) {
-        boolean checked = (boolean) o;
         String key = preference.getKey();
         switch (key) {
             case KEY_UPDATE_NOTIFICATION:
-                AppSettings.saveBoolean("show_update_notif", checked, getActivity());
+                if (o instanceof Boolean){
+                    boolean checked = (boolean) o;
+                    AppSettings.saveBoolean("show_update_notif", checked, getActivity());
+                }
                 return true;
             case KEY_FORCE_ENGLISH:
             case KEY_DARK_THEME:
@@ -216,6 +220,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
                 intent.putExtra(NavigationActivity.INTENT_SECTION,
                         SettingsFragment.class.getCanonicalName());
                 startActivity(intent);
+                return true;
+            case KEY_DARK_THEME_MODE:
+                getActivity().finish();
+                Intent intent2 = new Intent(getActivity(), MainActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent2.putExtra(NavigationActivity.INTENT_SECTION,
+                        SettingsFragment.class.getCanonicalName());
+                startActivity(intent2);
                 return true;
 /*
             case KEY_MATERIAL_ICON:

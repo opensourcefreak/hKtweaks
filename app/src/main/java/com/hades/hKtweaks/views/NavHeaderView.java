@@ -84,22 +84,18 @@ public class NavHeaderView extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.nav_header_view, this);
         mImage = findViewById(R.id.nav_header_pic);
 
-        boolean noPic;
         try {
             String uri = AppSettings.getPreviewPicture(getContext());
-            if (uri == null) noPic = true;
-            else {
+            if (uri == null){
+                mImage.setImageDrawable(null);
+            } else {
                 setImage(Uri.parse(uri));
-                noPic = false;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            noPic = true;
         }
 
-        if (noPic) {
-            AppSettings.resetPreviewPicture(getContext());
-        }
+
 
         findViewById(R.id.nav_header_fab).setOnClickListener(v
                 -> new Dialog(context).setItems(v.getResources()

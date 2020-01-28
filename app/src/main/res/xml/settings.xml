@@ -35,6 +35,13 @@
         <SwitchPreferenceCompat
             android:key="darktheme"
             android:summary="@string/dark_theme" />
+        <ListPreference
+            android:key="darkthememode"
+            android:summary="Dark theme mode"
+            android:defaultValue="Default dark"
+            android:entries="@array/dark_theme_modes"
+            android:entryValues="@array/dark_theme_modes_values"
+            />
         <SwitchPreferenceCompat
             android:key="forceenglish"
             android:summary="@string/force_english" />

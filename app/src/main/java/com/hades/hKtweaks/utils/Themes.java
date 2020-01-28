@@ -60,23 +60,37 @@ public class Themes {
 
     private static final String THEME_PREF_KEY = "application_theme";
     private static final String DARK_THEME_PREF_KEY = "darktheme";
+    private static final String DARK_THEME_MODE_PREF_KEY = "darkthememode";
     private static final String DEFAULT_THEME = "defaultPrimary;blueAccent";
+    private static final String DEFAULT_THEME_AMOLED = "defaultPrimary;blueAccentAmoled";
 
     public static boolean isDarkTheme(Context context) {
         return Prefs.getBoolean(DARK_THEME_PREF_KEY, false, context);
     }
 
-    public static Theme getTheme(Context context, boolean darktheme) {
+    public static boolean isAmoledBlack(Context context){
+        return Prefs.getString(DARK_THEME_MODE_PREF_KEY, "dark", context).equals("black");
+    }
+
+    public static Theme getTheme(Context context, boolean darktheme, boolean amoledDarkTheme) {
         String savedTheme = Prefs.getString(THEME_PREF_KEY, DEFAULT_THEME, context);
         Theme theme;
         if (darktheme) {
-            theme = sThemesDark.get(savedTheme);
+            if (amoledDarkTheme){
+                theme = sThemesDark.get(DEFAULT_THEME_AMOLED);
+            }else {
+                theme = sThemesDark.get(DEFAULT_THEME);
+            }
         } else {
             theme = sThemes.get(savedTheme);
         }
         if (theme == null) {
             if (darktheme) {
-                theme = sThemesDark.get(DEFAULT_THEME);
+                if (amoledDarkTheme){
+                    theme = sThemesDark.get(DEFAULT_THEME_AMOLED);
+                }else {
+                    theme = sThemesDark.get(DEFAULT_THEME);
+                }
             } else {
                 theme = sThemes.get(DEFAULT_THEME);
             }
@@ -95,11 +109,11 @@ public class Themes {
     }
 
     public static String getPrimaryColor(Context context) {
-        return getTheme(context, false).mPrimary;
+        return getTheme(context, false, false).mPrimary;
     }
 
     public static String getAccentColor(Context context) {
-        return getTheme(context, false).mAccent;
+        return getTheme(context, false, false).mAccent;
     }
 
     @ColorRes
@@ -395,6 +409,7 @@ public class Themes {
         sThemesDark.put("defaultPrimary;pinkAccent", new Theme("defaultPrimary", "pinkAccent", R.style.Theme_Default_Pink_Dark));
         sThemesDark.put("defaultPrimary;purpleAccent", new Theme("defaultPrimary", "purpleAccent", R.style.Theme_Default_Purple_Dark));
         sThemesDark.put("defaultPrimary;blueAccent", new Theme("defaultPrimary", "blueAccent", R.style.Theme_Default_Blue_Dark));
+        sThemesDark.put("defaultPrimary;blueAccentAmoled", new Theme("defaultPrimary", "blueAccent", R.style.Theme_Default_Blue_Dark_Amoled));
         sThemesDark.put("defaultPrimary;greenAccent", new Theme("defaultPrimary", "greenAccent", R.style.Theme_Default_Green_Dark));
         sThemesDark.put("defaultPrimary;orangeAccent", new Theme("defaultPrimary", "orangeAccent", R.style.Theme_Default_Orange_Dark));
         sThemesDark.put("defaultPrimary;brownAccent", new Theme("defaultPrimary", "brownAccent", R.style.Theme_Default_Brown_Dark));

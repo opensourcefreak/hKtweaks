@@ -52,7 +52,8 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         Utils.DARK_THEME = Themes.isDarkTheme(this);
-        Themes.Theme theme = Themes.getTheme(this, Utils.DARK_THEME);
+        Utils.AMOLED_DARK_THEME = Themes.isAmoledBlack(this);
+        Themes.Theme theme = Themes.getTheme(this, Utils.DARK_THEME, Utils.AMOLED_DARK_THEME);
         if (Utils.DARK_THEME) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         } else {

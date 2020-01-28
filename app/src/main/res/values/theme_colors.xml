@@ -14,6 +14,8 @@
     <color name="purpleAccent">#E040FB</color>
     <color name="bluePrimary">#448AFF</color>
     <color name="bluePrimaryDark">#1976D2</color>
+    <color name="blueSecondaryDark">#212121</color>
+    <color name="blueSecondaryDarkAmoled">#000000</color>
     <color name="blueAccent">#82C5FF</color>
     <color name="greenPrimary">#4CAF50</color>
     <color name="greenPrimaryDark">#388E3C</color>

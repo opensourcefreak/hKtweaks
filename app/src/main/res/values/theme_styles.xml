@@ -47,6 +47,7 @@
         <item name="colorPrimary">@color/bluePrimary</item>
         <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
         <item name="colorAccent">@color/blueAccent</item>
+        <item name="colorSecondary">@color/white</item>
         <item name="edittext_build_prop_style">@style/Theme.Default.Blue.Dark</item>
     </style>
 
@@ -54,9 +55,16 @@
         <item name="colorPrimary">@color/bluePrimary</item>
         <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
         <item name="colorAccent">@color/blueAccent</item>
+        <item name="colorSecondary">@color/blueSecondaryDark</item>
         <item name="edittext_build_prop_style">@style/Theme.Default.Blue.Dark</item>
     </style>
-
+    <style name="Theme.Default.Blue.Dark.Amoled" parent="AppThemeParentDark">
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
+        <item name="colorAccent">@color/blueAccent</item>
+        <item name="colorSecondary">@color/blueSecondaryDarkAmoled</item>
+        <item name="edittext_build_prop_style">@style/Theme.Default.Blue.Dark.Amoled</item>
+    </style>
     <style name="Theme.Default.Green" parent="AppThemeParent">
         <item name="colorPrimary">@color/greenPrimary</item>
         <item name="colorPrimaryDark">@color/greenPrimaryDark</item>
