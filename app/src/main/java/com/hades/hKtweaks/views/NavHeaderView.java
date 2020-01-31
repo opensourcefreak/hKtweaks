@@ -85,12 +85,17 @@ public class NavHeaderView extends LinearLayout {
         mImage = findViewById(R.id.nav_header_pic);
 
         try {
-            String uri = AppSettings.getPreviewPicture(getContext());
-            if (uri == null){
-                mImage.setImageDrawable(null);
-            } else {
-                setImage(Uri.parse(uri));
+            if (AppSettings.isPreviewPictureEmpty(context)) {
+                String uri = AppSettings.getPreviewPicture(getContext());
+                if (uri == null){
+                    mImage.setImageDrawable(null);
+                } else {
+                    setImage(Uri.parse(uri));
+                }
+            }else {
+                mImage.setImageResource(R.drawable.logo);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -108,6 +113,7 @@ public class NavHeaderView extends LinearLayout {
                             break;
                         case 1:
                             AppSettings.resetPreviewPicture(getContext());
+                            AppSettings.setPreviewPictureEmpty(true, context);
                             mImage.setImageDrawable(null);
                             animateBg();
                             break;
@@ -140,6 +146,8 @@ public class NavHeaderView extends LinearLayout {
                     Uri selectedImageUri = data.getData();
                     sCallback.setImage(selectedImageUri);
                     AppSettings.savePreviewPicture(selectedImageUri.toString(), this);
+                    AppSettings.setPreviewPictureEmpty(true, this);
+
                     sCallback.animate();
                 } catch (Exception e) {
                     e.printStackTrace();

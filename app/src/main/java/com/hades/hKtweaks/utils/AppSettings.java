@@ -56,6 +56,7 @@ public class AppSettings {
     private static final String APPLY_ON_BOOT_TOAST = "applyonboottoast";
     private static final String APPLY_ON_BOOT_SCRIPT = "applyonbootscript";
     private static final String PREVIEW_PICTURE = "previewpicture";
+    private static final String PREVIEW_PICTURE_EMPTY = "previewpictureempty";
     private static final String CPU_GLOBAL_OFFSET_CL0 = "globalOffset_Cl0";
     private static final String CPU_GLOBAL_OFFSET_CL1 = "globalOffset_Cl1";
 
@@ -290,6 +291,14 @@ public class AppSettings {
 
     public static String getPreviewPicture(Context context) {
         return Prefs.getString(PREVIEW_PICTURE, null, context);
+    }
+
+    public static Boolean isPreviewPictureEmpty(Context context){
+        return Prefs.getBoolean(PREVIEW_PICTURE_EMPTY, false, context);
+    }
+
+    public static void setPreviewPictureEmpty(boolean isEmpty, Context context){
+        Prefs.saveBoolean(PREVIEW_PICTURE_EMPTY, isEmpty, context);
     }
 
     public static void savePreviewPicture(String uri, Context context) {
