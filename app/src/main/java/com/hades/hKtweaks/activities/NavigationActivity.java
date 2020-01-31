@@ -90,7 +90,6 @@ import com.hades.hKtweaks.fragments.tools.downloads.DownloadsFragment;
 import com.hades.hKtweaks.services.monitor.Monitor;
 import com.hades.hKtweaks.utils.AppSettings;
 import com.hades.hKtweaks.utils.Device;
-import com.hades.hKtweaks.utils.Log;
 import com.hades.hKtweaks.utils.Utils;
 import com.hades.hKtweaks.utils.kernel.battery.Battery;
 import com.hades.hKtweaks.utils.kernel.bus.VoltageCam;
@@ -220,7 +219,7 @@ public class NavigationActivity extends BaseActivity
         if (Sound.getInstance().supported()) {
             mFragments.add(new NavigationActivity.NavigationFragment(R.string.sound, SoundFragment.class, R.drawable.ic_music));
         }
-        if (Spectrum.supported()) {
+        if (Spectrum.supported(this)) {
             mFragments.add(new NavigationActivity.NavigationFragment(R.string.spectrum, SpectrumFragment.class, R.drawable.ic_spectrum_logo));
         }
         if (Battery.getInstance(this).supported()) {
