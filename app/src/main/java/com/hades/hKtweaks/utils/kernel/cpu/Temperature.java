@@ -20,10 +20,10 @@
 package com.hades.hKtweaks.utils.kernel.cpu;
 
 import android.content.Context;
+import android.os.Build;
 import com.hades.hKtweaks.utils.Log;
 
 import com.hades.hKtweaks.R;
-import com.hades.hKtweaks.utils.Device;
 import com.hades.hKtweaks.utils.Utils;
 
 import org.json.JSONArray;
@@ -152,9 +152,15 @@ public class Temperature {
         private TempJson(Context context) {
             try {
                 JSONArray tempArray = new JSONArray(Utils.readAssetFile(context, "temp.json"));
+                String board = Build.BOARD.toLowerCase();
+                if (board.startsWith("samsungexynos")) {
+                    board = (board.replace("samsungexynos", "universal"));
+                } else if (board.startsWith("exynos")) {
+                    board = (board.replace("exynos", "universal"));
+                }
                 for (int i = 0; i < tempArray.length(); i++) {
                     JSONObject device = tempArray.getJSONObject(i);
-                    if (Device.getBoard().equalsIgnoreCase(device.getString("board"))) {
+                    if (board.equalsIgnoreCase(device.getString("board"))) {
                         mDeviceJson = device;
                         break;
                     }
