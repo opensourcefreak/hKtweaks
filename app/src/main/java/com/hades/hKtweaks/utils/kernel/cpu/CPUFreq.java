@@ -20,6 +20,7 @@
 package com.hades.hKtweaks.utils.kernel.cpu;
 
 import android.content.Context;
+import android.os.Build;
 import android.util.SparseArray;
 
 import com.hades.hKtweaks.R;
@@ -678,9 +679,10 @@ public class CPUFreq {
         String board = Device.getBoard();
         return board.equalsIgnoreCase("msm8996") || board.equalsIgnoreCase("msm8996pro");
     }
+
     private boolean is7885() {
-        String board = Device.getBoard();
-        return board.equalsIgnoreCase("universal7885") || board.equalsIgnoreCase("universal7884");
+        String board = Build.BOARD.toLowerCase();
+        return (board.contains("7884") || board.contains("7885") || board.contains("7904"));
     }
 
     public int getCpuCount() {
