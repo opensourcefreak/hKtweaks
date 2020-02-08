@@ -4,7 +4,8 @@ hKtweaks is a fork of MoroGoku's [MTweaks](https://github.com/morogoku/MTweaks-K
 
 Thanks to Willi Ye for this great application.
 
-## Donation link of myself
+
+### If you like my work and want to keep me going, feel free to hit the paypal button below to buy me a coffee!
 [![PayPal](https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-200px.png)](https://paypal.me/corsicanu)
 
 ## Credits
