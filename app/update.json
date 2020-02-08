@@ -1,11 +1,16 @@
 {
-  "latestVersion": "1.1.8",
-  "latestVersionCode": "118",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v1.1.8/hKtweaks_v1.1.8.apk",
+  "latestVersion": "2.0.0",
+  "latestVersionCode": "200",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.0.0/hKtweaks_v2.0.0.apk",
   "releaseNotes": [
     "Changelog:",
-    "- added battery node for S6 and S6+ family",
-    "- added S10 temperature nodes",
-    "- added toggle for adaptive fast charge"
+    "- added new logo",
+    "- added new icon",
+    "- adjusted theme colors according to new logo",
+    "- improved dark theme and added new amoled dark theme",
+    "- upgraded build sdk and updated all plugins",
+    "- added exception for battery health over 100%",
+    "- introduced new algorithm for GPU temperature reporting - more exynos based devices supported",
+    "- adapt to Android 10 changes in board name"
   ]
 }
