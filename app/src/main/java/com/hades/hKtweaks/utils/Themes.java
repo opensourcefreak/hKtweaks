@@ -74,12 +74,13 @@ public class Themes {
 
     public static Theme getTheme(Context context, boolean darktheme, boolean amoledDarkTheme) {
         String savedTheme = Prefs.getString(THEME_PREF_KEY, DEFAULT_THEME, context);
+        String savedThemeAmoled = Prefs.getString(THEME_PREF_KEY, DEFAULT_THEME_AMOLED, context);
         Theme theme;
         if (darktheme) {
             if (amoledDarkTheme){
-                theme = sThemesDark.get(DEFAULT_THEME_AMOLED);
+                theme = sThemesDark.get(savedThemeAmoled);
             }else {
-                theme = sThemesDark.get(DEFAULT_THEME);
+                theme = sThemesDark.get(savedTheme);
             }
         } else {
             theme = sThemes.get(savedTheme);
