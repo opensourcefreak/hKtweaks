@@ -71,6 +71,7 @@
         <SwitchPreferenceCompat
             android:defaultValue="true"
             android:key="section_icons"
+            app:defaultValue="true"
             android:summary="@string/section_icons_summary"
             android:title="@string/section_icons" />
     </PreferenceCategory>
