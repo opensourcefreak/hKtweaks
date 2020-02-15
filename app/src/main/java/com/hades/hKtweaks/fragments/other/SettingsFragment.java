@@ -354,19 +354,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
         alert.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
         });
         alert.setPositiveButton(getString(R.string.ok), (dialog, id) -> {
-
-            AlertDialog.Builder alert2 = new AlertDialog.Builder(getActivity());
-            alert2.setTitle(getString(R.string.reset_data_dialog2_title));
-            alert2.setMessage(getString(R.string.reset_data_dialog2_message));
-            alert2.setNegativeButton(getString(R.string.cancel), (dialogInterface, i) -> {
                 RootUtils.runCommand("rm -rf /data/.hKtweaks");
                 RootUtils.runCommand("pm clear com.hades.hKtweaks");
-            });
-            alert2.setPositiveButton(getString(R.string.ok), (dialog1, id1) -> {
-                RootUtils.runCommand("rm -rf /data/.hKtweaks");
-                RootUtils.runCommand("pm clear com.hades.hKtweaks && reboot");
-            });
-            alert2.show();
         });
         alert.show();
     }
