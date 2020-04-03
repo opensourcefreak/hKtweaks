@@ -227,11 +227,6 @@
         <item>9,4,-2,7,11</item>
         <item>9,4,10,4,7</item>
     </string-array>
-    <string-array name="zram_alg">
-        <item>@string/zram_lzo</item>
-        <item>@string/zram_lz4</item>
-        <item>@string/zram_deflate</item>
-    </string-array>
 
     <string-array name="dark_theme_modes">
         <item>Default dark</item>
