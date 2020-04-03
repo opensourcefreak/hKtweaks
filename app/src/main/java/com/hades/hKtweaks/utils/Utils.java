@@ -254,7 +254,7 @@ public class Utils {
     }
 
     public static String getInternalDataStorage() {
-        return Environment.getExternalStorageDirectory().toString() + "/Mtweaks";
+        return Environment.getExternalStorageDirectory().toString() + "/hKtweaks";
     }
 
     // MD5 code from
