@@ -22,7 +22,9 @@ package com.hades.hKtweaks.fragments.statistics;
 import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.fragments.DescriptionFragment;
 import com.hades.hKtweaks.fragments.recyclerview.RecyclerViewFragment;
+import com.hades.hKtweaks.utils.AppSettings;
 import com.hades.hKtweaks.utils.Device;
+import com.hades.hKtweaks.utils.kernel.gpu.GPUFreqExynos;
 import com.hades.hKtweaks.views.recyclerview.CardView;
 import com.hades.hKtweaks.views.recyclerview.DescriptionView;
 import com.hades.hKtweaks.views.recyclerview.RecyclerViewItem;
@@ -70,6 +72,8 @@ public class DeviceFragment extends RecyclerViewFragment {
                 {getString(R.string.bootloader), Device.getBootloader()},
                 {getString(R.string.rom), Device.ROMInfo.getInstance().getVersion()},
                 {getString(R.string.trustzone), Device.TrustZone.getInstance().getVersion()},
+                {"GPU " + getString(R.string.gpu_driver_version), GPUFreqExynos.getInstance().getDriverVersion()},
+                {"GPU " + getString(R.string.gpu_lib_version), AppSettings.getString("gpu_lib_version", "", getActivity())},
                 {getString(R.string.asv), Device.getAsv()}
         };
 
