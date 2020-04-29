@@ -22,6 +22,7 @@ package com.hades.hKtweaks.utils;
 import android.os.Build;
 
 import com.hades.hKtweaks.utils.root.RootUtils;
+import com.hades.hKtweaks.R;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ import java.util.regex.Pattern;
  * Created by willi on 31.12.15.
  */
 public class Device {
+
+    private static int CPUcount;
+    private static final String CPU_PRESENT = "/sys/devices/system/cpu/present";
 
     public static class Input {
 
@@ -403,6 +407,20 @@ public class Device {
             }
         }
         return codeName;
+    }
+
+    public static int getCoreCount() {
+        if (CPUcount == 0 && Utils.existFile(CPU_PRESENT)) {
+            try {
+                String output = Utils.readFile(CPU_PRESENT);
+                CPUcount = output.equals("0") ? 1 : Integer.parseInt(output.split("-")[1]) + 1;
+            } catch (Exception ignored) {
+            }
+        }
+        if (CPUcount == 0) {
+            CPUcount = Runtime.getRuntime().availableProcessors();
+        }
+        return CPUcount;
     }
 
     public static int getSDK() {

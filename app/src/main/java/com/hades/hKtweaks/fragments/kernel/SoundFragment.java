@@ -47,6 +47,9 @@ import java.util.List;
  */
 public class SoundFragment extends RecyclerViewFragment {
 
+    public int getSpanCount() {
+        return 2;
+    }
     private Sound mSound;
 
     private List<SeekBarView> mEqGain = new ArrayList<>();
@@ -657,6 +660,7 @@ public class SoundFragment extends RecyclerViewFragment {
         if(MoroSound.hasSoundSw()){
             CardView asCard = new CardView(getActivity());
             asCard.setTitle(getString(R.string.moro_sound_control) + " v" + MoroSound.getVersion());
+            asCard.setFullSpan(true);
 
             SwitchView es = new SwitchView();
             es.setTitle(getString(R.string.arizona_sound_sw));

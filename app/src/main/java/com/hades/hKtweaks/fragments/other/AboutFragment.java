@@ -83,6 +83,7 @@ public class AboutFragment extends RecyclerViewFragment {
         app.setTitle(getString(R.string.app_name));
         app.setSummary("v" + BuildConfig.VERSION_NAME);
 
+        about.setFullSpan(true);
         about.addItem(app);
         items.add(about);
 
@@ -98,6 +99,7 @@ public class AboutFragment extends RecyclerViewFragment {
 
             cardView.addItem(descriptionView);
         }
+        cardView.setFullSpan(true);
         items.add(cardView);
     }
 

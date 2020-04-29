@@ -56,7 +56,9 @@ public class MiscFragment extends RecyclerViewFragment {
 
     private Vibration mVibration;
     private Misc mMisc;
-
+    public int getSpanCount() {
+        return 1;
+    }
     @Override
     protected void init() {
         super.init();

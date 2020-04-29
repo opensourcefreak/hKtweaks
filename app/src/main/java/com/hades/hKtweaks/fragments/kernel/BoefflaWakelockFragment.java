@@ -52,6 +52,7 @@ public class BoefflaWakelockFragment extends RecyclerViewFragment {
 
         TitleView bwbT = new TitleView();
         bwbT.setText(getString(R.string.boeffla_wakelock) + " v" + BoefflaWakelock.getVersion());
+        bwbT.setFullSpan(true);
         items.add(bwbT);
 
         DescriptionView bwbD = new DescriptionView();
@@ -67,6 +68,7 @@ public class BoefflaWakelockFragment extends RecyclerViewFragment {
             BoefflaWakelock.setWakelockOrder(position);
             bwCardReload();
         });
+        bwOrder.setFullSpan(true);
         items.add(bwOrder);
 
 

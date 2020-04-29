@@ -6,10 +6,9 @@ import com.hades.hKtweaks.utils.Utils;
 import com.hades.hKtweaks.views.recyclerview.DescriptionView;
 import com.hades.hKtweaks.views.recyclerview.ImageView;
 import com.hades.hKtweaks.views.recyclerview.RecyclerViewItem;
-import com.hades.hKtweaks.views.recyclerview.TitleView;
+import com.hades.hKtweaks.views.recyclerview.CardView;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -27,47 +26,22 @@ public class DonationFragment extends RecyclerViewFragment {
     @Override
     protected void addItems(List<RecyclerViewItem> items) {
 
-        TitleView title = new TitleView();
-        title.setText(getString(R.string.donation_title));
-
-        items.add(title);
+        CardView donate = new CardView(getActivity());
+        donate.setTitle(getString(R.string.donation_title));
+        donate.setFullSpan(true);
 
         DescriptionView desc1 = new DescriptionView();
-        desc1.setDrawable(getResources().getDrawable(R.drawable.logo));
         desc1.setSummary(getString(R.string.donation_summary));
         desc1.setOnItemClickListener(item
                 -> Utils.launchUrl("https://www.paypal.me/corsicanu", Objects.requireNonNull(getActivity())));
-
-        items.add(desc1);
+        donate.addItem(desc1);
 
         ImageView img1 = new ImageView();
             img1.setDrawable(getResources().getDrawable(R.drawable.ic_paypal));
         img1.setOnItemClickListener(item
                 -> Utils.launchUrl("https://www.paypal.me/corsicanu", Objects.requireNonNull(getActivity())));
-
-        items.add(img1);
-
-        DescriptionView desc2 = new DescriptionView();
-        desc2.setDrawable(getResources().getDrawable(R.drawable.logo));
-        desc2.setSummary(getString(R.string.donation_summary_mg));
-        desc2.setOnItemClickListener(item
-                -> Utils.launchUrl("https://www.paypal.me/morogoku", Objects.requireNonNull(getActivity())));
-
-        items.add(desc2);
-
-
-        String leng = Locale.getDefault().getLanguage();
-
-        ImageView img2 = new ImageView();
-        if(leng.contains("es")){
-            img2.setDrawable(getResources().getDrawable(R.drawable.ic_donar_paypal));
-        }else {
-            img2.setDrawable(getResources().getDrawable(R.drawable.ic_donate_paypal));
-        }
-        img2.setOnItemClickListener(item
-                -> Utils.launchUrl("https://www.paypal.me/morogoku", Objects.requireNonNull(getActivity())));
-
-        items.add(img2);
+        donate.addItem(img1);
+        items.add(donate);
 
     }
 }

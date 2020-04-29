@@ -42,8 +42,6 @@ public class DeviceFragment extends RecyclerViewFragment {
 
         String processor = Device.CPUInfo.getInstance().getProcessor();
         String hardware = Device.CPUInfo.getInstance().getVendor();
-        String features = Device.CPUInfo.getInstance().getFeatures();
-        int ram = (int) Device.MemInfo.getInstance().getTotalMem();
 
         if (!processor.isEmpty()) {
             addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.processor), processor));
@@ -51,17 +49,13 @@ public class DeviceFragment extends RecyclerViewFragment {
         if (!hardware.isEmpty()) {
             addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.vendor), hardware));
         }
-        if (!features.isEmpty()) {
-            addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.features), features));
-        }
-        if (ram > 0) {
-            addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.ram), ram + getString(R.string.mb)));
-        }
     }
 
     @Override
     protected void addItems(List<RecyclerViewItem> items) {
 
+        int ram = (int) Device.MemInfo.getInstance().getTotalMem();
+        String features = Device.CPUInfo.getInstance().getFeatures();
         String[][] deviceInfos = {
                 {getString(R.string.android_version), Device.getVersion()},
                 {getString(R.string.android_api_level), String.valueOf(Device.getSDK())},
@@ -80,7 +74,11 @@ public class DeviceFragment extends RecyclerViewFragment {
         String[][] boardInfos = {
                 {getString(R.string.hardware), Device.getHardware()},
                 {getString(R.string.architecture), Device.getArchitecture()},
-                {getString(R.string.kernel), Device.getKernelVersion(true)}
+                {"CPU cores", getString(Device.getCoreCount() > 1 ?
+                        R.string.cores : R.string.cores_singular, Device.getCoreCount())},
+                {getString(R.string.ram), ram + getString(R.string.mb)},
+                {getString(R.string.kernel), Device.getKernelVersion(true)},
+                {getString(R.string.features), features}
         };
 
         CardView deviceCard = new CardView(getActivity());

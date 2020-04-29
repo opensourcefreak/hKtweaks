@@ -67,11 +67,11 @@ public class VMFragment extends RecyclerViewFragment {
     protected void addItems(List<RecyclerViewItem> items) {
 
         memBarsInit(items);
+        vmTunablesInit(items);
         if (ZRAM.supported()) {
             zramInit(items);
         }
         zswapInit(items);
-        vmTunablesInit(items);
     }
 
     private void memBarsInit (List<RecyclerViewItem> items){
@@ -97,7 +97,7 @@ public class VMFragment extends RecyclerViewFragment {
         mem.setUnit(getResources().getString(R.string.mb));
         mem.setProgressColor(getResources().getColor(R.color.orangeAccent));
         card.addItem(mem);
-
+        card.setFullSpan(true);
         items.add(card);
     }
 
