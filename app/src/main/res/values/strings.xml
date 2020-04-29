@@ -10,7 +10,6 @@
     <string name="open">Open %s</string>
     <string name="disable">Disable</string>
     <string name="changelog">hKtweaks v%s</string>
-    <string name="changelog_message">\n* added new logo\n* added new icon\n* adjusted theme colors according to new logo\n* improved dark theme and added new amoled dark theme\n* upgraded build sdk and updated all plugins\n* added exception for battery health over 100%\n* introduced new algorithm for GPU temperature reporting - more exynos based devices supported\n* adapt to Android 10 changes in board name\n</string>
     <string name="close">Close</string>
 
     <!-- Security -->

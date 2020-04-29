@@ -70,6 +70,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
 import java.util.Random;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by willi on 14.04.16.
  */
@@ -83,12 +87,22 @@ public class Utils {
     }
 
     public static void changelogDialog(Context context) {
-
         String versionName = appVersion();
-
+        StringBuilder changelog = new StringBuilder();
+        try {
+            JSONObject jsonObject = new JSONObject(readAssetFile(context, "update.json"));
+            JSONArray rel = (JSONArray) jsonObject.get("releaseNotes");
+            for (int i = 0; i < rel.length(); ++i) {
+                changelog.append(rel.getString(i).trim());
+                if (i != rel.length() - 1)
+                    changelog.append(System.getProperty("line.separator"));
+            }
+        } catch (JSONException ignored) {
+            Log.e("Can't read changelog, no release information provided");
+        }
         AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle(String.format(context.getString(R.string.changelog), versionName ));
-        alert.setMessage(context.getString(R.string.changelog_message));
+        alert.setMessage(changelog.toString());
         alert.setPositiveButton(context.getString(R.string.close), (dialog, id) -> {
             AppSettings.saveBoolean("show_changelog", false, context);
         });
