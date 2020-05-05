@@ -19,10 +19,10 @@
  */
 package com.hades.hKtweaks.utils;
 
+import android.content.res.Resources;
 import android.os.Build;
 
 import com.hades.hKtweaks.utils.root.RootUtils;
-import com.hades.hKtweaks.R;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -407,6 +407,10 @@ public class Device {
             }
         }
         return codeName;
+    }
+
+    public static int getDPI() {
+        return Resources.getSystem().getDisplayMetrics().densityDpi;
     }
 
     public static int getCoreCount() {

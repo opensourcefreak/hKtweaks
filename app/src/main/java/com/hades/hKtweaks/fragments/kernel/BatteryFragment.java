@@ -369,6 +369,7 @@ public class BatteryFragment extends RecyclerViewFragment {
 
         CardView usbCard = new CardView(getActivity());
         usbCard.setTitle(getString(R.string.usb_port));
+        usbCard.setFullSpan(true);
 
         if(mBattery.hasUsbInput()) {
             SeekBarView usb_input = new SeekBarView();
@@ -423,6 +424,7 @@ public class BatteryFragment extends RecyclerViewFragment {
 
         CardView carCard = new CardView(getActivity());
         carCard.setTitle(getString(R.string.car_dock));
+        carCard.setFullSpan(true);
 
         if(mBattery.hasCarInput()) {
             SeekBarView car_input = new SeekBarView();
@@ -477,6 +479,7 @@ public class BatteryFragment extends RecyclerViewFragment {
 
         CardView wcCard = new CardView(getActivity());
         wcCard.setTitle(getString(R.string.wireless_power));
+        wcCard.setFullSpan(true);
 
         if(mBattery.hasWcInput()) {
             SeekBarView wc_input = new SeekBarView();
@@ -630,6 +633,7 @@ public class BatteryFragment extends RecyclerViewFragment {
     private void chargeRateInit(List<RecyclerViewItem> items) {
         CardView chargeRateCard = new CardView(getActivity());
         chargeRateCard.setTitle(getString(R.string.charge_rate));
+        chargeRateCard.setFullSpan(true);
 
         if (mBattery.hasChargeRateEnable()) {
             SwitchView chargeRate = new SwitchView();

@@ -23,6 +23,7 @@ import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.fragments.ApplyOnBootFragment;
 import com.hades.hKtweaks.fragments.recyclerview.RecyclerViewFragment;
 import com.hades.hKtweaks.utils.AppSettings;
+import com.hades.hKtweaks.utils.Device;
 import com.hades.hKtweaks.utils.Utils;
 import com.hades.hKtweaks.utils.kernel.sound.ArizonaSound;
 import com.hades.hKtweaks.utils.kernel.sound.MoroSound;
@@ -48,8 +49,13 @@ import java.util.List;
 public class SoundFragment extends RecyclerViewFragment {
 
     public int getSpanCount() {
-        return 2;
+        if (Device.getDPI() > 500) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
+
     private Sound mSound;
 
     private List<SeekBarView> mEqGain = new ArrayList<>();
