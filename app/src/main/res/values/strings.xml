@@ -145,6 +145,7 @@
     <string name="gpu_usage">GPU Usage</string>
 
     <!-- Device -->
+    <string name="manufactured_date">Manufacturing Date</string>
     <string name="processor">Processor</string>
     <string name="vendor">Vendor</string>
     <string name="features">Features</string>

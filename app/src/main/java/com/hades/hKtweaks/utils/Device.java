@@ -25,9 +25,14 @@ import android.os.Build;
 import com.hades.hKtweaks.utils.root.RootUtils;
 
 import java.lang.reflect.Field;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -494,6 +499,24 @@ public class Device {
 
     public static String getFingerprint() {
         return Build.FINGERPRINT;
+    }
+
+    public static String getManufacturedDate() {
+        String date = RootUtils.getProp("ril.rfcal_date");
+        if (date.isEmpty()) {
+            date = "Not available";
+            return date;
+        } else {
+            try {
+                String loc = RootUtils.getProp("persist.sys.localedefault").isEmpty() ? RootUtils.getProp("persist.sys.locale") : RootUtils.getProp("persist.sys.localedefault");
+                Locale locale = new Locale.Builder().setLanguageTag(loc).build();
+                Date tmpdate = new SimpleDateFormat("yyyyMMdd").parse(date);
+                date = DateFormat.getDateInstance(DateFormat.SHORT, locale).format(tmpdate);
+            } catch (Exception e) {
+                date = "Not available";
+            }
+            return date;
+        }
     }
 
     public static String getVersion() {

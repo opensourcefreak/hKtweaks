@@ -57,6 +57,7 @@ public class DeviceFragment extends RecyclerViewFragment {
         int ram = (int) Device.MemInfo.getInstance().getTotalMem();
         String features = Device.CPUInfo.getInstance().getFeatures();
         String[][] deviceInfos = {
+                {getString(R.string.manufactured_date), Device.getManufacturedDate()},
                 {getString(R.string.android_version), Device.getVersion()},
                 {getString(R.string.android_api_level), String.valueOf(Device.getSDK())},
                 {getString(R.string.android_codename), Device.getCodename()},
