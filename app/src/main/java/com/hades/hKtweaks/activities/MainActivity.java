@@ -159,14 +159,11 @@ public class MainActivity extends BaseActivity {
                 BoefflaWakelock.CopyWakelockBlockerDefault();
             }
 
-            // If setting is applied on boot, mAppliedOnBoot = 1
-            int mAppliedOnboot = Utils.strToInt(RootUtils.getProp("hKtweaks.applied_onboot"));
-
             // If voltages are saved on Service.java, mVoltageSaved = 1
             int mVoltageSaved = Utils.strToInt(RootUtils.getProp("hKtweaks.voltage_saved"));
 
             // Check if system is rebooted
-            Boolean mIsBooted = AppSettings.getBoolean("is_booted", true, mRefActivity.get());
+            boolean mIsBooted = AppSettings.getBoolean("is_booted", true, mRefActivity.get());
             if (mIsBooted) {
                 // reset the Global voltages seekbar
                 if (!AppSettings.getBoolean("cpucl1voltage_onboot", false, mRefActivity.get())) {
