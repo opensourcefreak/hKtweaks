@@ -509,6 +509,7 @@ public class Device {
         } else {
             try {
                 String loc = RootUtils.getProp("persist.sys.localedefault").isEmpty() ? RootUtils.getProp("persist.sys.locale") : RootUtils.getProp("persist.sys.localedefault");
+                loc = loc.isEmpty() ? "en-US" : loc;
                 Locale locale = new Locale.Builder().setLanguageTag(loc).build();
                 Date tmpdate = new SimpleDateFormat("yyyyMMdd").parse(date);
                 date = DateFormat.getDateInstance(DateFormat.SHORT, locale).format(tmpdate);
