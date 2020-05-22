@@ -316,11 +316,8 @@ public class MainActivity extends BaseActivity {
             }
 
             // Save GPU libs version
-            if (!AppSettings.getBoolean("gpu_lib_version_saved", false, mRefActivity.get())){
-                AppSettings.saveString("gpu_lib_version",
-                        RootUtils.runCommand("dumpsys SurfaceFlinger | grep GLES | head -n 1 | cut -f 3,4,5 -d ','"), mRefActivity.get());
-                AppSettings.saveBoolean("gpu_lib_version_saved", true, mRefActivity.get());
-            }
+            AppSettings.saveString("gpu_lib_version",
+                    RootUtils.runCommand("dumpsys SurfaceFlinger | grep GLES | head -n 1 | cut -f 3,4,5 -d ','"), mRefActivity.get());
         }
 
         @Override
