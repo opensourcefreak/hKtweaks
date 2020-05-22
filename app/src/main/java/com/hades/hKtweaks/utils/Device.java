@@ -22,6 +22,7 @@ package com.hades.hKtweaks.utils;
 import android.content.res.Resources;
 import android.os.Build;
 
+import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.utils.root.RootUtils;
 
 import java.lang.reflect.Field;
@@ -503,18 +504,19 @@ public class Device {
 
     public static String getManufacturedDate() {
         String date = RootUtils.getProp("ril.rfcal_date");
+        String pattern = (date.length() == 8) ? "yyyyMMdd" : "yyyy.MM.dd";
         if (date.isEmpty()) {
-            date = "Not available";
+            date = String.valueOf(R.string.not_supported);
             return date;
         } else {
             try {
                 String loc = RootUtils.getProp("persist.sys.localedefault").isEmpty() ? RootUtils.getProp("persist.sys.locale") : RootUtils.getProp("persist.sys.localedefault");
                 loc = loc.isEmpty() ? "en-US" : loc;
                 Locale locale = new Locale.Builder().setLanguageTag(loc).build();
-                Date tmpdate = new SimpleDateFormat("yyyyMMdd").parse(date);
+                Date tmpdate = new SimpleDateFormat(pattern).parse(date);
                 date = DateFormat.getDateInstance(DateFormat.SHORT, locale).format(tmpdate);
             } catch (Exception e) {
-                date = "Not available";
+                date = String.valueOf(R.string.not_available);
             }
             return date;
         }
