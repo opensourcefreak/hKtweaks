@@ -516,7 +516,7 @@ public class Device {
                 Date tmpdate = new SimpleDateFormat(pattern).parse(date);
                 date = DateFormat.getDateInstance(DateFormat.SHORT, locale).format(tmpdate);
             } catch (Exception e) {
-                date = String.valueOf(R.string.not_available);
+                date = String.valueOf(R.string.not_supported);
             }
             return date;
         }
