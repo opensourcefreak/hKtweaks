@@ -21,6 +21,7 @@ package com.hades.hKtweaks.utils;
 
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.SystemClock;
 
 import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.utils.root.RootUtils;
@@ -29,11 +30,11 @@ import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,7 +59,7 @@ public class Device {
 
         private static final String BUS_INPUT = "/proc/bus/input/devices";
 
-        private List<Item> mItems = new ArrayList<>();
+        private final List<Item> mItems = new ArrayList<>();
 
         private Input() {
             String value = Utils.readFile(BUS_INPUT);
@@ -165,7 +166,7 @@ public class Device {
             return sInstance;
         }
 
-        private static String[] sProps = {
+        private static final String[] sProps = {
                 "ro.cm.version",
                 "ro.pa.version",
                 "ro.pac.version",
@@ -324,7 +325,7 @@ public class Device {
             return sInstance;
         }
 
-        private static HashMap<String, String> PARTITIONS = new HashMap<>();
+        private static final HashMap<String, String> PARTITIONS = new HashMap<>();
 
         static {
             PARTITIONS.put("/dev/block/platform/msm_sdcc.1/by-name/tz", "QC_IMAGE_VERSION_STRING=");
@@ -441,8 +442,8 @@ public class Device {
         String format(String board);
     }
 
-    private static HashMap<String, BoardFormatter> sBoardFormatters = new HashMap<>();
-    private static HashMap<String, String> sBoardAliases = new HashMap<>();
+    private static final HashMap<String, BoardFormatter> sBoardFormatters = new HashMap<>();
+    private static final HashMap<String, String> sBoardAliases = new HashMap<>();
 
     static {
         sBoardFormatters.put(".*msm.+.\\d+.*", board
@@ -500,6 +501,18 @@ public class Device {
 
     public static String getFingerprint() {
         return Build.FINGERPRINT;
+    }
+
+    public static String getUptime(){
+    	long uptime = SystemClock.elapsedRealtime();
+    	// TODO: find a better way to return uptime as hh:mm:ss
+        String h = String.valueOf(TimeUnit.MILLISECONDS.toHours(uptime));
+        String m = String.valueOf((TimeUnit.MILLISECONDS.toMinutes(uptime) - TimeUnit.HOURS.toMinutes(Long.parseLong(h))));
+        String s = String.valueOf((TimeUnit.MILLISECONDS.toSeconds(uptime) - TimeUnit.HOURS.toSeconds(Long.parseLong(h)) - TimeUnit.MINUTES.toSeconds(Long.parseLong(m))));
+        if (h.length() == 1) h = "0" + h;
+        if (m.length() == 1) m = "0" + m;
+        if (s.length() == 1) s = "0" + s;
+        return(h + ":" + m + ":" + s);
     }
 
     public static String getManufacturedDate() {

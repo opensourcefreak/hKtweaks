@@ -79,7 +79,8 @@ public class DeviceFragment extends RecyclerViewFragment {
                         R.string.cores : R.string.cores_singular, Device.getCoreCount())},
                 {getString(R.string.ram), ram + getString(R.string.mb)},
                 {getString(R.string.kernel), Device.getKernelVersion(true)},
-                {getString(R.string.features), features}
+                {getString(R.string.features), features},
+                {getString(R.string.uptime), Device.getUptime()}
         };
 
         CardView deviceCard = new CardView(getActivity());
