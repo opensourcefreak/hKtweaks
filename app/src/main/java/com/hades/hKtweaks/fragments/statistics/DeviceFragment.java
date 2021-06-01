@@ -23,6 +23,7 @@ import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.fragments.DescriptionFragment;
 import com.hades.hKtweaks.fragments.recyclerview.RecyclerViewFragment;
 import com.hades.hKtweaks.utils.AppSettings;
+import com.hades.hKtweaks.utils.kernel.battery.Battery;
 import com.hades.hKtweaks.utils.Device;
 import com.hades.hKtweaks.utils.kernel.gpu.GPUFreqExynos;
 import com.hades.hKtweaks.views.recyclerview.CardView;
@@ -40,78 +41,69 @@ public class DeviceFragment extends RecyclerViewFragment {
     protected void init() {
         super.init();
 
-        String processor = Device.CPUInfo.getInstance().getProcessor();
-        String hardware = Device.CPUInfo.getInstance().getVendor();
+        String vendor = Device.getVendor();
+        vendor = vendor.substring(0, 1).toUpperCase() + vendor.substring(1);
 
-        if (!processor.isEmpty()) {
-            addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.processor), processor));
-        }
-        if (!hardware.isEmpty()) {
-            addViewPagerFragment(DescriptionFragment.newInstance(getString(R.string.vendor), hardware));
-        }
+        addViewPagerFragment(DescriptionFragment.newInstance(vendor + " " + Device.getModel(),
+                Device.getBoard().toUpperCase()));
     }
 
     @Override
     protected void addItems(List<RecyclerViewItem> items) {
-
-        int ram = (int) Device.MemInfo.getInstance().getTotalMem();
-        String features = Device.CPUInfo.getInstance().getFeatures();
-        String[][] deviceInfos = {
-                {getString(R.string.manufactured_date), Device.getManufacturedDate()},
+        String[][] swInfo = {
                 {getString(R.string.android_version), Device.getVersion()},
                 {getString(R.string.android_api_level), String.valueOf(Device.getSDK())},
                 {getString(R.string.android_codename), Device.getCodename()},
-                {getString(R.string.fingerprint), Device.getFingerprint()},
-                {getString(R.string.build_display_id), Device.getBuildDisplayId()},
-                {getString(R.string.baseband), Device.getBaseBand()},
                 {getString(R.string.bootloader), Device.getBootloader()},
-                {getString(R.string.rom), Device.ROMInfo.getInstance().getVersion()},
-                {getString(R.string.trustzone), Device.TrustZone.getInstance().getVersion()},
+                {getString(R.string.baseband), Device.getBaseBand()},
+                {getString(R.string.build_display_id), Device.getBuildDisplayId()},
+                {getString(R.string.fingerprint), Device.getFingerprint()},
+                {getString(R.string.kernel), Device.getKernelVersion(true)},
                 {"GPU " + getString(R.string.gpu_driver_version), GPUFreqExynos.getInstance().getDriverVersion()},
                 {"GPU " + getString(R.string.gpu_lib_version), AppSettings.getString("gpu_lib_version", "", getActivity())},
-                {getString(R.string.asv), Device.getAsv()}
+                {getString(R.string.rom), Device.ROMInfo.getInstance().getVersion()},
+                {getString(R.string.trustzone), Device.TrustZone.getInstance().getVersion()}
         };
-
-        String[][] boardInfos = {
+        String[][] hwInfo = {
+                {getString(R.string.manufactured_date), Device.getManufacturedDate()},
                 {getString(R.string.hardware), Device.getHardware()},
                 {getString(R.string.architecture), Device.getArchitecture()},
                 {"CPU cores", getString(Device.getCoreCount() > 1 ?
                         R.string.cores : R.string.cores_singular, Device.getCoreCount())},
-                {getString(R.string.ram), ram + getString(R.string.mb)},
-                {getString(R.string.kernel), Device.getKernelVersion(true)},
-                {getString(R.string.features), features},
-                {getString(R.string.uptime), Device.getUptime()}
+                {getString(R.string.ram), (int) Device.MemInfo.getInstance().getTotalMem() + getString(R.string.mb)},
+                {getString(R.string.uptime), Device.getUptime()},
+                {getString(R.string.battery_health), Battery.getHealthValue()+"%"},
+                {getString(R.string.asv), Device.getAsv()},
+                {getString(R.string.cpu_features), Device.CPUInfo.getInstance().getFeatures()}
         };
 
-        CardView deviceCard = new CardView(getActivity());
-        String vendor = Device.getVendor();
-        vendor = vendor.substring(0, 1).toUpperCase() + vendor.substring(1);
-        deviceCard.setTitle(vendor + " " + Device.getModel());
+        CardView swCard = new CardView(getActivity());
+        swCard.setTitle(getString(R.string.swInfo));
 
-        CardView boardCard = new CardView(getActivity());
-        boardCard.setTitle(Device.getBoard().toUpperCase());
+        CardView hwCard = new CardView(getActivity());
+        hwCard.setTitle(getString(R.string.hwInfo));
 
-        for (String[] deviceInfo : deviceInfos) {
-            if (deviceInfo[1] != null && deviceInfo[1].isEmpty()) {
+        for (String[] softwareInfo : swInfo) {
+            if (softwareInfo[1] != null && softwareInfo[1].isEmpty()) {
                 continue;
             }
             DescriptionView info = new DescriptionView();
-            info.setTitle(deviceInfo[0]);
-            info.setSummary(deviceInfo[1]);
-            deviceCard.addItem(info);
+            info.setTitle(softwareInfo[0]);
+            info.setSummary(softwareInfo[1]);
+            swCard.addItem(info);
         }
 
-        for (String[] boardInfo : boardInfos) {
-            if (boardInfo[1] != null && boardInfo[1].isEmpty()) {
+        for (String[] hardwareInfo : hwInfo) {
+            if (hardwareInfo[1] != null && hardwareInfo[1].isEmpty()) {
                 continue;
             }
             DescriptionView info = new DescriptionView();
-            info.setTitle(boardInfo[0]);
-            info.setSummary(boardInfo[1]);
-            boardCard.addItem(info);
+            info.setTitle(hardwareInfo[0]);
+            info.setSummary(hardwareInfo[1]);
+            hwCard.addItem(info);
         }
 
-        items.add(deviceCard);
-        items.add(boardCard);
+        items.add(swCard);
+        items.add(hwCard);
     }
 }

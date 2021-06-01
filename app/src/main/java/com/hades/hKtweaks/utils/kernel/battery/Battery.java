@@ -37,6 +37,7 @@ import java.lang.reflect.Method;
 public class Battery {
 
     private static Battery sInstance;
+    private static int mCapacity;
 
     public static Battery getInstance(@NonNull Context context) {
         if (sInstance == null) {
@@ -66,6 +67,7 @@ public class Battery {
     public static void setValues() {
         for (String file : new String[] {
                 // Add on this list needed values for battery sysfs nodes
+                // TODO: Make sys nodes of battery device be auto detected as on gpu/cpu temps
                 "/sys/devices/battery",
                 "/sys/devices/battery.30",
                 "/sys/devices/battery.53",
@@ -106,7 +108,6 @@ public class Battery {
     private static String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
     private static String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
 
-    private int mCapacity;
     private Battery(Context context) {
         if (BATTERY_NODE == null) {
             setValues();
@@ -125,7 +126,7 @@ public class Battery {
         }
     }
 
-    public String getHealthValue() {
+    public static String getHealthValue() {
         float cap = Utils.strToInt(Utils.readFile(FG_FULLCAPNOM));
         if (cap != 0) {
             float value = ((cap * 2) / getCapacity()) * 100;
@@ -293,7 +294,7 @@ public class Battery {
         return Utils.existFile(ADAPTIVE_FAST_CHARGE);
     }
 
-    public int getCapacity() {
+    public static int getCapacity() {
         return mCapacity;
     }
 

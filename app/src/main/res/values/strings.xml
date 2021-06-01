@@ -1339,5 +1339,9 @@
     <string name="appupdater_download_filed">Download FAILED!</string>
     <string name="appupdater_downloading_file">Downloading</string>
     <string name="appupdater_json">https://raw.githubusercontent.com/corsicanu/hKtweaks/master/app/src/main/assets/update.json</string>
-    <string name="not_supported">Not supported...</string>
+    <string name="not_supported">Not supported…</string>
+    <string name="battery_health">Battery Health</string>
+    <string name="swInfo">Software Info</string>
+    <string name="hwInfo">Hardware Info</string>
+    <string name="cpu_features">CPU Features/Extensions</string>
 </resources>
