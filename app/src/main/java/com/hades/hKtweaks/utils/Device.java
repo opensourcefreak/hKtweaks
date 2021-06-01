@@ -25,6 +25,7 @@ import android.os.SystemClock;
 
 import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.utils.root.RootUtils;
+import org.json.JSONObject;
 
 import java.lang.reflect.Field;
 import java.text.DateFormat;
@@ -393,7 +394,29 @@ public class Device {
     }
 
     public static String getAsv() {
-        return Utils.readFile("/sys/kernel/debug/asv_summary");
+        String asv = Utils.readFile("/sys/kernel/debug/asv_summary");
+        if (asv == null) {
+            String[] values = {"HW_REV", "ASV_MIF", "ASV_BIG", "ASV_MID", "ASV_LIT", "ASV_G3D", "IDS_BIG", "IDS_MID", "IDS_LIT", "IDS_G3D"};
+            StringBuilder asvbuilder = new StringBuilder();
+            try {
+                asv = Utils.readFile("/sys/devices/virtual/sec/sec_hw_param/ap_info");
+                if (asv.endsWith(",")) {
+                    asv = asv.substring(0, asv.length() - 1);
+                }
+                asv = "{" + asv + "}";
+                JSONObject obj = new JSONObject(asv);
+                for (String value : values) {
+                    if (obj.has(value) && !obj.getString(value).equals("undefined")) {
+                        asvbuilder.append(value).append(": ").append(obj.getString(value)).append("\n");
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                asvbuilder = new StringBuilder();
+            }
+            asv = asvbuilder.toString();
+        }
+        return asv;
     }
 
     public static String getCodename() {
