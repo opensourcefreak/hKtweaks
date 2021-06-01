@@ -71,7 +71,8 @@ public class Battery {
                 "/sys/devices/battery.53",
                 "/sys/devices/battery.54",
                 "/sys/devices/battery.55",
-                "/sys/devices/platform/battery"}
+                "/sys/devices/platform/battery",
+                "/sys/devices/platform/samsung_mobile_device/samsung_mobile_device:battery"}
                 ) {
             if (Utils.existFile(file)) {
                 BATTERY_NODE = file;
