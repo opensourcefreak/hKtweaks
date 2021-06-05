@@ -27,7 +27,6 @@ import android.os.BatteryManager;
 
 import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.fragments.ApplyOnBootFragment;
-import com.hades.hKtweaks.fragments.DescriptionFragment;
 import com.hades.hKtweaks.fragments.recyclerview.RecyclerViewFragment;
 import com.hades.hKtweaks.utils.AppSettings;
 import com.hades.hKtweaks.utils.Utils;
@@ -68,7 +67,6 @@ public class BatteryFragment extends RecyclerViewFragment {
     private double mBatteryTemp;
     private String mBatteryStatus;
     private String mBatteryHealth;
-    private String mBatteryHealthValue;
 
     public int getSpanCount() {
         return 3;
@@ -677,18 +675,17 @@ public class BatteryFragment extends RecyclerViewFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (Battery.BATTERY_NODE == null) {
-                mBattery.setValues();
+                Battery.setValues();
             }
             mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
             mBatteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, 0);
             mBatteryCurrent = Utils.strToInt(Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/current_now"));
             mBatteryCurrentAvg = Utils.strToInt(Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/current_avg"));
-            mBatteryCharSource = mBattery.getChargeSource(context);
-            mBatteryCapacity = mBattery.getCapacity() + getString(R.string.mah);
+            mBatteryCharSource = Battery.getChargeSource(context);
+            mBatteryCapacity = Battery.getCapacity() + getString(R.string.mah);
             mBatteryTemp = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10D;
             mBatteryStatus = Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/status");
-            mBatteryHealth = Utils.readFile(Battery.BATTERY_NODE + "/power_supply/battery/health");
-            mBatteryHealthValue = mBattery.getHealthValue();
+            mBatteryHealth = Battery.getHealthValue();
         }
     };
 
@@ -720,9 +717,7 @@ public class BatteryFragment extends RecyclerViewFragment {
             mStatus.setStat(mBatteryStatus);
         }
         if (mHealth != null) {
-            if (mBatteryHealthValue != null) {
-                mHealth.setStat(mBatteryHealth + " / " + mBatteryHealthValue + getString(R.string.percent));
-            } else {
+            if (mBatteryHealth != null) {
                 mHealth.setStat(mBatteryHealth);
             }
         }

@@ -62,6 +62,7 @@ public class Battery {
     private static String CAR_INPUT;
     private static String CAR_CHARGE;
     private static String CHARGE_SOURCE;
+    private static String HEALTH;
     private static String FG_FULLCAPNOM;
 	
     public static void setValues() {
@@ -92,6 +93,7 @@ public class Battery {
                 CAR_INPUT = BATTERY_NODE + "/car_input";
                 CAR_CHARGE = BATTERY_NODE + "/car_charge";
                 CHARGE_SOURCE = BATTERY_NODE + "/power_supply/battery/batt_charging_source";
+                HEALTH = BATTERY_NODE + "/power_supply/battery/health";
                 FG_FULLCAPNOM = BATTERY_NODE + "/power_supply/battery/fg_fullcapnom";
                 break;
             }
@@ -127,14 +129,19 @@ public class Battery {
     }
 
     public static String getHealthValue() {
-        float cap = Utils.strToInt(Utils.readFile(FG_FULLCAPNOM));
-        if (cap != 0) {
-            float value = ((cap * 2) / getCapacity()) * 100;
-            value = (value > 100) ? (value / 2) : value;
-            value = (value > 100) ? 100 : value;
-            return String.format("%.2f", value);
-        } else {
+        String state = Utils.readFile(HEALTH);
+        if (state == null){
             return null;
+        } else {
+            float cap = Utils.strToInt(Utils.readFile(FG_FULLCAPNOM));
+            if (cap != 0) {
+                float value = ((cap * 2) / getCapacity()) * 100;
+                value = (value > 100) ? (value / 2) : value;
+                value = (value > 100) ? 100 : value;
+                return state + " / " +String.format("%.2f", value)+"%";
+            } else {
+                return state;
+            }
         }
     }
 
@@ -454,10 +461,6 @@ public class Battery {
 
     public String getCarInput() {
         return Utils.readFile(CAR_INPUT);
-    }
-
-    public boolean hasChargeSource() {
-        return Utils.existFile(CHARGE_SOURCE);
     }
 
     public static String getChargeSource(Context context) {
