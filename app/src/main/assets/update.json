@@ -1,16 +1,14 @@
 {
-  "latestVersion": "2.1.0",
-  "latestVersionCode": "210",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.1.0/hKtweaks_v2.1.0.apk",
+  "latestVersion": "2.2.0",
+  "latestVersionCode": "220",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.2.0/hKtweaks_v2.2.0.apk",
   "releaseNotes": [
     "Changelog:",
-    "- fixed color accent in dark mode",
-    "- reworked zram algorithms",
-    "- fixed saving of profiles in Android 10",
-    "- added support for more hotplugs",
-    "- added support for triclustered cpus",
-    "- added gpu driver info",
-    "- added auto detection of cpu temperature (exynos only)",
-    "- updated layout of several screens to fit better on big dpi"
+    "- device: full rearrange, added manufacturing date, alternate ASV detection, battery health, uptime",
+    "- cpufreq: added S21 cpu support (exynos2100/sd888)",
+    "- battery: fixed S21 battery health detection + possibly for other new devices running 5.* kernel",
+    "- build: updated gradle, plugins, build tools, targetsdk and minsdk (android <8.0 can use v2.1.0 and below)",
+    "- manifest: add back USE_FINGERPRINT for < 28 api",
+    "- others: minor optimizations, fix isolated layout issues because of dpi, check gpu_lib string everytime we open the app"
   ]
 }
