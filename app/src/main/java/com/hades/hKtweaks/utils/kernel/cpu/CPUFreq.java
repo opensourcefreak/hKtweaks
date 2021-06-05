@@ -683,7 +683,7 @@ public class CPUFreq {
     }
 
     public boolean hasMidCpu() {
-        return is9820() || is855();
+        return is422() || is431();
     }
 
     public int getClusterCount() {
@@ -710,11 +710,11 @@ public class CPUFreq {
             } else if (is7885()) {
                 mBigCpu = 6;
                 mLITTLECpu = 0;
-            } else if (is9820()) {
+            } else if (is422()) {
                 mBigCpu = 6;
                 mMidCpu = 4;
                 mLITTLECpu = 0;
-            } else if (is855()){
+            } else if (is431()){
                 mBigCpu = 7;
                 mMidCpu = 4;
                 mLITTLECpu = 0;
@@ -744,6 +744,7 @@ public class CPUFreq {
         return mBigCpu >= 0 && mLITTLECpu >= 0;
     }
 
+    // TODO: get/parse cluster and core listing from /sys/firmware/devicetree/base/cpufreq
     private boolean is8996() {
         String board = Device.getBoard();
         return board.equalsIgnoreCase("msm8996") || board.equalsIgnoreCase("msm8996pro");
@@ -754,7 +755,8 @@ public class CPUFreq {
         return (board.contains("7884") || board.contains("7885") || board.contains("7904"));
     }
 
-    private boolean is9820() {
+    // triclustered 4 little, 2 middle, 2 big
+    private boolean is422() {
         String board = Device.getBoard();
         return board.equalsIgnoreCase("exynos9820")
                 || board.equalsIgnoreCase("universal9820")
@@ -763,11 +765,13 @@ public class CPUFreq {
                 || board.equalsIgnoreCase("exynos990")
                 || board.equalsIgnoreCase("exynos995");
     }
-
-    private boolean is855() {
+    // triclustered 4 little, 3 middle, 1 big
+    private boolean is431() {
         String board = Device.getBoard();
         return board.equalsIgnoreCase("msmnile")
-                || board.equalsIgnoreCase("kona");
+                || board.equalsIgnoreCase("kona")
+                || board.equalsIgnoreCase("exynos2100")
+                || board.equalsIgnoreCase("lahaina");
     }
 
     public int getCpuCount() {
