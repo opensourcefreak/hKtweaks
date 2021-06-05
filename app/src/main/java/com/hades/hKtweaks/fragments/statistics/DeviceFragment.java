@@ -58,10 +58,10 @@ public class DeviceFragment extends RecyclerViewFragment {
                 {getString(R.string.baseband), Device.getBaseBand()},
                 {getString(R.string.build_display_id), Device.getBuildDisplayId()},
                 {getString(R.string.fingerprint), Device.getFingerprint()},
+                {getString(R.string.rom), Device.ROMInfo.getInstance().getVersion()},
                 {getString(R.string.kernel), Device.getKernelVersion(true)},
                 {"GPU " + getString(R.string.gpu_driver_version), GPUFreqExynos.getInstance().getDriverVersion()},
                 {"GPU " + getString(R.string.gpu_lib_version), AppSettings.getString("gpu_lib_version", "", getActivity())},
-                {getString(R.string.rom), Device.ROMInfo.getInstance().getVersion()},
                 {getString(R.string.trustzone), Device.TrustZone.getInstance().getVersion()}
         };
         String[][] hwInfo = {
@@ -72,7 +72,7 @@ public class DeviceFragment extends RecyclerViewFragment {
                         R.string.cores : R.string.cores_singular, Device.getCoreCount())},
                 {getString(R.string.ram), (int) Device.MemInfo.getInstance().getTotalMem() + getString(R.string.mb)},
                 {getString(R.string.uptime), Device.getUptime()},
-                {getString(R.string.battery_health), Battery.getHealthValue()+"%"},
+                {getString(R.string.battery_health), Battery.getHealthValue()},
                 {getString(R.string.asv), Device.getAsv()},
                 {getString(R.string.cpu_features), Device.CPUInfo.getInstance().getFeatures()}
         };
