@@ -29,8 +29,6 @@ import com.hades.hKtweaks.utils.root.RootUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
-
 /**
  * Created by willi on 25.06.16.
  */
