@@ -31,7 +31,7 @@ import java.io.File;
  */
 public class ExportProfile {
 
-    private JSONObject mMain;
+    private final JSONObject mMain;
 
     public ExportProfile(Profiles.ProfileItem item, int version) {
         mMain = new JSONObject();
@@ -46,7 +46,7 @@ public class ExportProfile {
     public boolean export(String name) {
         if (!name.endsWith(".json")) name += ".json";
         File exportFiles = new File(Utils.getInternalDataStorage() + "/profiles");
-        File file = new File(exportFiles.toString() + "/" + name);
+        File file = new File(exportFiles + "/" + name);
         if (file.exists()) return false;
         exportFiles.mkdirs();
         Utils.writeFile(file.toString(), mMain.toString(), false, false);

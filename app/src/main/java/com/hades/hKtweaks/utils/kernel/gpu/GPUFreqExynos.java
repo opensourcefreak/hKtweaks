@@ -236,8 +236,8 @@ public class GPUFreqExynos {
     private String POWER_POLICY;
     private String USAGE;
 
-    private String SPLIT_NEW_LINE = "\\r?\\n";
-    private String SPLIT_LINE = " ";
+    private final String SPLIT_NEW_LINE = "\\r?\\n";
+    private final String SPLIT_LINE = " ";
 
 
     private GPUFreqExynos() {
@@ -274,7 +274,7 @@ public class GPUFreqExynos {
         for (String file : mAvailableFreqs) {
             if (Utils.existFile(file)) {
                 if ((file.equals(AVAILABLE_S7_FREQS_STOCK)) || (file.equals(AVAILABLE_FREQS_STOCK))){
-                    String freqs[] = Utils.readFile(file).split(" ");
+                    String[] freqs = Utils.readFile(file).split(" ");
                     AVAILABLE_FREQS = new ArrayList<>();
                     AVAILABLE_FREQS_SORT = new ArrayList<>();
                     for (String freq : freqs) {
@@ -282,7 +282,7 @@ public class GPUFreqExynos {
                         AVAILABLE_FREQS_SORT.add(Utils.strToInt(freq.trim()));
                     }
                 } else {
-                    String freqs[] = Utils.readFile(file).split("\\r?\\n");
+                    String[] freqs = Utils.readFile(file).split("\\r?\\n");
                     AVAILABLE_FREQS = new ArrayList<>();
                     AVAILABLE_FREQS_SORT = new ArrayList<>();
                     for (String freq : freqs) {

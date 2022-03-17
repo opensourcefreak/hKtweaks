@@ -13,13 +13,13 @@ import java.lang.ref.WeakReference;
 class UtilsAsync {
 
     static class LatestAppVersion extends AsyncTask<Void, Void, Update> {
-        private WeakReference<Context> contextRef;
-        private LibraryPreferences libraryPreferences;
-        private Boolean fromUtils;
-        private UpdateFrom updateFrom;
-        private GitHub gitHub;
-        private String xmlOrJsonUrl;
-        private AppUpdater.LibraryListener listener;
+        private final WeakReference<Context> contextRef;
+        private final LibraryPreferences libraryPreferences;
+        private final Boolean fromUtils;
+        private final UpdateFrom updateFrom;
+        private final GitHub gitHub;
+        private final String xmlOrJsonUrl;
+        private final AppUpdater.LibraryListener listener;
 
         public LatestAppVersion(Context context, Boolean fromUtils, UpdateFrom updateFrom, GitHub gitHub, String xmlOrJsonUrl, AppUpdater.LibraryListener listener) {
             this.contextRef = new WeakReference<>(context);

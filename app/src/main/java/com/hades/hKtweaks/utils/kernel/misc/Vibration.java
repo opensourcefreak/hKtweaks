@@ -120,8 +120,8 @@ public class Vibration {
 
     private class MinMax {
 
-        private int mMin;
-        private int mMax;
+        private final int mMin;
+        private final int mMax;
         private String mMinFile;
         private String mMaxFile;
 

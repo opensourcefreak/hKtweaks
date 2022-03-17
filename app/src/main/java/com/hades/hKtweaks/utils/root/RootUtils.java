@@ -128,7 +128,7 @@ public class RootUtils {
         private boolean mFirstTry;
         private boolean mLog;
 
-        private ReentrantLock mLock = new ReentrantLock();
+        private final ReentrantLock mLock = new ReentrantLock();
 
         public SU() {
             this(true, false);

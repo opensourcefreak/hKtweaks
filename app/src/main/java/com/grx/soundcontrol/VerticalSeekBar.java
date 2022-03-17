@@ -370,7 +370,7 @@ public class VerticalSeekBar extends AppCompatSeekBar {
     public int mGrxZeroOffset;
     public int mGrxDividerStep;
     private int mGrxNumSteps;
-    private int mGrxLeftMin=0;
+    private final int mGrxLeftMin=0;
     private float mGrxHalfDividerLength;
     private float mGrxHalfDividerThickness;
     private float mGrxHalfProgressThickness;

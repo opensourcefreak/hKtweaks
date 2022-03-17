@@ -46,9 +46,9 @@ public abstract class ValueView2 extends RecyclerViewItem {
 
     @Override
     public void onCreateView(View view) {
-        mTitleView = (TextView) view.findViewById(R.id.title);
+        mTitleView = view.findViewById(R.id.title);
         mValueParent = view.findViewById(R.id.value_parent);
-        mValueView = (TextView) view.findViewById(R.id.value);
+        mValueView = view.findViewById(R.id.value);
         mProgress = view.findViewById(R.id.progress);
 
         super.onCreateView(view);

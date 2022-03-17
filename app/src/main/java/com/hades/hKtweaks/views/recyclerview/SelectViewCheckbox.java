@@ -38,7 +38,7 @@ public class SelectViewCheckbox extends ValueView {
     private View mView;
     private Dialog mDialog;
     private List<String> mItems = new ArrayList<>();
-    private boolean[] mCheckBoxes = new boolean[]{false, false, false, false};
+    private final boolean[] mCheckBoxes = new boolean[]{false, false, false, false};
     private int mCurrValue = S2w.getInstance().get();
 
 
@@ -100,17 +100,13 @@ public class SelectViewCheckbox extends ValueView {
     }
 
     private void setCheckBoxesFromInt(){
-        if ((mCurrValue & 1 ) != 0) mCheckBoxes[0]=true;
-        else mCheckBoxes[0] = false;
+        mCheckBoxes[0]= (mCurrValue & 1) != 0;
 
-        if ((mCurrValue & 2 ) != 0) mCheckBoxes[1]=true;
-        else mCheckBoxes[1] = false;
+        mCheckBoxes[1]= (mCurrValue & 2) != 0;
 
-        if ((mCurrValue & 4 ) != 0) mCheckBoxes[2]=true;
-        else mCheckBoxes[2] = false;
+        mCheckBoxes[2]= (mCurrValue & 4) != 0;
 
-        if ((mCurrValue & 8 ) != 0) mCheckBoxes[3]=true;
-        else mCheckBoxes[3] = false;
+        mCheckBoxes[3]= (mCurrValue & 8) != 0;
     }
 
     private void setIntValueFromCheckBoxes(Context context){

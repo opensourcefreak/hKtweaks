@@ -105,11 +105,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public AppBarLayout getAppBarLayout() {
-        return (AppBarLayout) findViewById(R.id.appbarlayout);
+        return findViewById(R.id.appbarlayout);
     }
 
     public Toolbar getToolBar() {
-        return (Toolbar) findViewById(R.id.toolbar);
+        return findViewById(R.id.toolbar);
     }
 
     public void initToolBar() {

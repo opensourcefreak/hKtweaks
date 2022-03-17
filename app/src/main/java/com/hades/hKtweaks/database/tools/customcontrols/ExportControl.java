@@ -31,7 +31,7 @@ import java.io.File;
  */
 public class ExportControl {
 
-    private JSONObject mMain;
+    private final JSONObject mMain;
 
     public ExportControl(Controls.ControlItem item, int version) {
         mMain = new JSONObject();
@@ -48,7 +48,7 @@ public class ExportControl {
     public boolean export(String name) {
         if (!name.endsWith(".json")) name += ".json";
         File exportFiles = new File(Utils.getInternalDataStorage() + "/controls");
-        File file = new File(exportFiles.toString() + "/" + name);
+        File file = new File(exportFiles + "/" + name);
         if (file.exists()) return false;
         exportFiles.mkdirs();
         Utils.writeFile(file.toString(), mMain.toString(), false, false);

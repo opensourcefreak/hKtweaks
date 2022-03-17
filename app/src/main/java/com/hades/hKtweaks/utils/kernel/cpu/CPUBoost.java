@@ -77,11 +77,11 @@ public class CPUBoost {
 
     public void setCpuBoostExynosInputFreq(String value1, String value2, Context context) {
         String value = value1 + " " + value2;
-        run(Control.write(String.valueOf(value), CPU_BOOST_EXYNOS_BOOST_FREQ), CPU_BOOST_EXYNOS_BOOST_FREQ, context);
+        run(Control.write(value, CPU_BOOST_EXYNOS_BOOST_FREQ), CPU_BOOST_EXYNOS_BOOST_FREQ, context);
     }
 
     public List<String> getCpuBootExynosInputFreq() {
-        String freqs[] = Utils.readFile(CPU_BOOST_EXYNOS_BOOST_FREQ).split(" ");
+        String[] freqs = Utils.readFile(CPU_BOOST_EXYNOS_BOOST_FREQ).split(" ");
         List<String> INPUT_FREQS = new ArrayList<>();
         for (String freq : freqs) {
             INPUT_FREQS.add(freq.trim());

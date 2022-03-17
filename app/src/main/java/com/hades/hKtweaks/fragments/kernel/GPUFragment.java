@@ -57,14 +57,14 @@ public class GPUFragment extends RecyclerViewFragment {
     private XYGraphView m2dCurFreq;
     private XYGraphView mCurFreq;
     private XYGraphView mUsage;
-    private List<SeekBarView> mVoltages = new ArrayList<>();
-    private SeekBarView mSeekbarProf = new SeekBarView();
+    private final List<SeekBarView> mVoltages = new ArrayList<>();
+    private final SeekBarView mSeekbarProf = new SeekBarView();
 
     private PathReaderFragment mGPUGovernorTunableFragment;
 
-    private static float mVoltMinValue = -100000f;
-    private static float mVoltMaxValue = 25000f;
-    private static int mVoltStep = 6250;
+    private static final float mVoltMinValue = -100000f;
+    private static final float mVoltMaxValue = 25000f;
+    private static final int mVoltStep = 6250;
     public static int mDefZeroPosition = (Math.round(mVoltMaxValue - mVoltMinValue) / mVoltStep) - (Math.round(mVoltMaxValue) / mVoltStep);
 
     @Override

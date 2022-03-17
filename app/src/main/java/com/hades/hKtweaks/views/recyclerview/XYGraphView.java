@@ -39,7 +39,7 @@ public class XYGraphView extends RecyclerViewItem {
 
     private CharSequence mTitleStr;
     private CharSequence mTextStr;
-    private Queue<Integer> mPercentages = new LinkedBlockingQueue<>();
+    private final Queue<Integer> mPercentages = new LinkedBlockingQueue<>();
 
     @Override
     public int getLayoutRes() {

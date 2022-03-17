@@ -101,15 +101,15 @@ public class Battery {
         }
     }
 
-    private static String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
-    private static String ADAPTIVE_FAST_CHARGE = "/sys/class/sec/switch/afc_disable";
-    private static String BLX = "/sys/devices/virtual/misc/batterylifeextender/charging_limit";
-    private static String CHARGE_RATE = "/sys/kernel/thundercharge_control";
-    private static String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
-    private static String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
-    private static String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
-    private static String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
-    private static String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
+    private static final String FORCE_FAST_CHARGE = "/sys/kernel/fast_charge/force_fast_charge";
+    private static final String ADAPTIVE_FAST_CHARGE = "/sys/class/sec/switch/afc_disable";
+    private static final String BLX = "/sys/devices/virtual/misc/batterylifeextender/charging_limit";
+    private static final String CHARGE_RATE = "/sys/kernel/thundercharge_control";
+    private static final String CHARGE_RATE_ENABLE = CHARGE_RATE + "/enabled";
+    private static final String CUSTOM_CURRENT = CHARGE_RATE + "/custom_current";
+    private static final String STORE_MODE = "/sys/devices/battery/power_supply/battery/store_mode";
+    private static final String STORE_MODE_MAX = "/sys/module/sec_battery/parameters/store_mode_max";
+    private static final String STORE_MODE_MIN = "/sys/module/sec_battery/parameters/store_mode_min";
 
     private Battery(Context context) {
         if (BATTERY_NODE == null) {

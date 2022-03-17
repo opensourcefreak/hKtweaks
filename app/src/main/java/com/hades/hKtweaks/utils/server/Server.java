@@ -25,7 +25,7 @@ package com.hades.hKtweaks.utils.server;
 
 public class Server {
 
-    private String mAddress;
+    private final String mAddress;
 
     Server(String address) {
         mAddress = address;
@@ -33,8 +33,8 @@ public class Server {
 
     class Query {
 
-        private String mKey;
-        private String mValue;
+        private final String mKey;
+        private final String mValue;
 
         Query(String key, String value) {
             mKey = key;

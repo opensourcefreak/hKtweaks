@@ -671,7 +671,7 @@ public class BatteryFragment extends RecyclerViewFragment {
         }
     }
 
-    private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (Battery.BATTERY_NODE == null) {

@@ -31,7 +31,7 @@ import java.util.List;
 public class RootFile {
 
     private final String mFile;
-    private RootUtils.SU mSU;
+    private final RootUtils.SU mSU;
 
     public RootFile(String file) {
         mFile = file;
@@ -74,7 +74,7 @@ public class RootFile {
         for (String arg : arguments) {
             args.append(" \"").append(arg).append("\"");
         }
-        return mSU.runCommand(mFile + args.toString());
+        return mSU.runCommand(mFile + args);
     }
 
     public void delete() {

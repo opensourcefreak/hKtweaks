@@ -320,7 +320,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements
     }
 
     private static class Execute extends AsyncTask<String, Void, Void> {
-        private ProgressDialog mProgressDialog;
+        private final ProgressDialog mProgressDialog;
 
         private Execute(Context context) {
             mProgressDialog = new ProgressDialog(context);

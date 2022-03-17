@@ -47,7 +47,7 @@ public class CardView extends RecyclerViewItem {
         void onMenuReady(CardView cardView, PopupMenu popupMenu);
     }
 
-    private Activity mActivity;
+    private final Activity mActivity;
 
     private androidx.cardview.widget.CardView mRootView;
     private View mTitleParent;
@@ -61,11 +61,11 @@ public class CardView extends RecyclerViewItem {
     private PopupMenu mPopupMenu;
     private OnMenuListener mOnMenuListener;
 
-    private List<RecyclerViewItem> mItems = new ArrayList<>();
-    private HashMap<RecyclerViewItem, View> mViews = new HashMap<>();
+    private final List<RecyclerViewItem> mItems = new ArrayList<>();
+    private final HashMap<RecyclerViewItem, View> mViews = new HashMap<>();
 
-    private List<RecyclerViewItem> mLoading = new ArrayList<>();
-    private List<Runnable> mRunnables = new ArrayList<>();
+    private final List<RecyclerViewItem> mLoading = new ArrayList<>();
+    private final List<Runnable> mRunnables = new ArrayList<>();
 
     private int mLayoutHeight;
     private ValueAnimator mLayoutAnimator;

@@ -84,10 +84,10 @@ public class Temperature {
                         String type = "/type";
                         if (Utils.readFile(node + i + type).contains("gpuss-0-usr")) {
                             SD_GPU_NODE = node + i + "/temp";
-                            SD_GPU_OFFSET = (int) Math.pow(10, (double) (Utils.readFile(SD_GPU_NODE).length() - (Utils.readFile(SD_GPU_NODE).length() - 3)));
+                            SD_GPU_OFFSET = (int) Math.pow(10, Utils.readFile(SD_GPU_NODE).length() - (Utils.readFile(SD_GPU_NODE).length() - 3));
                         } else if (Utils.readFile(node + i + type).contains("cpu-0-0-usr")) {
                             SD_CPU_NODE = node + i + "/temp";
-                            SD_CPU_OFFSET = (int) Math.pow(10, (double) (Utils.readFile(SD_CPU_NODE).length() - (Utils.readFile(SD_CPU_NODE).length() - 3)));
+                            SD_CPU_OFFSET = (int) Math.pow(10, Utils.readFile(SD_CPU_NODE).length() - (Utils.readFile(SD_CPU_NODE).length() - 3));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -108,10 +108,10 @@ public class Temperature {
                         String type = "/cdev0/type";
                         if (Utils.readFile(node + i + type).contains("gpu")) {
                             EXYNOS_GPU_NODE = node + i + "/temp";
-                            EXYNOS_GPU_OFFSET = (int) Math.pow(10, (double) (Utils.readFile(EXYNOS_GPU_NODE).length() - (Utils.readFile(EXYNOS_GPU_NODE).length() - 3)));
+                            EXYNOS_GPU_OFFSET = (int) Math.pow(10, Utils.readFile(EXYNOS_GPU_NODE).length() - (Utils.readFile(EXYNOS_GPU_NODE).length() - 3));
                         } else if (Utils.readFile(node + i + type).contains("cpufreq-0")) {
                             EXYNOS_CPU_NODE = node + i + "/temp";
-                            EXYNOS_CPU_OFFSET = (int) Math.pow(10, (double) (Utils.readFile(EXYNOS_CPU_NODE).length() - (Utils.readFile(EXYNOS_CPU_NODE).length() - 3)));
+                            EXYNOS_CPU_OFFSET = (int) Math.pow(10, Utils.readFile(EXYNOS_CPU_NODE).length() - (Utils.readFile(EXYNOS_CPU_NODE).length() - 3));
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

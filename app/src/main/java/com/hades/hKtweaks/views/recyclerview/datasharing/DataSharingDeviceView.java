@@ -35,8 +35,8 @@ import com.hades.hKtweaks.views.recyclerview.RecyclerViewItem;
 
 public class DataSharingDeviceView extends RecyclerViewItem {
 
-    private DeviceInfo mDeviceInfo;
-    private int mRank;
+    private final DeviceInfo mDeviceInfo;
+    private final int mRank;
 
     private View mDialogView;
 

@@ -37,9 +37,10 @@ import java.util.Map;
 public class Themes {
 
     public static class Theme {
-        private String mPrimary;
-        private String mAccent;
+        private final String mPrimary;
+        private final String mAccent;
         private @StyleRes
+        final
         int mStyle;
 
         private Theme(String primary, String accent, @StyleRes int style) {

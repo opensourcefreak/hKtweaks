@@ -115,7 +115,7 @@ public class BuildpropFragment extends RecyclerViewFragment {
     }
 
     private static class ReloadHandler extends RecyclerViewFragment.ReloadHandler<BuildpropFragment> {
-        private boolean mRead;
+        private final boolean mRead;
 
         private ReloadHandler(boolean read) {
             mRead = read;

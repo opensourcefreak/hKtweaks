@@ -26,7 +26,7 @@ public class Hmp {
 
 
     public void setHmpProfile(String value, Context context){
-        String hmp[] = value.split(" ");
+        String[] hmp = value.split(" ");
         int up = Utils.strToInt(hmp[0]);
         int down = Utils.strToInt(hmp[1]);
         setUpThreshold(up, context);

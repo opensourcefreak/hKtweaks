@@ -59,7 +59,7 @@ public class IO {
         External
     }
 
-    private String INTERNAL;
+    private final String INTERNAL;
     private String EXTERNAL;
 
     private IO() {

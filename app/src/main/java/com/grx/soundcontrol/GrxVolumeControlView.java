@@ -228,7 +228,7 @@ public class GrxVolumeControlView extends View {
             if(deg>mMaxProgress) deg=mMaxProgress;
 
 
-            angle = String.valueOf(String.valueOf(deg));
+            angle = String.valueOf(deg);
 
             //   this.getParent().requestDisallowInterceptTouchEvent(false);
             invalidate();

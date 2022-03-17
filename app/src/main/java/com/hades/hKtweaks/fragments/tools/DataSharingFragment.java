@@ -97,7 +97,7 @@ public class DataSharingFragment extends RecyclerViewFragment {
         items.add(mDataSharingSwitch);
     }
 
-    private BroadcastReceiver mDisableReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mDisableReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (mDataSharingSwitch != null) {

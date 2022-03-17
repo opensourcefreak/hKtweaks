@@ -48,7 +48,7 @@ import java.util.List;
  */
 public class VMFragment extends RecyclerViewFragment {
 
-    private List<GenericSelectView2> mVMs = new ArrayList<>();
+    private final List<GenericSelectView2> mVMs = new ArrayList<>();
     private boolean mCompleteList;
 
     private Device.MemInfo mMemInfo;

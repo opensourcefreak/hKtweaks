@@ -65,7 +65,7 @@ public class RecoveryFragment extends RecyclerViewFragment {
     private Dialog mAddDialog;
     private Dialog mFlashDialog;
 
-    private List<Recovery> mCommands = new ArrayList<>();
+    private final List<Recovery> mCommands = new ArrayList<>();
 
     @Override
     public int getSpanCount() {

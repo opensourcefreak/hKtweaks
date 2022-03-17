@@ -354,8 +354,8 @@ public class CustomControlsFragment extends RecyclerViewFragment {
 
     private static class ImportTask extends AsyncTask<Void, Void, ImportControl> {
 
-        private WeakReference<CustomControlsFragment> mRefFragment;
-        private String mPath;
+        private final WeakReference<CustomControlsFragment> mRefFragment;
+        private final String mPath;
 
         private ImportTask(CustomControlsFragment fragment, String path) {
             mRefFragment = new WeakReference<>(fragment);

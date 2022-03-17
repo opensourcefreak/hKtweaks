@@ -164,7 +164,7 @@ public class InitdFragment extends RecyclerViewFragment {
     }
 
     private static class ExecuteTask extends DialogLoadHandler<InitdFragment> {
-        private String mInitd;
+        private final String mInitd;
         private String mResult;
 
         private ExecuteTask(Context context, String initd) {

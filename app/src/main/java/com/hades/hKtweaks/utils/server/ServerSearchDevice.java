@@ -51,7 +51,7 @@ public class ServerSearchDevice extends Server {
         void onBoardFailure();
     }
 
-    private Activity mActivity;
+    private final Activity mActivity;
 
     private WebpageReader mDeviceReader;
     private WebpageReader mBoardReader;

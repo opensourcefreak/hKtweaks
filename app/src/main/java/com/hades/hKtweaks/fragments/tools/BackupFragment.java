@@ -256,8 +256,8 @@ public class BackupFragment extends RecyclerViewFragment {
     }
 
     private static class RestoreTask extends DialogLoadHandler<BackupFragment> {
-        private File mFile;
-        private Backup.PARTITION mPartition;
+        private final File mFile;
+        private final Backup.PARTITION mPartition;
 
         private RestoreTask(Context context, boolean flashing,
                             File file, Backup.PARTITION partition) {
@@ -329,8 +329,8 @@ public class BackupFragment extends RecyclerViewFragment {
     }
 
     private static class BackupTask extends DialogLoadHandler<BackupFragment> {
-        private String mName;
-        private Backup.PARTITION mPartition;
+        private final String mName;
+        private final Backup.PARTITION mPartition;
 
         private BackupTask(Context context, String name, Backup.PARTITION partition) {
             super(null, context.getString(R.string.backing_up));

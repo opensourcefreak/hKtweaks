@@ -44,7 +44,7 @@ public abstract class Provider {
      */
     private final String mPath;
 
-    private int mVersion;
+    private final int mVersion;
 
     /**
      * JSON Database is used to store large amount of datasets
@@ -141,7 +141,7 @@ public abstract class Provider {
 
     public static class DBJsonItem {
 
-        private JSONObject mItem;
+        private final JSONObject mItem;
 
         protected DBJsonItem() {
             mItem = new JSONObject();

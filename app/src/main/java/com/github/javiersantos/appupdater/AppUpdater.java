@@ -20,8 +20,8 @@ import com.github.javiersantos.appupdater.objects.Update;
 import com.hades.hKtweaks.R;
 
 public class AppUpdater implements IAppUpdater {
-    private Context context;
-    private LibraryPreferences libraryPreferences;
+    private final Context context;
+    private final LibraryPreferences libraryPreferences;
     private Display display;
     private UpdateFrom updateFrom;
     private Duration duration;

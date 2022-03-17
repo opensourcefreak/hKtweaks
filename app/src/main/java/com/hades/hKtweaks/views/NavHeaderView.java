@@ -57,7 +57,7 @@ public class NavHeaderView extends LinearLayout {
     }
 
     private static Callback sCallback;
-    private ImageView mImage;
+    private final ImageView mImage;
 
     public NavHeaderView(Context context) {
         this(context, null);

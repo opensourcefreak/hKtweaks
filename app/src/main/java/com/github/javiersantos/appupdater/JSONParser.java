@@ -16,9 +16,10 @@ import java.io.Reader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 class JSONParser {
-    private URL jsonUrl;
+    private final URL jsonUrl;
 
     private static final String KEY_LATEST_VERSION = "latestVersion";
     private static final String KEY_LATEST_VERSION_CODE = "latestVersionCode";
@@ -76,7 +77,7 @@ class JSONParser {
     private JSONObject readJsonFromUrl() throws IOException, JSONException {
         InputStream is = this.jsonUrl.openStream();
         try {
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+            BufferedReader rd = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String jsonText = readAll(rd);
             return new JSONObject(jsonText);
         } finally {

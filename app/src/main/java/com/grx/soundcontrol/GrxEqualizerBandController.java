@@ -60,7 +60,7 @@ public class GrxEqualizerBandController extends LinearLayout implements SeekBar.
         mVerticalSeekBar.setOnSeekBarChangeListener(this);
         mValueTextView = findViewById(R.id.value);
 
-        TextView bandview = (AppCompatTextView) findViewById(R.id.band);
+        TextView bandview = findViewById(R.id.band);
         String[] bands = getResources().getStringArray(R.array.equalizerbands);
         bandview.setText(String.valueOf(  bands[mBandId]    ));
         updateSeekBar();

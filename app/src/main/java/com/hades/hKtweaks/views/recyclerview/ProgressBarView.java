@@ -46,14 +46,14 @@ public class ProgressBarView extends RecyclerViewItem {
     @Override
     public void onCreateView(final View view) {
 
-        mProgressBar = (RoundCornerProgressBar) view.findViewById(R.id.progressbar);
-        mTitle = (AppCompatTextView) view.findViewById(R.id.title);
-        mTotal = (AppCompatTextView) view.findViewById(R.id.total);
-        mUsed = (AppCompatTextView) view.findViewById(R.id.used);
-        mUsedLabel = (AppCompatTextView) view.findViewById(R.id.used_label);
-        mFree = (AppCompatTextView) view.findViewById(R.id.free);
-        mFreeLabel = (AppCompatTextView) view.findViewById(R.id.free_label);
-        mPercent = (AppCompatTextView) view.findViewById(R.id.percent);
+        mProgressBar = view.findViewById(R.id.progressbar);
+        mTitle = view.findViewById(R.id.title);
+        mTotal = view.findViewById(R.id.total);
+        mUsed = view.findViewById(R.id.used);
+        mUsedLabel = view.findViewById(R.id.used_label);
+        mFree = view.findViewById(R.id.free);
+        mFreeLabel = view.findViewById(R.id.free_label);
+        mPercent = view.findViewById(R.id.percent);
 
         super.onCreateView(view);
     }
@@ -80,7 +80,7 @@ public class ProgressBarView extends RecyclerViewItem {
 
     public void setProgress(long progress) {
         mProgress = progress;
-        mPercentText = String.valueOf(mProgress) + " %";
+        mPercentText = mProgress + " %";
         refresh();
     }
 
@@ -100,7 +100,7 @@ public class ProgressBarView extends RecyclerViewItem {
             mTotalText = String.valueOf(total);
             mUsedText = String.valueOf(progress);
             mFreeText = String.valueOf(total - progress);
-            mPercentText = String.valueOf(mProgress) + " %";
+            mPercentText = mProgress + " %";
             refresh();
         }catch (Exception ignored) {
         }

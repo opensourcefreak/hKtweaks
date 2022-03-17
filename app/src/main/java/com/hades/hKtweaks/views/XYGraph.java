@@ -41,12 +41,12 @@ import java.util.ArrayList;
  */
 public class XYGraph extends View {
 
-    private Paint mPaintLine;
-    private Paint mPaintEdge;
-    private Paint mPaintGraph;
-    private Paint mPaintGraphStroke;
-    private Path mPathGraph;
-    private boolean mEdgeVisible;
+    private final Paint mPaintLine;
+    private final Paint mPaintEdge;
+    private final Paint mPaintGraph;
+    private final Paint mPaintGraphStroke;
+    private final Path mPathGraph;
+    private final boolean mEdgeVisible;
     private int state = 1;
     private ArrayList<Integer> mPercentages = new ArrayList<>();
 

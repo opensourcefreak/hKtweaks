@@ -86,7 +86,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     private View mRootView;
 
-    private List<RecyclerViewItem> mItems = new ArrayList<>();
+    private final List<RecyclerViewItem> mItems = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerViewAdapter mRecyclerViewAdapter;
@@ -246,8 +246,8 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     private static class LoaderTask extends AsyncTask<Void, Void, List<RecyclerViewItem>> {
 
-        private WeakReference<RecyclerViewFragment> mRefFragment;
-        private Bundle mSavedInstanceState;
+        private final WeakReference<RecyclerViewFragment> mRefFragment;
+        private final Bundle mSavedInstanceState;
 
         private LoaderTask(RecyclerViewFragment fragment, Bundle savedInstanceState) {
             mRefFragment = new WeakReference<>(fragment);
@@ -853,8 +853,8 @@ public abstract class RecyclerViewFragment extends BaseFragment {
 
     public abstract static class DialogLoadHandler<T extends RecyclerViewFragment>
             extends LoadAsyncTask.LoadHandler<T, Void> {
-        private String mTitle;
-        private String mSummary;
+        private final String mTitle;
+        private final String mSummary;
 
         public DialogLoadHandler(String title, String summary) {
             mTitle = title;
@@ -887,11 +887,8 @@ public abstract class RecyclerViewFragment extends BaseFragment {
                 && mForegroundParent.getVisibility() == View.VISIBLE) {
             dismissForeground();
             return true;
-        } else if (mDialogParent != null
-                && mDialogParent.getVisibility() == View.VISIBLE) {
-            return true;
-        }
-        return false;
+        } else return mDialogParent != null
+                && mDialogParent.getVisibility() == View.VISIBLE;
     }
 
     @Override
@@ -925,7 +922,7 @@ public abstract class RecyclerViewFragment extends BaseFragment {
         super.onSaveInstanceState(outState);
     }
 
-    private Runnable mScheduler = () -> {
+    private final Runnable mScheduler = () -> {
         refreshThread();
 
         Activity activity = getActivity();

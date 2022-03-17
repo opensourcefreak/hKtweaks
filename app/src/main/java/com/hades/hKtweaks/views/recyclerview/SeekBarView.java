@@ -53,7 +53,7 @@ public class SeekBarView extends RecyclerViewItem {
     private int mMax = 100;
     private int mProgress;
     private String mUnit;
-    private List<String> mItems = new ArrayList<>();
+    private final List<String> mItems = new ArrayList<>();
     private int mOffset = 1;
     private boolean mEnabled = true;
     private float mAlpha = 1f;

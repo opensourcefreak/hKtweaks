@@ -58,8 +58,8 @@ public class CreateFragment extends RecyclerViewFragment {
     }
 
     private ArrayList<Items.Setting> mSettings;
-    private HashMap<Items.Setting, EditTextView> mEditTextViews = new HashMap<>();
-    private HashMap<Items.Setting, CodeView> mCodeViews = new HashMap<>();
+    private final HashMap<Items.Setting, EditTextView> mEditTextViews = new HashMap<>();
+    private final HashMap<Items.Setting, CodeView> mCodeViews = new HashMap<>();
 
     @Override
     protected boolean showViewPager() {

@@ -88,7 +88,7 @@ public class CPUFreq {
     private int mMidCpu = -1;
     private int mLITTLECpu = -1;
     public int mCoreCtlMinCpu = 2;
-    private SparseArray<List<Integer>> sFreqs = new SparseArray<>();
+    private final SparseArray<List<Integer>> sFreqs = new SparseArray<>();
     private String[] sGovernors;
 
     private CPUFreq(Context context) {
@@ -156,9 +156,9 @@ public class CPUFreq {
                 run("#" + new ApplyCpu(path, value, min, max, bigCpus.toArray(new Integer[bigCpus.size()]),
                         midCpus.toArray(new Integer[midCpus.size()]),
                         littleCpus.toArray(new Integer[littleCpus.size()]),
-                        mCoreCtlMinCpu).toString(), path + min, context);
+                        mCoreCtlMinCpu), path + min, context);
             } else {
-                run("#" + new ApplyCpu(path, value, min, max).toString(), path + min, context);
+                run("#" + new ApplyCpu(path, value, min, max), path + min, context);
             }
         }
     }

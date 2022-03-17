@@ -326,7 +326,7 @@ public class ProfileFragment extends RecyclerViewFragment {
 
         if (!mTaskerMode) {
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getActivity());
-            int appWidgetIds[] = appWidgetManager.getAppWidgetIds(new ComponentName(getActivity(), Widget.class));
+            int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(getActivity(), Widget.class));
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.profile_list);
             Tile.publishProfileTile(profileItems, getActivity());
         }

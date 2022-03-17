@@ -46,7 +46,7 @@ public class GrxEqualizerManager extends RecyclerViewItem
     private int mSelectedEqProfile = -1, mOldSelectedEqProfile = -1;
     private String mCurrentProfile;
 
-    private ArrayList<ProfileInfo> mEquProfiles = new ArrayList<>();
+    private final ArrayList<ProfileInfo> mEquProfiles = new ArrayList<>();
     
     private Context mContext;
 

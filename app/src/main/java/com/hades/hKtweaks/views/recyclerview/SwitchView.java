@@ -50,7 +50,7 @@ public class SwitchView extends RecyclerViewItem {
     private float mAlpha = 1f;
     private View mView;
 
-    private List<OnSwitchListener> mOnSwitchListeners = new ArrayList<>();
+    private final List<OnSwitchListener> mOnSwitchListeners = new ArrayList<>();
 
     @Override
     public int getLayoutRes() {

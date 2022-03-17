@@ -33,7 +33,7 @@ public class CheckBoxView extends RecyclerViewItem {
     private float mAlpha = 1f;
     private View mView;
 
-    private List<OnCheckboxListener> mOnCheckboxListeners = new ArrayList<>();
+    private final List<OnCheckboxListener> mOnCheckboxListeners = new ArrayList<>();
 
     @Override
     public int getLayoutRes() {

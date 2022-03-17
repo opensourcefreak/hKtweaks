@@ -73,14 +73,14 @@ public class CPUFragment extends RecyclerViewFragment {
     private SelectView mCPUMaxScreenOffLITTLE;
     private SelectView mCPUGovernorLITTLE;
 
-    private SparseArray<SwitchView> mCoresBig = new SparseArray<>();
-    private SparseArray<SwitchView> mCoresMid = new SparseArray<>();
-    private SparseArray<SwitchView> mCoresLITTLE = new SparseArray<>();
+    private final SparseArray<SwitchView> mCoresBig = new SparseArray<>();
+    private final SparseArray<SwitchView> mCoresMid = new SparseArray<>();
+    private final SparseArray<SwitchView> mCoresLITTLE = new SparseArray<>();
 
     private PathReaderFragment mGovernorTunableFragment;
     private Dialog mGovernorTunableErrorDialog;
 
-    private List<GenericSelectView2> mInput = new ArrayList<>();
+    private final List<GenericSelectView2> mInput = new ArrayList<>();
 
     @Override
     protected BaseFragment getForegroundFragment() {

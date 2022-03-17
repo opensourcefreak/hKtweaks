@@ -43,7 +43,7 @@ public class LMKFragment extends RecyclerViewFragment {
 
     private final LinkedHashMap<Integer, String> sProfiles = new LinkedHashMap<>();
 
-    private List<SeekBarView> mMinFrees = new ArrayList<>();
+    private final List<SeekBarView> mMinFrees = new ArrayList<>();
 
     @Override
     protected void init() {
@@ -64,7 +64,7 @@ public class LMKFragment extends RecyclerViewFragment {
         long memTotal = Device.MemInfo.getInstance().getTotalMem() * 1024L / 100L / 4L;
         StringBuilder stringBuilder = new StringBuilder();
         for (int offset : offsets) {
-            stringBuilder.append(String.valueOf((int) memTotal * offset)).append(",");
+            stringBuilder.append((int) memTotal * offset).append(",");
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();

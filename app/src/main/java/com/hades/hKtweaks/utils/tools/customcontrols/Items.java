@@ -131,7 +131,7 @@ public class Items {
             ID(3),
             STRING(4);
 
-            private int mId;
+            private final int mId;
 
             Unit(int id) {
                 mId = id;

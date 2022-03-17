@@ -39,7 +39,7 @@ public class DownloadKernelFragment extends RecyclerViewFragment {
     }
 
     private List<SupportedDownloads.KernelContent.Download> mDownloads;
-    private List<DownloadKernelView> mViews = new ArrayList<>();
+    private final List<DownloadKernelView> mViews = new ArrayList<>();
 
     @Override
     protected boolean showViewPager() {

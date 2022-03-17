@@ -58,7 +58,7 @@ public class SoundFragment extends RecyclerViewFragment {
 
     private Sound mSound;
 
-    private List<SeekBarView> mEqGain = new ArrayList<>();
+    private final List<SeekBarView> mEqGain = new ArrayList<>();
 
     @Override
     protected void init() {

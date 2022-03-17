@@ -40,8 +40,8 @@ class LoadAsyncTask<T extends RecyclerViewFragment, RESULT> extends AsyncTask<Vo
         }
     }
 
-    private WeakReference<T> mRefFragment;
-    private LoadHandler<T, RESULT> mListener;
+    private final WeakReference<T> mRefFragment;
+    private final LoadHandler<T, RESULT> mListener;
 
     LoadAsyncTask(T fragment, @NonNull LoadHandler<T, RESULT> listener) {
         mRefFragment = new WeakReference<>(fragment);

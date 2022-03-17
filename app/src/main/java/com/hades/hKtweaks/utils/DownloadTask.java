@@ -84,7 +84,7 @@ public class DownloadTask {
                 input = mConnection.getInputStream();
                 fileOutput = new FileOutputStream(path);
 
-                byte data[] = new byte[4096];
+                byte[] data = new byte[4096];
                 int currentSize = 0;
                 int count;
                 while (true) {

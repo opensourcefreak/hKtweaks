@@ -66,12 +66,12 @@ public class Monitor extends Service {
 
     private int mLevel;
     private long mTime;
-    private List<Long> mTimes = new ArrayList<>();
-    private ServerCreateDevice mServerCreateDevice = new ServerCreateDevice("https://www.grarak.com");
+    private final List<Long> mTimes = new ArrayList<>();
+    private final ServerCreateDevice mServerCreateDevice = new ServerCreateDevice("https://www.grarak.com");
     private boolean mScreenOn;
     private boolean mCalculating;
 
-    private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
@@ -108,7 +108,7 @@ public class Monitor extends Service {
         }
     };
 
-    private BroadcastReceiver mScreenReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mScreenReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             mScreenOn = intent.getAction().equals(Intent.ACTION_SCREEN_ON);
@@ -165,7 +165,7 @@ public class Monitor extends Service {
     }
 
 
-    private IBinder mBinder = new MonitorBinder();
+    private final IBinder mBinder = new MonitorBinder();
 
     public class MonitorBinder extends Binder {
         public void onSettingsChange() {

@@ -29,7 +29,7 @@ import java.util.Objects;
 
 public class BoefflaWakelockFragment extends RecyclerViewFragment {
 
-    private List<CardView> mWakeCard = new ArrayList<>();
+    private final List<CardView> mWakeCard = new ArrayList<>();
     boolean mAlertCheckbox = true;
 
     @Override

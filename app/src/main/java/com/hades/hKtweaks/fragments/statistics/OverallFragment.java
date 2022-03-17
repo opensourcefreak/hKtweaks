@@ -396,7 +396,7 @@ public class OverallFragment extends RecyclerViewFragment {
         }
     }
 
-    private BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             mBatteryRaw = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) / 10D;
@@ -484,7 +484,7 @@ public class OverallFragment extends RecyclerViewFragment {
             }
         }
 
-        private Runnable mRefresh = new Runnable() {
+        private final Runnable mRefresh = new Runnable() {
             @Override
             public void run() {
                 refresh();
