@@ -396,7 +396,7 @@ public class Device {
     public static String getAsv() {
         String asv = Utils.readFile("/sys/kernel/debug/asv_summary");
         if (asv.length() == 0) { // asv returns empty rather than null
-            String[] values = {"HW_REV", "ASV_MIF", "ASV_BIG", "ASV_MID", "ASV_LIT", "ASV_G3D", "IDS_BIG", "IDS_MID", "IDS_LIT", "IDS_G3D"};
+            String[] values = {"HW_REV", "ASV_MIF", "ASV_BIG", "ASV_MID", "ASV_LIT", "ASV_G3D", "IDS_BIG", "IDS_MID", "IDS_LIT", "IDS_G3D", "SoC_ID", "SoC_REV", "GC_PRM", "GC_OPV_3", "DOUR", "DOUB"};
             StringBuilder asvbuilder = new StringBuilder();
             try {
                 asv = Utils.readFile("/sys/devices/virtual/sec/sec_hw_param/ap_info");
