@@ -28,8 +28,6 @@ import android.os.BatteryManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +35,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bvalosek.cpuspy.CpuSpyApp;
 import com.bvalosek.cpuspy.CpuStateMonitor;
 import com.hades.hKtweaks.R;
 import com.hades.hKtweaks.fragments.BaseFragment;
-
 import com.hades.hKtweaks.fragments.recyclerview.RecyclerViewFragment;
 import com.hades.hKtweaks.utils.AppSettings;
 import com.hades.hKtweaks.utils.AppUpdaterTask;
@@ -66,7 +66,7 @@ import java.util.Objects;
  * Created by willi on 19.04.16.
  */
 public class OverallFragment extends RecyclerViewFragment {
-
+    
     private CPUFreq mCPUFreq;
     private GPUFreq mGPUFreq;
 
@@ -111,12 +111,6 @@ public class OverallFragment extends RecyclerViewFragment {
 
     private void statsInit(List<RecyclerViewItem> items) {
 
-        if (mGPUFreq.hasCurFreq()) {
-            mGPUFreqStatsView = new StatsView();
-            mGPUFreqStatsView.setTitle(getString(R.string.gpu_freq));
-
-            items.add(mGPUFreqStatsView);
-        }
         mTemperature = new TemperatureView();
         mTemperature.setFullSpan(mGPUFreqStatsView == null);
 
