@@ -1,14 +1,14 @@
 {
-  "latestVersion": "2.2.0",
-  "latestVersionCode": "220",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.2.0/hKtweaks_v2.2.0.apk",
+  "latestVersion": "2.2.1",
+  "latestVersionCode": "221",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.2.1/hKtweaks_v2.2.1.apk",
   "releaseNotes": [
     "Changelog:",
-    "- device: full rearrange, added manufacturing date, alternate ASV detection, battery health, uptime",
-    "- cpufreq: added S21 cpu support (exynos2100/sd888)",
-    "- battery: fixed S21 battery health detection + possibly for other new devices running 5.* kernel",
-    "- build: updated gradle, plugins, build tools, targetsdk and minsdk (android <8.0 can use v2.1.0 and below)",
-    "- manifest: add back USE_FINGERPRINT for < 28 api",
-    "- others: minor optimizations, fix isolated layout issues because of dpi, check gpu_lib string everytime we open the app"
+    "- build: updated gradle, plugins, build tools, targetsdk and minsdk (Android <10 can use v2.2.0 and below)",
+    "- virtual memory: increased max zram size and adapted to device ram size, for better integration with Samsung's RAM Plus setting",
+    "- device: add few more strings for alternate ASV detection (snapdragon wise)",
+    "- battery: fixed snapdragon855 (and probably others)",
+    "- temperature: add snapdragon nodes autodetection",
+    "- others: disable gpu freq on main screen, code cleanup"
   ]
 }
