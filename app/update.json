@@ -1,14 +1,9 @@
 {
-  "latestVersion": "2.2.1",
-  "latestVersionCode": "221",
-  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.2.1/hKtweaks_v2.2.1.apk",
+  "latestVersion": "2.2.2",
+  "latestVersionCode": "222",
+  "url": "https://github.com/corsicanu/hKtweaks/releases/download/v2.2.2/hKtweaks_v2.2.2.apk",
   "releaseNotes": [
     "Changelog:",
-    "- build: updated gradle, plugins, build tools, targetsdk and minsdk (Android <10 can use v2.2.0 and below)",
-    "- virtual memory: increased max zram size and adapted to device ram size, for better integration with Samsung's RAM Plus setting",
-    "- device: add few more strings for alternate ASV detection (snapdragon wise)",
-    "- battery: fixed snapdragon855 (and probably others)",
-    "- temperature: add snapdragon nodes autodetection",
-    "- others: disable gpu freq on main screen, code cleanup"
+    "- fix crashes when changing frequencies, disabling/enabling wakelocks and probably others"
   ]
 }
