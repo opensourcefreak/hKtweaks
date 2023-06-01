@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 31
-    buildToolsVersion '30.0.3'
+    compileSdk 33
+    buildToolsVersion '33.0.2'
     defaultConfig {
         applicationId 'com.hades.hKtweaks'
         minSdk 29
-        targetSdk 31
+        targetSdk 33
         versionCode 222
         versionName "2.2.2"
         vectorDrawables.useSupportLibrary = true
