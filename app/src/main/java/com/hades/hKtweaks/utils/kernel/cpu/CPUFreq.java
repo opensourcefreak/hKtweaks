@@ -67,10 +67,10 @@ public class CPUFreq {
     public static final String TIME_STATE_2 = "/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state";
     private static final String OPP_TABLE = "/sys/devices/system/cpu/cpu%d/opp_table";
 
-    private static final String CPU_MAX_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq";
+    private static final String CPU_MAX_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/user_scaling_max_freq";
     private static final String CPU_MAX_FREQ_KT = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_max_freq_kt";
     private static final String HARD_CPU_MAX_FREQ = "/sys/kernel/cpufreq_hardlimit/scaling_max_freq";
-    private static final String CPU_MIN_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/scaling_min_freq";
+    private static final String CPU_MIN_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/user_scaling_min_freq";
     private static final String HARD_CPU_MIN_FREQ = "/sys/kernel/cpufreq_hardlimit/scaling_min_freq";
     private static final String CPU_MAX_SCREEN_OFF_FREQ = "/sys/devices/system/cpu/cpu%d/cpufreq/screen_off_max_freq";
     public static final String CPU_ONLINE = "/sys/devices/system/cpu/cpu%d/online";
