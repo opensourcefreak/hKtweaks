@@ -37,7 +37,7 @@ public class VoltageCl0 {
 
     public static final String BACKUP = "/data/.hKtweaks/cpuCl0_stock_voltage";
 
-    public static final String CL0_VOLTAGE = "/sys/devices/system/cpu/cpufreq/mp-cpufreq/cluster0_volt_table";
+    public static final String CL0_VOLTAGE = "/sys/power/cpu_lit_volt";
 
     private static final HashMap<String, Boolean> sVoltages = new HashMap<>();
     private static final HashMap<String, Integer> sOffset = new HashMap<>();
